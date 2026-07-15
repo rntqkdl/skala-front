@@ -1,0 +1,293 @@
+/* CSS 커스텀 변수 (라이트/다크 테마 중앙 제어) */
+:root {
+    --bg-primary: #f8fafc;
+    --bg-secondary: #ffffff;
+    --bg-card: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --accent-color: #3b82f6;
+    --accent-hover: #1d4ed8;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #60a5fa;
+    --accent-hover: #93c5fd;
+    --border-color: #334155;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* 기본 초기화 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.8;
+    padding: 40px 20px;
+    transition: var(--transition);
+}
+
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+/* 컨트롤러 헤더 */
+.header-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* 테마 토글 버튼 스타일 */
+.theme-toggle {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.theme-toggle:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* 타이틀 가독성 설정 */
+h1 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    letter-spacing: -0.05em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    border-left: 5px solid var(--accent-color);
+    padding-left: 12px;
+    margin-top: 45px;
+    margin-bottom: 20px;
+    letter-spacing: -0.03em;
+}
+
+p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+/* 형광펜 효과 커스텀 */
+mark {
+    background: linear-gradient(120deg, #fef08a80 0%, #fef08a 100%);
+    color: #0f172a;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+[data-theme="dark"] mark {
+    background: linear-gradient(120deg, #ca8a0480 0%, #eab308 100%);
+    color: #ffffff;
+}
+
+/* 인적 사항 리스트 (CSS Grid) */
+ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+ul li {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+ul li:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-color);
+}
+
+/* 기술 스택 리스트 (ol 순서 번호 커스텀) */
+ol {
+    list-style: none;
+    counter-reset: tech-counter;
+    padding: 0;
+    margin: 20px 0;
+}
+
+ol li {
+    counter-increment: tech-counter;
+    position: relative;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 15px 20px 15px 55px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    font-weight: 500;
+}
+
+ol li::before {
+    content: "0" counter(tech-counter);
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 800;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+}
+
+ol li strong {
+    color: var(--accent-color);
+    margin-right: 8px;
+}
+
+/* 학력 및 경력 컨테이너 (dl 타임라인 스타일) */
+dl {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+dt {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-top: 30px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+dt:first-of-type {
+    margin-top: 0;
+}
+
+dd {
+    margin-left: 0;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+/* 프로젝트 윈도우 인터랙티브 카드 */
+.project-card {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 5px solid #64748b;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.project-card:hover {
+    transform: scale(1.01) translateX(5px);
+    border-left-color: var(--accent-color);
+}
+
+.project-title {
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-prize {
+    color: #ef4444;
+    font-weight: 700;
+    font-size: 0.9rem;
+    background-color: rgba(239, 68, 68, 0.1);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+/* 독립 모달 시스템 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    position: relative;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
