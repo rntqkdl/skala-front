@@ -5,176 +5,240 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>안성민 | AI & 데이터 엔지니어 포트폴리오</title>
     
-    <!-- 경로 연동 에러 전면 해결 -->
+    <!-- 정밀 매핑된 상대 경로 스타일시트 로드 -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
     <div class="container">
-        <!-- 테마 제어 토글 시스템 -->
-        <div class="header-controls">
-            <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌓 테마 전환</button>
-        </div>
-
-        <!-- 성민 프로필 개요 -->
-        <h1>안녕하세요! 안성민입니다! 👨‍💻</h1>
-        <p>
-            저는 이론적 배움과 실무 오케스트레이션의 연결고리를 탐구하는 <mark>지능형 데이터 엔지니어</mark>입니다.[cite: 1, 3]<br>
-            문제의 본질을 집요하게 분석하여, 날것의 비정형 데이터셋을 유기적인 실용 서비스 파이프라인으로 설계합니다.[cite: 5]
-        </p>
-
-        <!-- 나를 설명하는 키워드 배지 영역 -->
-        <div class="keyword-container">
-            <span class="keyword-tag">#원리주의_엔지니어</span>
-            <span class="keyword-tag">#데이터_센트릭_AI</span>
-            <span class="keyword-tag">#자동화_아키텍트</span>
-            <span class="keyword-tag">#집요한_트러블슈터</span>
-            <span class="keyword-tag">#협업_PM</span>
-        </div>
-
-        <!-- 일상 아카이브 갤러리 (이미지 경로 404 원인 차단 패치) -->
-        <h2>📷 성민의 라이프 아카이브 (Daily Life)</h2>
-        <div class="gallery-grid">
-            <div class="gallery-card">
-                <div class="gallery-card-img-wrapper">
-                    <!-- HTML 폴더 내부에 있는 파일의 경로를 상대경로 ./ 로 정확하게 로드 -->
-                    <img src="./claw-machine.jpg" alt="인형뽑기 열정">
-                </div>
-                <div class="gallery-info">
-                    <h3>🎯 소소한 탕진잼, 인형뽑기</h3>
-                    <p>최근 귀여운 인형뽑기에 제대로 맛을 들렸습니다. 집게의 찰나의 손맛에 빠져 야금야금 전 재산을 행복하게 탕진하고 있는 요즘의 힐링 취미 중 하나입니다.</p>
-                </div>
+        <!-- 상단 헤더 영역 -->
+        <header>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌓 테마 전환</button>
             </div>
-            
-            <div class="gallery-card">
-                <div class="gallery-card-img-wrapper">
-                    <img src="./food.jpg" alt="미식 라이프">
+            <h1>안녕하세요! 안성민입니다! 👨‍💻</h1>
+        </header>
+
+        <!-- 자기소개 본문 (시맨틱 태그 활용 고도화) -->
+        <main>
+            <section class="intro-section">
+                <blockquote cite="https://github.com/seongminan">
+                    "저는 이론적 배움과 실무 오케스트레이션의 연결고리를 탐구하는 <mark>지능형 데이터 엔지니어</mark>입니다. <br>
+                    문제의 본질을 집요하게 분석하여, 날것의 비정형 데이터셋을 유기적인 실용 서비스 파이프라인으로 설계합니다."
+                </blockquote>
+                
+                <!-- 키워드 배지 영역 -->
+                <div class="keyword-container">
+                    <span class="keyword-tag">#원리주의_엔지니어</span>
+                    <span class="keyword-tag">#데이터_센트릭_AI</span>
+                    <span class="keyword-tag">#자동화_아키텍트</span>
+                    <span class="keyword-tag">#집요한_트러블슈터</span>
+                    <span class="keyword-tag">#협업_PM</span>
                 </div>
-                <div class="gallery-info">
-                    <h3>🍕 선(先) 사진, 후(後) 미식</h3>
-                    <p>맛있는 음식을 먹을 때 가장 짜릿한 행복을 느낍니다. 갓 구워진 노릇노릇한 피자와 바삭한 치킨을 먹기 전, 최고의 각도와 조명으로 사진 기록을 남겨두는 것은 저만의 필수 루틴입니다.</p>
-                </div>
-            </div>
+            </section>
 
-            <div class="gallery-card">
-                <div class="gallery-card-img-wrapper">
-                    <img src="./pet.jpg" alt="반려동물 사랑">
-                </div>
-                <div class="gallery-info">
-                    <h3>🐶 힐링 치트키, 지인 펫 컬렉션</h3>
-                    <p>강아지나 고양이 등 귀여운 반려동물들을 정말 온 마음 다해 좋아합니다. 지인들의 귀엽고 사랑스러운 반려동물 사진들을 하나둘 수집하고 구경하면서 매일 활력을 얻습니다.</p>
-                </div>
-            </div>
-
-            <div class="gallery-card">
-                <div class="gallery-card-img-wrapper">
-                    <img src="./travel.jpg" alt="공항과 하늘">
-                </div>
-                <div class="gallery-info">
-                    <h3>✈️ 낯선 공기, 기록하는 여행</h3>
-                    <p>새로운 도시, 탁 트인 하늘과 낯선 공기가 주는 여행의 해방감을 사랑합니다. 새로운 목적지에 첫발을 내디뎠을 때 마주하는 설레는 순간들을 뷰파인더 속에 가득 기록해 두곤 합니다.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 올해 할 일 체크리스트 (2026 To-Do List) -->
-        <h2>📅 2026년 버킷리스트 및 활동 계획</h2>
-        <ul class="todo-list">
-            <li class="todo-item completed">
-                <input type="checkbox" class="todo-checkbox" checked disabled>
-                <span class="todo-text">🎓 국가공인 ADsP (데이터 분석 준전문가) 자격증 취득하기 (완료)[cite: 8]</span>
-            </li>
-            <li class="todo-item">
-                <input type="checkbox" class="todo-checkbox" disabled>
-                <span class="todo-text">📈 SQLD 자격증 취득 및 데이터베이스 정밀 분석 공부하기[cite: 3, 5]</span>
-            </li>
-            <li class="todo-item">
-                <input type="checkbox" class="todo-checkbox" disabled>
-                <span class="todo-text">🤝 COSS 빅데이터 서포터즈 및 학과 후배 멘토링 프로그램 성공적으로 마무리지어보기</span>
-            </li>
-            <li class="todo-item">
-                <input type="checkbox" class="todo-checkbox" disabled>
-                <span class="todo-text">📚 인공지능(AI)과 전공 지식을 유기적으로 결합한 졸업 포트폴리오 완성하기[cite: 1, 5]</span>
-            </li>
-        </ul>
-
-        <!-- 기본 정보 (ul.profile-grid) -->
-        <h2>📋 기본 인적 사항</h2>
-        <ul class="profile-grid">
-            <li>👤 <strong>이름:</strong> 안성민 (Seongmin An)[cite: 1]</li>
-            <li>📞 <strong>연락처:</strong> <a href="tel:010-2878-5134">010-2878-5134</a>[cite: 1]</li>
-            <li>✉️ <strong>이메일:</strong> <a href="mailto:tjdals2299@gmail.com">tjdals2299@gmail.com</a>[cite: 1]</li>
-            <li>📍 <strong>활동권역:</strong> 전북 전주시[cite: 1]</li>
-            <li>🎸 <strong>개인 취미:</strong> 코딩, 영화 분석, 여행 설계, 음악 감상[cite: 5]</li>
-        </ul>
-
-        <!-- 핵심 보유 기술 (ol) -->
-        <h2>🛠️ 프로그래밍 & 데이터 기술 스택</h2>
-        <ol>
-            <li><strong>프로그래밍 언어:</strong> Python, SQL, JavaScript, C, C++[cite: 1, 5]</li>
-            <li><strong>프레임워크 & 라이브러리:</strong> PyTorch, FastAPI, OpenCV, Flask, React[cite: 1]</li>
-            <li><strong>자동화 & 인프라:</strong> n8n, Docker, AWS, Azure, Git/GitHub[cite: 1]</li>
-            <li><strong>데이터 가공 및 엔지니어링:</strong> Google API 수집, JSONL 구조화, 정규표현식 파싱[cite: 1]</li>
-        </ol>
-
-        <!-- 학력/프로젝트/자격증 명세 (dl) -->
-        <h2>🎓 학력 및 대외 활동 경력</h2>
-        <dl>
-            <dt>🏫 학력 사항 (Education)</dt>
-            <dd>
-                <strong>전북대학교</strong> (2019.03 - 2027.02 졸업 예정)[cite: 1, 3]<br>
-                - IT기전공학과 / IAB융합전공 학사 재학 중[cite: 1]<br>
-                - GPA: 3.5 / 4.5[cite: 3]
-            </dd>
-
-            <dt>🏆 수상 실적 및 대외 프로젝트 (Awards & Projects)</dt>
-            <dd>
-                <p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--text-secondary);">
-                    💡 <strong>카드를 클릭</strong>하면 상세 문제 해결 경험(STAR)을 확인할 수 있습니다.[cite: 5]
+            <!-- 📸 일상 아카이브 갤러리 섹션 (클릭 시 원본 Lightbox 확대 액션 추가) -->
+            <section class="gallery-section">
+                <h2>📷 성민의 라이프 아카이브 (Daily Life)</h2>
+                <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-secondary);">
+                    💡 <strong>사진 카드를 클릭</strong>하시면 잘림 없는 원본 비율의 따뜻한 감성 사진을 크게 보실 수 있습니다.
                 </p>
+                <div class="gallery-grid">
+                    
+                    <figure class="gallery-card" onclick="openLightbox('../media/인형뽑기.jpeg', '🎯 소소한 탕진잼, 인형뽑기')">
+                        <div class="gallery-card-img-wrapper">
+                            <img src="../media/인형뽑기.jpeg" alt="인형뽑기 열정">
+                        </div>
+                        <figcaption class="gallery-info">
+                            <h3>🎯 소소한 탕진잼, 인형뽑기</h3>
+                            <p>최근 귀여운 인형뽑기에 제대로 맛을 들였습니다. 집게의 찰나의 손맛에 빠져 야금야금 전 재산을 행복하게 탕진하고 있는 요즘의 힐링 취미 중 하나입니다.</p>
+                        </figcaption>
+                    </figure>
+                    
+                    <figure class="gallery-card" onclick="openLightbox('../media/음식.jpeg', '🍕 선(先) 사진, 후(後) 미식')">
+                        <div class="gallery-card-img-wrapper">
+                            <img src="../media/음식.jpeg" alt="미식 라이프">
+                        </div>
+                        <figcaption class="gallery-info">
+                            <h3>🍕 선(先) 사진, 후(後) 미식</h3>
+                            <p>맛있는 음식을 먹을 때 가장 짜릿한 행복을 느낍니다. 갓 구워진 노릇노릇한 피자와 바삭한 치킨을 먹기 전, 최고의 각도와 조명으로 사진 기록을 남겨두는 것은 저만의 필수 루틴입니다.</p>
+                        </figcaption>
+                    </figure>
 
-                <!-- On Library 프로젝트 카드 추가 -->
-                <div class="project-card" onclick="openModal('onlibrary')">
-                    <div class="project-title">
-                        <span>🗺️ On Library: Public Data 기반 이동식 도서관 운영 의사결정 지원 시스템</span>
-                        <span class="project-prize" style="background-color: #6d5d50;">최종 프로젝트</span>
-                    </div>
-                    <div style="font-size: 0.9rem; margin-top: 5px;">공간 접근성 분석 및 실제 도로 시간 반영 TSP 최적화 순회 노선 모델 개발</div>
+                    <figure class="gallery-card" onclick="openLightbox('../media/반려동물.jpeg', '🐶 힐링 치트키, 지인 펫 컬렉션')">
+                        <div class="gallery-card-img-wrapper">
+                            <img src="../media/반려동물.jpeg" alt="반려동물 사랑">
+                        </div>
+                        <figcaption class="gallery-info">
+                            <h3>🐶 힐링 치트키, 지인 펫 컬렉션</h3>
+                            <p>강아지나 고양이 등 귀여운 반려동물들을 정말 온 마음 다해 좋아합니다. 지인들의 귀엽고 사랑스러운 반려동물 사진들을 하나둘 수집하고 구경하면서 매일 활력을 얻습니다.</p>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="gallery-card" onclick="openLightbox('../media/풍경.jpeg', '✈️ 낯선 공기, 기록하는 여행')">
+                        <div class="gallery-card-img-wrapper">
+                            <img src="../media/풍경.jpeg" alt="공항과 하늘">
+                        </div>
+                        <figcaption class="gallery-info">
+                            <h3>✈️ 낯선 공기, 기록하는 여행</h3>
+                            <p>새로운 도시, 탁 트인 하늘과 낯선 공기가 주는 여행의 해방감을 사랑합니다. 새로운 목적지에 첫발을 내디뎠을 때 마주하는 설레는 순간들을 뷰파인더 속에 가득 기록해 두곤 합니다.</p>
+                        </figcaption>
+                    </figure>
+
                 </div>
+            </section>
 
-                <div class="project-card" onclick="openModal('epitext')">
-                    <div class="project-title">
-                        <span>🏛️ Epitext: 고문서 탁본 복원 및 해석 AI 솔루션[cite: 3]</span>
-                        <span class="project-prize">대상 (정보통신기획평가원장상)</span>[cite: 1]
+            <!-- 💡 성민의 실전 해결 에세이 & 멘토링 철학 섹션 (신규 클릭 액션 바인딩) -->
+            <section class="story-section">
+                <h2>✍️ 성민의 실전 트러블슈팅 & 철학</h2>
+                <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-secondary);">
+                    💡 <strong>아래 에세이 카드를 클릭</strong>하시면 현업 지향적 극복 과정과 세부 가이드라인을 보실 수 있습니다.
+                </p>
+                <div class="story-grid">
+                    <div class="story-card" onclick="openModal('story_data')">
+                        <div class="story-icon">📊</div>
+                        <div class="story-content">
+                            <h3>가상 데이터와 현업 데이터의 이질감 극복 경험</h3>
+                            <p>학습용 데이터셋에서는 정상 동작하던 로직이 비정형 및 고노이즈의 필드 데이터를 만났을 때 겪는 실패와, 이를 극복하기 위한 데이터 중심 파이프라인 정제 방안을 소개합니다.</p>
+                        </div>
                     </div>
-                    <div style="font-size: 0.9rem; margin-top: 5px;">Swin Transformer V2와 SikuRoBERTa 기반 멀티모달 앙상블 복원 파이프라인 개발[cite: 3]</div>
-                </div>
 
-                <div class="project-card" onclick="openModal('smishing')">
-                    <div class="project-title">
-                        <span>🛡️ Smishing Forecast: 자가 진화형 스미싱 방어 AI[cite: 1]</span>
-                        <span class="project-prize" style="background-color: #8c7a6b;">우수상 (DACON)</span>[cite: 1]
+                    <div class="story-card" onclick="openModal('story_collab')">
+                        <div class="story-icon">🤝</div>
+                        <div class="story-content">
+                            <h3>역할 분담 없는 협업의 실패와 PM 리더십 극복기</h3>
+                            <p>"친밀함과 책임감의 분리"를 핵심 가치로 삼아, 감정이 아닌 시스템 중심의 R&R 구축 및 체계적인 업무 리뷰로 최종 프로젝트 대상을 일궈낸 협업 아키텍처입니다.</p>
+                        </div>
                     </div>
-                    <div style="font-size: 0.9rem; margin-top: 5px;">비정형 텍스트 광고 제거, 계층적 예외 처리 및 정제 파이프라인 구축[cite: 1]</div>
-                </div>
 
-                <div class="project-card" onclick="openModal('iot')">
-                    <div class="project-title">
-                        <span>🏊 IoT 기반 스마트 모니터링 제어 시스템[cite: 3]</span>
-                        <span class="project-prize" style="background-color: #8c7a6b;">우수상 (캡스톤 디자인)</span>[cite: 3]
+                    <div class="story-card" onclick="openModal('story_mentor')">
+                        <div class="story-icon">🌱</div>
+                        <div class="story-content">
+                            <h3>실전 중심의 커리어 로드맵과 멘토링 가이드라인</h3>
+                            <p>진로 탐색에 막막함을 느끼는 후배 멘티들이 한 학기 만에 이력서에 실무적인 가치 한 줄을 추가할 수 있도록 이끄는 구체적인 깃허브 관리 및 공모전 전략 철학입니다.</p>
+                        </div>
                     </div>
-                    <div style="font-size: 0.9rem; margin-top: 5px;">수압 센서 노이즈 필터링 및 0.1초 이내 제어 로직 설계[cite: 3]</div>
                 </div>
-            </dd>
+            </section>
 
-            <dt>📜 보유 국가공인 및 글로벌 자격증 (Certifications)</dt>
-            <dd>
-                - 🎖️ <strong>ADsP (데이터 분석 준전문가)</strong> — 한국데이터산업진흥원 (취득일자: 2026.06.05)[cite: 8]<br>
-                - 📜 <strong>AI-900 (Azure AI Fundamentals)</strong> — Microsoft[cite: 1]<br>
-                - 📜 <strong>DP-900 (Azure Data Fundamentals)</strong> — Microsoft[cite: 1]<br>
-                - ⚙️ 전기기능사, 승강기 기능사 — 한국산업인력공단[cite: 4, 5]
-            </dd>
-        </dl>
+            <!-- 📅 2026 To-Do 리스트 -->
+            <section class="todo-section">
+                <fieldset>
+                    <legend>📅 2026년 버킷리스트 및 활동 계획</legend>
+                    <ul class="todo-list">
+                        <li class="todo-item completed">
+                            <input type="checkbox" class="todo-checkbox" checked disabled>
+                            <span class="todo-text">🎓 국가공인 ADsP (데이터 분석 준전문가) 자격증 취득하기 (완료)</span>
+                        </li>
+                        <li class="todo-item">
+                            <input type="checkbox" class="todo-checkbox" disabled>
+                            <span class="todo-text">📈 SQLD 자격증 취득 및 데이터베이스 정밀 분석 공부하기</span>
+                        </li>
+                        <li class="todo-item">
+                            <input type="checkbox" class="todo-checkbox" disabled>
+                            <span class="todo-text">🤝 COSS 빅데이터 서포터즈 및 학과 후배 멘토링 프로그램 성공적으로 마무리지어보기</span>
+                        </li>
+                        <li class="todo-item">
+                            <input type="checkbox" class="todo-checkbox" disabled>
+                            <span class="todo-text">📚 인공지능(AI)과 전공 지식을 유기적으로 결합한 졸업 포트폴리오 완성하기</span>
+                        </li>
+                    </ul>
+                </fieldset>
+            </section>
+
+            <!-- 📋 기본 인적 사항 -->
+            <section class="profile-section">
+                <h2>📋 기본 인적 사항</h2>
+                <address>
+                    <ul class="profile-grid">
+                        <li>👤 <strong>이름:</strong> 안성민 (Seongmin An)</li>
+                        <li>📞 <strong>연락처:</strong> <a href="tel:010-2878-5134">010-2878-5134</a></li>
+                        <li>✉️ <strong>이메일:</strong> <a href="mailto:tjdals2299@gmail.com">tjdals2299@gmail.com</a></li>
+                        <li>📍 <strong>활동권역:</strong> 전북 전주시</li>
+                        <li>🎸 <strong>개인 취미:</strong> 코딩, 영화 분석, 여행 설계, 음악 감상</li>
+                    </ul>
+                </address>
+            </section>
+
+            <!-- 🛠️ 기술 스택 -->
+            <section class="tech-section">
+                <h2>🛠️ 프로그래밍 & 데이터 기술 스택</h2>
+                <ol>
+                    <li><strong>프로그래밍 언어:</strong> Python, SQL, JavaScript, C, C++</li>
+                    <li><strong>프레임워크 & 라이브러리:</strong> PyTorch, FastAPI, OpenCV, Flask, React</li>
+                    <li><strong>자동화 & 인프라:</strong> n8n, Docker, AWS, Azure, Git/GitHub</li>
+                    <li><strong>데이터 가공 및 엔지니어링:</strong> Google API 수집, JSONL 구조화, 정규표현식 파싱</li>
+                </ol>
+            </section>
+
+            <!-- 🎓 학력 및 경력 -->
+            <section class="career-section">
+                <h2>🎓 학력 및 대외 활동 경력</h2>
+                <dl>
+                    <dt>🏫 학력 사항 (Education)</dt>
+                    <dd>
+                        <strong>전북대학교</strong> (2019.03 - 2027.02 졸업 예정)<br>
+                        - IT기전공학과 / IAB융합전공 학사 재학 중<br>
+                        - GPA: 3.5 / 4.5
+                    </dd>
+
+                    <dt>🏆 수상 실적 및 대외 프로젝트 (Awards & Projects)</dt>
+                    <dd>
+                        <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-secondary);">
+                            💡 <strong>카드를 클릭</strong>하면 상세 문제 해결 경험(STAR)을 확인할 수 있습니다.
+                        </p>
+
+                        <!-- On Library 프로젝트 카드 -->
+                        <div class="project-card" onclick="openModal('onlibrary')">
+                            <div class="project-title">
+                                <span>🗺️ On Library: Public Data 기반 이동식 도서관 운영 의사결정 지원 시스템</span>
+                                <span class="project-prize" style="background-color: #6d5d50;">최종 프로젝트</span>
+                            </div>
+                            <div style="font-size: 0.9rem; margin-top: 5px;">공간 접근성 분석 및 실제 도로 시간 반영 TSP 최적화 순회 노선 모델 개발</div>
+                        </div>
+
+                        <div class="project-card" onclick="openModal('epitext')">
+                            <div class="project-title">
+                                <span>🏛️ Epitext: 고문서 탁본 복원 및 해석 AI 솔루션</span>
+                                <span class="project-prize">대상 (정보통신기획평가원장상)</span>
+                            </div>
+                            <div style="font-size: 0.9rem; margin-top: 5px;">Swin Transformer V2와 SikuRoBERTa 기반 멀티모달 앙상블 복원 파이프라인 개발</div>
+                        </div>
+
+                        <div class="project-card" onclick="openModal('smishing')">
+                            <div class="project-title">
+                                <span>🛡️ Smishing Forecast: 자가 진화형 스미싱 방어 AI</span>
+                                <span class="project-prize" style="background-color: #8c7a6b;">우수상 (DACON)</span>
+                            </div>
+                            <div style="font-size: 0.9rem; margin-top: 5px;">비정형 텍스트 광고 제거, 계층적 예외 처리 및 정제 파이프라인 구축</div>
+                        </div>
+
+                        <div class="project-card" onclick="openModal('iot')">
+                            <div class="project-title">
+                                <span>🏊 IoT 기반 스마트 모니터링 제어 시스템</span>
+                                <span class="project-prize" style="background-color: #8c7a6b;">우수상 (캡스톤 디자인)</span>
+                            </div>
+                            <div style="font-size: 0.9rem; margin-top: 5px;">수압 센서 노이즈 필터링 및 0.1초 이내 제어 로직 설계</div>
+                        </div>
+                    </dd>
+
+                    <dt>📜 보유 국가공인 및 글로벌 자격증 (Certifications)</dt>
+                    <dd>
+                        - 🎖️ <strong>ADsP (데이터 분석 준전문가)</strong> — 한국데이터산업진흥원 (취득일자: 2026.06.05)<br>
+                        - 📜 <strong>AI-900 (Azure AI Fundamentals)</strong> — Microsoft<br>
+                        - 📜 <strong>DP-900 (Azure Data Fundamentals)</strong> — Microsoft<br>
+                        - ⚙️ 전기기능사, 승강기 기능사 — 한국산업인력공단
+                    </dd>
+                </dl>
+            </section>
+        </main>
+
+        <!-- 푸터 영역 -->
+        <footer>
+            <p style="text-align: center; margin-top: 40px; font-size: 0.85rem; color: var(--text-secondary);">
+                © 2026 Seongmin An. All rights reserved. Powered by Pure HTML/CSS/JS.
+            </p>
+        </footer>
     </div>
 
     <!-- 팝업 상세 모달 레이아웃 -->
@@ -183,6 +247,15 @@
             <button class="close-btn" onclick="closeModalDirect()">&times;</button>
             <h2 id="modalTitle" style="border-left: 5px solid var(--accent-color); margin-top: 10px;">프로젝트 상세</h2>
             <div id="modalBody" style="margin-top: 15px; font-size: 1rem;"></div>
+        </div>
+    </div>
+
+    <!-- 📸 이미지 원본 확대용 Lightbox 모달 구조 -->
+    <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox(event)">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeLightboxDirect()">&times;</button>
+            <img id="lightboxImg" src="" alt="원본 크기">
+            <div id="lightboxCaption">사진 설명</div>
         </div>
     </div>
 

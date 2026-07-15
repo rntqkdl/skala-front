@@ -1,30 +1,30 @@
-/* CSS 커스텀 변수 (따뜻하고 포근한 Cozy 테마로 전면 변경) */
+/* CSS 커스텀 변수 (따뜻하고 포근한 Cozy 테마) */
 :root {
-    --bg-primary: #fbfbf9;      /* 부드러운 미색/크림 */
-    --bg-secondary: #ffffff;    /* 순백색 */
-    --bg-card: #f5efe6;         /* 따뜻한 오트밀 베이지 */
-    --text-primary: #3e362e;    /* 다크 브라운 */
-    --text-secondary: #867070;  /* 로즈 토프 */
-    --accent-color: #d0b8a8;    /* 밀크티 베이지 */
-    --accent-hover: #b09b8f;    /* 딥 베이지 */
-    --border-color: #e8dfd8;    /* 연한 베이지 테두리 */
+    --bg-primary: #fbfbf9;      
+    --bg-secondary: #ffffff;    
+    --bg-card: #f5efe6;         
+    --text-primary: #3e362e;    
+    --text-secondary: #867070;  
+    --accent-color: #d0b8a8;    
+    --accent-hover: #b09b8f;    
+    --border-color: #e8dfd8;    
     --shadow: 0 10px 20px -5px rgba(134, 112, 112, 0.1), 0 4px 6px -2px rgba(134, 112, 112, 0.05);
     --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="dark"] {
-    --bg-primary: #1c1412;      /* 아주 어두운 에스프레소 브라운 */
-    --bg-secondary: #2d1f1e;    /* 어두운 로스팅 브라운 */
+    --bg-primary: #1c1412;      
+    --bg-secondary: #2d1f1e;    
     --bg-card: #1c1412;
-    --text-primary: #f5efe6;    /* 크림 화이트 */
-    --text-secondary: #d0b8a8;  /* 연베이지 */
-    --accent-color: #e17a47;    /* 따뜻한 시나몬/테라코타 주황 */
-    --accent-hover: #f29c6f;    /* 밝은 테라코타 */
-    --border-color: #3e2e2c;    /* 다크 우드 브라운 테두리 */
+    --text-primary: #f5efe6;    
+    --text-secondary: #d0b8a8;  
+    --accent-color: #e17a47;    
+    --accent-hover: #f29c6f;    
+    --border-color: #3e2e2c;    
     --shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* 기본 초기화 - 잘림 및 찌그러짐 방지 */
+/* 기본 초기화 */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -54,7 +54,6 @@ body {
     margin-bottom: 25px;
 }
 
-/* 테마 토글 버튼 (둥글고 따스한 느낌 극대화) */
 .theme-toggle {
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
@@ -66,27 +65,19 @@ body {
     cursor: pointer;
     box-shadow: var(--shadow);
     transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 .theme-toggle:hover {
     border-color: var(--accent-color);
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px -5px rgba(134, 112, 112, 0.2);
 }
 
-/* 타이틀 정밀 교정 */
+/* 타이틀 */
 h1 {
     font-size: 2.3rem;
     color: var(--text-primary);
     margin-bottom: 12px;
     letter-spacing: -0.05em;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
 }
 
 h2 {
@@ -96,16 +87,23 @@ h2 {
     padding-left: 14px;
     margin-top: 50px;
     margin-bottom: 22px;
-    letter-spacing: -0.03em;
 }
 
-p {
-    font-size: 1.05rem;
+blockquote {
+    background-color: var(--bg-secondary);
+    border-left: 5px solid var(--accent-color);
+    padding: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    border-radius: 0 14px 14px 0;
+    box-shadow: var(--shadow);
     color: var(--text-secondary);
-    margin-bottom: 20px;
 }
 
-/* 감성 형광펜 효과 */
+address {
+    font-style: normal;
+}
+
 mark {
     background: linear-gradient(120deg, rgba(208, 184, 168, 0.3) 0%, rgba(208, 184, 168, 0.9) 100%);
     color: #3e362e;
@@ -145,7 +143,7 @@ mark {
     border-color: var(--accent-color);
 }
 
-/* 🖼️ 따뜻한 느낌의 라이프 아카이브 갤러리 */
+/* 🖼️ 라이프 아카이브 갤러리 그리드 (잘림현상 제어) */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -162,6 +160,7 @@ mark {
     transition: var(--transition);
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .gallery-card:hover {
@@ -171,8 +170,8 @@ mark {
 
 .gallery-card-img-wrapper {
     width: 100%;
-    height: 220px;
-    overflow: hidden; /* 이미지 확대 시 밖으로 튀어나가지 않게 제어 */
+    aspect-ratio: 4 / 3; /* 반응형 화면에 대응하면서 이미지 높이가 고정되어 잘리던 한계 극복 */
+    overflow: hidden;
     background-color: var(--bg-card);
 }
 
@@ -184,7 +183,7 @@ mark {
 }
 
 .gallery-card:hover img {
-    transform: scale(1.08); /* 마우스 올렸을 때 부드러운 확대 효과 */
+    transform: scale(1.08);
 }
 
 .gallery-info {
@@ -201,11 +200,58 @@ mark {
 .gallery-info p {
     font-size: 0.93rem;
     color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ✍️ 에세이 & 멘토링 스토리 그리드 레이아웃 */
+.story-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.story-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.story-card:hover {
+    transform: scale(1.01) translateX(5px);
+    border-left: 5px solid var(--accent-color);
+}
+
+.story-icon {
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.story-content {
+    flex-grow: 1;
+}
+
+.story-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.story-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     margin-bottom: 0;
     line-height: 1.6;
 }
 
-/* 기본 정보 그리드 */
+/* profile 그리드 */
 ul.profile-grid {
     list-style: none;
     display: grid;
@@ -229,7 +275,7 @@ ul.profile-grid li:hover {
     border-color: var(--accent-color);
 }
 
-/* 기술 스택 리스트 (ol 순서 번호) */
+/* 기술스택 (ol) */
 ol {
     list-style: none;
     counter-reset: tech-counter;
@@ -267,22 +313,40 @@ ol li strong {
     margin-right: 8px;
 }
 
-/* 버킷리스트 투두 */
+/* fieldset 투두 */
+fieldset {
+    border: 1.5px dashed var(--border-color);
+    padding: 25px;
+    border-radius: 20px;
+    background-color: var(--bg-secondary);
+    box-shadow: var(--shadow);
+    margin: 25px 0;
+}
+
+legend {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    padding: 0 15px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
 .todo-list {
     list-style: none;
-    margin: 20px 0;
 }
 
 .todo-item {
     display: flex;
     align-items: center;
     gap: 12px;
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary);
     border: 1px solid var(--border-color);
     padding: 15px 20px;
     margin-bottom: 12px;
     border-radius: 14px;
-    box-shadow: var(--shadow);
     font-weight: 500;
     transition: var(--transition);
 }
@@ -305,10 +369,9 @@ ol li strong {
     width: 18px;
     height: 18px;
     accent-color: var(--accent-color);
-    cursor: default;
 }
 
-/* 학력 및 경력 (dl) */
+/* 학력 및 수상 (dl) */
 dl {
     background-color: var(--bg-secondary);
     border: 1px solid var(--border-color);
@@ -340,7 +403,7 @@ dd {
     color: var(--text-secondary);
 }
 
-/* 프로젝트 카드 디자인 고도화 */
+/* 프로젝트 카드 */
 .project-card {
     background-color: var(--bg-card);
     padding: 18px 22px;
@@ -377,7 +440,7 @@ dd {
     white-space: nowrap;
 }
 
-/* 모달 레이아웃 (스크롤 최적화) */
+/* 프로젝트 모달 시스템 */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -408,9 +471,50 @@ dd {
     animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes slideUp {
-    from { transform: translateY(40px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+/* 📸 원본 Lightbox 이미지 팝업 전용 스타일링 */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(28, 20, 18, 0.9); /* 다크 원두 브라운 톤 암막 효과 */
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* 프로젝트 모달창보다 위에 뜨게 설정 */
+    backdrop-filter: blur(8px);
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 75vh;
+    border-radius: 12px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    object-fit: contain; /* 원본 비율 유지 확대 */
+    animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#lightboxCaption {
+    margin-top: 15px;
+    color: #f5efe6;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.92); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .close-btn {
