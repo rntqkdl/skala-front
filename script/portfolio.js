@@ -192,6 +192,32 @@ window.openLightbox = function(src, caption) { PortfolioCore.openLightboxAPI(src
 window.closeLightbox = function(e) { if (e.target.id === 'lightboxModal') PortfolioCore.closeLightboxAPI(); };
 window.closeLightboxDirect = function() { PortfolioCore.closeLightboxAPI(); };
 
+/* 🎨 고도화: 프로필 동적 기술 스택 필터링 서비스 */
+window.filterProjects = function(filterValue, btnEl) {
+    document.querySelectorAll('#projectFilterRail button').forEach(btn => btn.classList.remove('active'));
+    if (btnEl) btnEl.classList.add('active');
+
+    const cards = document.querySelectorAll('.project-list-container .project-card');
+    cards.forEach(card => {
+        if (filterValue === 'all') {
+            card.style.display = 'block';
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+        } else {
+            const tags = card.getAttribute('data-tags') || '';
+            if (tags.split(',').includes(filterValue)) {
+                card.style.display = 'block';
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            } else {
+                card.style.display = 'none';
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+            }
+        }
+    });
+};
+
 // 돔 로드 즉시 멀티테마 연동 상태 머신 구동
 window.addEventListener('DOMContentLoaded', () => {
     PortfolioCore.initThemeSync();

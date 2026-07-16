@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKALA | Portal 마스터 허브 대시보드</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 📱 고속 줌인 및 반응형 픽셀 무결성 스타일팩 */
+        .naver-main-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+        @media (max-width: 1024px) {
+            .naver-main-layout {
+                grid-template-columns: 1fr;
+            }
+            .right-sidebar-stream {
+                order: -1;
+            }
+        }
+        .portal-service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .cozy-input, .cozy-btn {
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .sandbox-btn-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .sandbox-btn-group .cozy-btn {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        /* �️ 입체형 좌우 분할 게임 디스플레이 콘솔 전용 디자인 팩 */
+        .console-split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 16px;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .console-split-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .console-control-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* 따뜻한 라떼/오트밀 감성의 코지(Cozy) 가상 스크린 */
+        .virtual-screen-deck {
+            background: var(--bg-nested);
+            border: 1px solid var(--border-cozy);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-cozy);
+            position: relative;
+            min-height: 180px; /* 세로 폭 대폭 축소하여 No Scroll 핏 완료 */
+        }
+
+        .screen-glass {
+            flex: 1;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            border: 1px solid var(--border-cozy);
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: var(--transition-apple);
+        }
+
+        /* 아날로그 노이즈를 걷어내고 따뜻한 에스테틱 격자망 투영 */
+        .screen-crt-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(var(--border-cozy) 1px, transparent 1px);
+            background-size: 16px 16px;
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .screen-title {
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            border-bottom: 1px dashed var(--border-cozy);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+        }
+
+        /* 🐾 성장형 마스터 아바타 캐릭터 */
+        .avatar-stage-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            animation: breatheMotion 2s infinite alternate ease-in-out;
+        }
+        @keyframes breatheMotion {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-4px); }
+        }
+        .avatar-character {
+            font-size: 2.5rem;
+            transition: var(--transition-apple);
+            filter: drop-shadow(0 4px 8px rgba(224, 108, 83, 0.25));
+        }
+        .avatar-level-tag {
+            background: var(--color-brand);
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 1px 6px;
+            border-radius: 20px;
+            box-shadow: 0 2px 6px rgba(224,108,83,0.2);
+        }
+
+        /* 📊 누적 학점 게이지 그래프 */
+        .progress-rail {
+            width: 100%;
+            max-width: 180px;
+            height: 8px;
+            background: var(--bg-nested);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-cozy);
+            margin-top: 4px;
+        }
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--color-brand);
+            transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 4px rgba(224, 108, 83, 0.3);
+        }
+
+        /* 🎒 가방 입체 스택 랙 */
+        .console-stack-rack {
+            display: flex;
+            flex-direction: column-reverse;
+            gap: 4px;
+            width: 100%;
+            max-width: 150px;
+            background: var(--bg-primary);
+            border: 1px dashed var(--border-cozy);
+            padding: 6px;
+            border-radius: 6px;
+            min-height: 90px;
+        }
+        .console-rack-item {
+            background: var(--bg-nested);
+            color: var(--text-main);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-align: center;
+            border: 1px solid var(--border-cozy);
+            animation: popIn 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.9) translateY(8px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* 🔢 이진 탐색 스캔 도트 가이드 */
+        .binary-scan-rail {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 200px;
+            height: 16px;
+            background: var(--bg-primary);
+            border-radius: 20px;
+            border: 1px solid var(--border-cozy);
+            align-items: center;
+            padding: 0 8px;
+            margin-top: 6px;
+        }
+        .scan-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--border-cozy);
+            border-radius: 50%;
+            transition: var(--transition-apple);
+        }
+        .scan-dot.active {
+            background: var(--color-brand);
+            box-shadow: 0 0 6px var(--color-brand);
+            transform: scale(1.2);
+        }
+        .scan-dot.target {
+            background: var(--color-success);
+            box-shadow: 0 0 6px var(--color-success);
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mesh-gradient-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="notion-grid-mask"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="global-header">
+            <a href="index.html" class="logo-area" style="text-decoration:none; color:inherit;">SKALA<span>.Hub</span></a>
+            <nav class="theme-select-box" aria-label="멀티 테마 스위치">
+                <button class="theme-btn-node active" data-theme="light">Light</button>
+                <button class="theme-btn-node" data-theme="dark">Dark</button>
+                <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
+                <button class="theme-btn-node" data-theme="forest">Forest</button>
+            </nav>
+        </header>
+
+        <main class="naver-main-layout">
+            
+            <div class="left-content-stream">
+                <section class="dashboard-card">
+                    <div class="widget-headline" style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>📂 SKALA 포털 서비스 채널</span>
+                        <a href="signUp.html" style="font-size:0.75rem; font-weight:900; background:var(--color-brand); color:#fff; padding:4px 10px; border-radius:12px; text-decoration:none;">✨ 멤버십 가입하기</a>
+                    </div>
+                    <div class="portal-service-grid">
+                        
+                        <div class="service-nav-card" style="border:1px solid var(--border-cozy);">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">👤</div>
+                                <div class="service-nav-title">마스터 프로필 명세</div>
+                            </div>
+                            <p class="service-nav-desc">AI 및 지능형 데이터 엔지니어링 수행 이력과 STAR 트러블슈팅 명세 기술서</p>
+                            <a href="myProfile.html" class="service-jump-btn">채널 입장 &rarr;</a>
+                        </div>
+
+                        <div class="service-nav-card" style="border:1px solid var(--border-cozy);">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">🌍</div>
+                                <div class="service-nav-title">나의 감성 여행 앨범</div>
+                            </div>
+                            <p class="service-nav-desc">성민 마스터가 발자취를 남긴 3개국 실측 고해상도 여행 기록 및 감상</p>
+                            <a href="myTrip.html" class="service-jump-btn">채널 입장 &rarr;</a>
+                        </div>
+
+                        <div class="service-nav-card" style="border:1px solid var(--border-cozy);">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">👤</div>
+                                <div class="service-nav-title">회원가입 포털 게이트</div>
+                            </div>
+                            <p class="service-nav-desc">쿼리 파싱 환영 인터랙션이 연계된 SKALA 엔지니어 전용 멤버십 가입 게이트</p>
+                            <a href="signUp.html" class="service-jump-btn">채널 입장 &rarr;</a>
+                        </div>
+
+                        <div class="service-nav-card" style="border:1px solid var(--border-cozy);">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">🏖️</div>
+                                <div class="service-nav-title">공휴일 타임라인 분석</div>
+                            </div>
+                            <p class="service-nav-desc">연간 법정 공휴일 지표 분석 및 마일스톤 타임라인 렌더링 시스템</p>
+                            <a href="holiday.html" class="service-jump-btn">채널 입장 &rarr;</a>
+                        </div>
+
+                        <div class="service-nav-card" style="border:1px solid var(--border-cozy);">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">📅</div>
+                                <div class="service-nav-title">학사 일정 캘린더 대시보드</div>
+                            </div>
+                            <p class="service-nav-desc">학과 학기 시간표 및 데이터 배치 자동화 스케줄 관리 달력 대시보드</p>
+                            <a href="myClass.html" class="service-jump-btn">채널 입장 &rarr;</a>
+                        </div>
+
+                        <div class="service-nav-card" style="border:1px solid var(--border-cozy);">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">⚙️</div>
+                                <div class="service-nav-title">통합 오케스트레이션 게이트웨이</div>
+                            </div>
+                            <p class="service-nav-desc">SKALA 자동화 오케스트레이션 제어 및 마스터 어드민 인증 게이트웨이</p>
+                            <a href="gateway.html" class="service-jump-btn">채널 입장 &rarr;</a>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section class="dashboard-card" id="sandboxSection">
+                    <div class="widget-headline" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                        <span>🎮 알고리즘 미니 게임 실습 상자 (Sandbox v9.0)</span>
+                        <!-- 🎁 마스터 퀘스트 배지 현황판 -->
+                        <div style="display:flex; gap:6px;">
+                            <span id="badgeRunning" style="font-size:0.7rem; font-weight:900; background:var(--bg-nested); color:var(--text-muted); padding:3px 8px; border-radius:10px; border:1px solid var(--border-cozy); transition:var(--transition-apple);">💯 성적 완료</span>
+                            <span id="badgeGourmet" style="font-size:0.7rem; font-weight:900; background:var(--bg-nested); color:var(--text-muted); padding:3px 8px; border-radius:10px; border:1px solid var(--border-cozy); transition:var(--transition-apple);">🎯 예측 완료</span>
+                            <span id="badgeTravel" style="font-size:0.7rem; font-weight:900; background:var(--bg-nested); color:var(--text-muted); padding:3px 8px; border-radius:10px; border:1px solid var(--border-cozy); transition:var(--transition-apple);">🎒 가방 완료</span>
+                        </div>
+                    </div>
+                    <p class="section-desc" style="margin-bottom:16px;">
+                        자바스크립트로 구현된 미니 게임형 알고리즘 실습 공간입니다. 아래의 3가지 챌린지를 모두 완수하여 마스터의 갓생 마일스톤에 히든 이스터에그를 작동시켜 보세요!
+                    </p>
+                    <div class="sandbox-tabs" role="tablist">
+                        <button class="tab-btn active" onclick="switchSandboxTab('gradePanel', this)">📊 1단계. 학점 변환 (Grade)</button>
+                        <button class="tab-btn" onclick="switchSandboxTab('updownPanel', this)">🔢 2단계. 난수 매칭 (UpDown)</button>
+                        <button class="tab-btn" onclick="switchSandboxTab('bagPanel', this)">🎒 3단계. 가방 스택 (Bag)</button>
+                    </div>
+
+                    <!-- 1. Grade 탭 (러닝 강도 판정) -->
+                    <div class="tab-panel active" id="gradePanel" role="tabpanel">
+                        <label for="gradeInput" style="display:none;">러닝 컨디션 점수</label>
+                        <input type="number" class="cozy-input" id="gradeInput" placeholder="성적 수치 점수를 입력하세요 (0 ~ 100)">
+                        <button class="cozy-btn" style="margin-top:10px;" onclick="executeGradeCalc()">학점 변환 테스트 기동 📈</button>
+                        <div class="sandbox-log-list" id="gradeLog"><div class="sandbox-log-item">📊 대기 중... 점수 버퍼 입력 후 작동시키세요.</div></div>
+                    </div>
+
+                    <!-- 2. UpDown 탭 (미식 임계값 맞추기) -->
+                    <div class="tab-panel" id="updownPanel" role="tabpanel">
+                        <label for="updownInput" style="display:none;">매운맛 임계값 예측</label>
+                        <input type="number" class="cozy-input" id="updownInput" placeholder="추측 난수 변수값 입력 (1 ~ 100)">
+                        <div class="sandbox-btn-group">
+                            <button class="cozy-btn" onclick="executeUpDownGame()">정답 맞추기 시도 🎯</button>
+                            <button class="cozy-btn" style="background:var(--text-muted);" onclick="resetUpDownGame()">난수 초기화</button>
+                        </div>
+                        <div class="sandbox-log-list" id="updownLog"><div class="sandbox-log-item">🎲 게임이 준비되었습니다. 난수를 예측해 보세요! (치트키는 F12 콘솔 탭을 확인하세요.)</div></div>
+                    </div>
+
+                    <!-- 3. Bag 탭 (여행 캐리어 패킹) -->
+                    <div class="tab-panel" id="bagPanel" role="tabpanel">
+                        <label for="bagInput" style="display:none;">여행 소장품 기입</label>
+                        <input type="text" class="cozy-input" id="bagInput" placeholder="가방에 집어넣을 소장품 명칭 입력 (예: 스마트폰, 노트북, 책, 지갑 등)">
+                        <div class="sandbox-btn-group">
+                            <button class="cozy-btn" onclick="executeBagAction('add')">아이템 적재 ➕</button>
+                            <button class="cozy-btn" style="background:#ba7a70;" onclick="executeBagAction('remove')">최근 아이템 꺼내기 (Pop) ➖</button>
+                            <button class="cozy-btn" style="background:var(--text-main);" onclick="executeBagAction('clear')">가방 전체 비우기</button>
+                        </div>
+                        <div class="sandbox-log-list" id="bagLog"><div class="sandbox-log-item">🎒 가방 인스턴스가 완전히 비어있습니다.</div></div>
+                    </div>
+                </section>
+
+                <section class="dashboard-card n8n-live-panel">
+                    <div class="n8n-header-meta">
+                        <div>🔄 n8n 워크플로우 실시간 파이프라인 모니터</div>
+                        <div id="n8nStatus" style="color:#a3e635; font-weight: 900; letter-spacing: 0.05em;">● 정상 작동 중</div>
+                    </div>
+                    <div class="n8n-terminal-box" title="마우스 호버 시 로그 스트림 흐름이 정지되어 가독성을 확보합니다">
+                        <div class="n8n-scroller" id="n8nTerminalScroller"></div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="right-sidebar-stream">
+                <div class="dashboard-card naver-profile-box">
+                    <div class="profile-avatar">👨‍💻</div>
+                    <div class="profile-name">안성민 (Seongmin An)</div>
+                    <div class="profile-duty">AI Agent & Data Engineer</div>
+                    
+                    <div class="portal-quick-bar" aria-label="개인 서재 핫라인 링크">
+                        <a href="https://github.com/rntqkdl" target="_blank" class="quick-chip" title="GitHub 코드 저장소 오픈">🐙<br>깃허브</a>
+                        <a href="mailto:tjdals2299@gmail.com" class="quick-chip" title="이메일 다이렉트 전송">✉️<br>메일</a>
+                        <a href="tel:010-2878-5134" class="quick-chip" title="유선 모바일 핫라인 연결">📞<br>전화</a>
+                        <a href="../README.md" target="_blank" class="quick-chip" title="대시보드 운영 아키텍처 명세서">📄<br>리드미</a>
+                    </div>
+                    
+                    <div class="sub-links">
+                        <a href="myTrip.html">🌍 여행 일지 채널</a>
+                        <a href="signUp.html">👤 멤버십 포털 게이트</a>
+                        <a href="holiday.html">🏖️ 휴일 다이어리 채널</a>
+                        <a href="myClass.html">📅 학사 일정 캘린더</a>
+                    </div>
+
+                    <div class="milestone-counter">
+                        <span>🎯 2026 핵심 마일스톤</span>
+                        <span class="milestone-badge" id="milestoneCount">1 / 4 달성 완료</span>
+                    </div>
+
+                    <div class="milestone-counter" style="flex-direction:column; align-items:stretch; gap:10px; margin-top:12px; background:var(--bg-card); border:1px solid var(--border-cozy); padding:14px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span id="realtimeClock" style="font-size:1.4rem; font-weight:900; letter-spacing:-0.03em;">00:00:00</span>
+                            <span id="wTemp" style="font-weight:900; color:var(--color-brand); font-size:1.15rem;">--°C</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:var(--text-muted);">
+                            <span id="realtimeDate">날짜 연산 중</span>
+                            <span id="wDesc" style="font-weight:700;">로딩 중...</span>
+                        </div>
+                        <!-- ⛅ 고도화: 비동기 도시 선택 기상 레이어 탑재 -->
+                        <div style="margin-top: 6px; border-top: 1px dashed var(--border-cozy); padding-top: 8px;">
+                            <label for="city-select" style="display:none;">도시 선택</label>
+                            <select id="city-select" style="width:100%; background:var(--bg-nested); border:1px solid var(--border-cozy); padding:6px 10px; border-radius:6px; font-size:0.78rem; font-weight:700; color:var(--text-main); cursor:pointer;">
+                                <option value="35.1595,126.8526">📍 광주광역시 (기본)</option>
+                                <option value="37.5665,126.9780">📍 서울특별시</option>
+                                <option value="35.1796,129.0756">📍 부산광역시</option>
+                                <option value="35.8714,128.6014">📍 대구광역시</option>
+                                <option value="37.4563,126.7052">📍 인천광역시</option>
+                                <option value="36.3504,127.3845">📍 대전광역시</option>
+                                <option value="35.5384,129.3114">📍 울산광역시</option>
+                                <option value="33.4996,126.5312">📍 제주특별자치도</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- 📟 고도화: 사용자 디바이스 감지 및 세션 카운터 보드 -->
+                    <div class="milestone-counter" style="flex-direction:column; align-items:stretch; gap:8px; margin-top:12px; background:rgba(224,108,83,0.04); border:1px solid rgba(224,108,83,0.15); padding:14px; font-size:0.78rem;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:900;">
+                            <span style="color:var(--color-brand);">🖥️ 접속 세션 디바이스 로거</span>
+                            <span id="platformViewCount" style="background:var(--color-brand); color:#fff; padding:1px 6px; border-radius:10px; font-size:0.7rem;">0회 접속</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; color:var(--text-muted); margin-top:2px;">
+                            <span>감지된 운영체제 (OS)</span>
+                            <span id="detectedOSVal" style="color:var(--text-main);">감지 중...</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; font-weight:700; color:var(--text-muted);">
+                            <span>브라우저 코어</span>
+                            <span id="detectedBrowserVal" style="color:var(--text-main);">감지 중...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="global-footer">
+            <p>© 2026 안성민. Multi-Theme Automated Portal Dashboard Engine.</p>
+        </footer>
+    </div>
+
+    <script type="module" src="../script/app.js"></script>
+    <script>
+        function switchSandboxTab(panelId, btnElement) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            btnElement.classList.add('active');
+            document.getElementById(panelId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

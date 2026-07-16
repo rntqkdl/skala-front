@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKALA | 나의 감성 여행 앨범 🗺️</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 🗺️ 여행 앨범 고유 갤러리 아키텍처 및 미디어 플레이어 팩 */
+        .trip-header-card {
+            background: linear-gradient(135deg, #1c1816, #2d221f);
+            color: #fff;
+            border-left: 5px solid var(--color-brand);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .music-player-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.08);
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .music-player-wrap audio {
+            height: 32px;
+            outline: none;
+        }
+
+        /* 📸 Premium Card Grid layout with complete aspect control */
+        .trip-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .trip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cozy);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-cozy);
+            transition: var(--transition-apple);
+            cursor: pointer;
+            position: relative;
+            padding: 0;
+            margin: 0;
+        }
+        .trip-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--color-brand);
+            box-shadow: var(--shadow-hover);
+        }
+        .trip-img-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: var(--bg-nested);
+            position: relative;
+        }
+        .trip-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-apple);
+        }
+        .trip-card:hover .trip-img-wrap img {
+            transform: scale(1.05);
+        }
+        .trip-caption {
+            padding: 16px;
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: var(--text-main);
+            font-family: var(--font-serif);
+            border-top: 1px solid var(--border-cozy);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .trip-year-badge {
+            font-size: 0.75rem;
+            background: var(--bg-nested);
+            color: var(--color-brand);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 900;
+        }
+
+        /* 📹 Vlog Section styling */
+        .vlog-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cozy);
+            border-radius: 20px;
+            padding: 28px;
+            margin-top: 24px;
+            box-shadow: var(--shadow-cozy);
+        }
+        .vlog-player-container {
+            width: 100%;
+            max-width: 720px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 16px;
+            border: 1px solid var(--border-cozy);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+        }
+        .vlog-player-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ♿ Focus optimization for accessibility */
+        .trip-card:focus-visible, .music-player-wrap audio:focus-visible, .vlog-player-container video:focus-visible, .close-btn:focus-visible {
+            outline: 3px solid var(--color-brand);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🌌 공간 렌더링 셰이더 배경 인프라 -->
+    <div class="mesh-gradient-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="notion-grid-mask"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 🛠️ 통합 프리미엄 포털 GNB 헤더 완벽 규격 가동 -->
+        <header class="global-header">
+            <div class="logo-area">
+                <a href="index.html" aria-label="메인 포털 대시보드로 이동" style="text-decoration:none; color:inherit;">🏠 Portal Hub</a>
+            </div>
+            <nav class="theme-select-box" aria-label="4대 멀티 테마 스위치">
+                <button class="theme-btn-node active" data-theme="light">Light</button>
+                <button class="theme-btn-node" data-theme="dark">Dark</button>
+                <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
+                <button class="theme-btn-node" data-theme="forest">Forest</button>
+            </nav>
+        </header>
+
+        <!-- 🏢 나의 여행 앨범 콘텐츠 영역 -->
+        <main>
+            <div class="trip-header-card">
+                <div>
+                    <h1 style="font-family: var(--font-serif); font-weight:900; font-size:1.45rem;">🌍 나의 여행 앨범 & 사색의 소리</h1>
+                    <p style="font-size:0.8rem; color:#bda697; margin-top:4px; font-weight:600;">성민 마스터가 직접 발자취를 남긴 3개국 실측 고해상도 기록 저장소</p>
+                </div>
+                <!-- 🎵 배경음악 연동 컴포넌트 -->
+                <div class="music-player-wrap">
+                    <span style="font-size:0.85rem; font-weight:900; color:#fff;">🎵 BGM ON:</span>
+                    <audio controls loop>
+                        <source src="../media/music.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+
+            <!-- 📸 3개국 실측 그리드 레이아웃 -->
+            <div class="trip-grid-container">
+                <!-- 리장 -->
+                <div class="trip-card" tabindex="0" role="button" aria-label="리장 호도협 일지 열기" onclick="openLightbox('../media/리장.jpg', '🇨🇳 리장 호도협 (2025년) — 구름 위의 비경과 굽이치는 장강 협곡')">
+                    <div class="trip-img-wrap">
+                        <img src="../media/리장.jpg" alt="리장 호도협">
+                    </div>
+                    <div class="trip-caption">
+                        <span>🇨🇳 리장 호도협</span>
+                        <span class="trip-year-badge">2025년</span>
+                    </div>
+                </div>
+
+                <!-- 세부 -->
+                <div class="trip-card" tabindex="0" role="button" aria-label="세부 탑스힐 일지 열기" onclick="openLightbox('../media/세부.jpg', '🇵🇭 세부 탑스힐 (2024년) — 남태평양 밤바다와 도심을 수놓은 야경')">
+                    <div class="trip-img-wrap">
+                        <img src="../media/세부.jpg" alt="세부 탑스힐">
+                    </div>
+                    <div class="trip-caption">
+                        <span>🇵🇭 세부 탑스힐</span>
+                        <span class="trip-year-badge">2024년</span>
+                    </div>
+                </div>
+
+                <!-- 홋카이도 -->
+                <div class="trip-card" tabindex="0" role="button" aria-label="홋카이도 대설산 일지 열기" onclick="openLightbox('../media/홋카이도.jpg', '🇯🇵 홋카이도 대설산 (2025년) — 드넓은 설원과 하늘의 경계선')">
+                    <div class="trip-img-wrap">
+                        <img src="../media/홋카이도.jpg" alt="훗카이도 대설산">
+                    </div>
+                    <div class="trip-caption">
+                        <span>🇯🇵 훗카이도 대설산</span>
+                        <span class="trip-year-badge">2025년</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 📹 여행 브이로그 채널 -->
+            <section class="vlog-section">
+                <div class="widget-headline" style="border-bottom: 1px solid var(--border-cozy); padding-bottom: 12px; margin-bottom: 14px;">
+                    📹 나의 여행 브이로그 (Vlog Cast)
+                </div>
+                <p class="section-desc">
+                    웅장하고 이국적인 정취를 4H 무결성 비디오 캐스트로 스트리밍 서비스합니다. 사운드와 함께 감상해 보세요.
+                </p>
+                <div class="vlog-player-container">
+                    <video width="400" height="225" controls loop>
+                        <source src="../media/video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p style="font-size:0.85rem; color:var(--text-muted); font-weight:700; margin-top:12px; display:flex; align-items:center; gap:6px;">
+                    <span>✈️</span> 아름다운 자연의 음악과 힐링 루틴
+                </p>
+            </section>
+        </main>
+
+        <footer class="global-footer">
+            <p>© 2026 안성민. SK AX [SKALA 4기] 마스터 교육 일정 거버넌스 시스템.</p>
+        </footer>
+    </div>
+
+    <!-- 이미지 원본 모달 라이트박스 컴포넌트 -->
+    <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox(event)">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeLightboxDirect()">&times;</button>
+            <img id="lightboxImg" src="" alt="원본 스케일 화면">
+            <div id="lightboxCaption">사진 설명</div>
+        </div>
+    </div>
+
+    <script src="../script/portfolio.js"></script>
+    <script>
+        // Trait for key navigation support on cards
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.trip-card').forEach(card => {
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        card.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

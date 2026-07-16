@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKALA | 성민의 주말 및 공휴일 아카이브</title>
+    <!-- 📍 경로 정정: 동일 디렉터리 구조에 따른 상위 css 자산 인덱싱 -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 🎨 네이버 파워블로그 감성 레이아웃 & 2열 공간 분할 팩 */
+        .blog-container-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-top: 12px; }
+
+        /* 📝 네이버 감성 주간일기 스트림 피드 */
+        .blog-diary-stream { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+        .blog-post-card { background: var(--bg-card); border: 1px solid var(--border-cozy); border-radius: 16px; padding: 28px; box-shadow: var(--shadow-cozy); }
+        .blog-meta-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; border-bottom: 1px solid var(--border-cozy); padding-bottom: 12px; }
+        .blog-author-avatar { width: 42px; height: 42px; background: var(--color-brand); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; }
+        .blog-title-meta h3 { font-family: var(--font-serif); font-weight: 900; font-size: 1.15rem; color: var(--text-main); }
+        .blog-title-meta span { font-size: 0.78rem; color: var(--text-muted); font-weight: 700; }
+
+        /* 📸 멀티 및 싱글 사진 컴포넌트 박스 무결성 제어 */
+        .blog-multi-image-box { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: var(--bg-nested); padding: 12px; border-radius: 14px; border: 1px solid var(--border-cozy); margin: 16px 0; }
+        .blog-single-image-box { display: block; background: var(--bg-nested); padding: 12px; border-radius: 14px; border: 1px solid var(--border-cozy); margin: 16px 0; text-align: center; }
+        
+        .blog-img-node { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-cozy); cursor: pointer; transition: var(--transition-apple); }
+        .blog-img-node:hover { transform: scale(1.02); border-color: var(--color-brand); }
+        
+        .blog-diary-section { scroll-margin-top: 100px; padding: 12px; border-radius: 12px; transition: background-color 0.5s ease, transform 0.3s ease; }
+        .blog-diary-section.highlight-focus { background-color: rgba(224, 108, 83, 0.08); transform: scale(1.01); }
+        .blog-diary-text { font-size: 0.96rem; color: var(--text-main); line-height: 1.8; font-weight: 600; text-align: justify; word-break: keep-all; margin: 14px 0; }
+        .blog-sticker-emoji { font-size: 1.3rem; vertical-align: middle; margin-right: 4px; }
+
+        /* ⏱️ 사이드바 데스크톱 기본 스티키 레일 */
+        .side-routine-sticky { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 20px; }
+        .routine-card-node { background: var(--bg-card); border: 1px solid var(--border-cozy); padding: 14px 16px; border-radius: 12px; box-shadow: var(--shadow-cozy); display: flex; flex-direction: column; gap: 6px; transition: var(--transition-apple); cursor: pointer; }
+        .routine-card-node:hover { transform: translateX(-4px); border-color: var(--color-brand); background: #ffffff; }
+        .routine-time-badge { font-weight: 800; color: var(--color-brand); background: rgba(224, 108, 83, 0.06); padding: 2px 8px; border-radius: 12px; font-size: 0.78rem; display: inline-block; width: fit-content; }
+        
+        /* 💬 고도화된 댓글 CRUD 컴포넌트 인프라 */
+        .comment-stream-box { margin-top: 16px; border-top: 1px solid var(--border-cozy); padding-top: 16px; max-height: 500px; overflow-y: auto; }
+        .comment-instance-node { background: var(--bg-nested); border: 1px solid var(--border-cozy); padding: 16px; border-radius: 12px; margin-bottom: 12px; animation: paneFadeUp 0.4s var(--transition-apple); display: flex; flex-direction: column; gap: 8px; position: relative; }
+        
+        .comment-header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; padding-bottom: 4px; }
+        .comment-meta-info { display: flex; gap: 12px; font-size: 0.78rem; color: var(--text-muted); font-weight: 700; }
+        
+        /* 제어 버튼 그룹의 명확한 정렬 배치 */
+        .comment-action-group { display: flex; align-items: center; gap: 6px; }
+        .comment-ctrl-btn { font-size: 0.75rem; font-weight: 800; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border-cozy); background: var(--bg-card); color: var(--text-main); cursor: pointer; transition: var(--transition-apple); }
+        .comment-ctrl-btn:hover { border-color: var(--color-brand); color: var(--color-brand); background: #ffffff; }
+        .comment-delete-btn { background: rgba(224, 108, 83, 0.08); color: var(--color-brand); border-color: transparent; }
+        .comment-delete-btn:hover { background: var(--color-brand); color: #fff; }
+        
+        .comment-body-text { font-size: 0.9rem; color: var(--text-main); font-weight: 600; line-height: 1.5; word-break: break-all; }
+        .comment-edit-input { width: 100%; font-family: inherit; font-size: 0.9rem; font-weight: 600; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--color-brand); background: #ffffff; color: #000; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+
+        /* 📱 🚀 핵심 고도화: A안 모바일 반응형 5대 가로 스크롤 칩 레일 미디어 쿼리 */
+        @media (max-width: 992px) {
+            .blog-container-layout { grid-template-columns: 1fr; }
+            .right-sidebar-stream { order: -1; margin-bottom: 8px; }
+            .side-routine-sticky { 
+                flex-direction: row; 
+                overflow-x: auto; 
+                white-space: nowrap; 
+                padding: 4px 2px;
+                gap: 10px;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+            /* 모바일 진입 시 고정 알림 패널 파쇄 숨김 */
+            .side-routine-sticky .dashboard-card { display: none !important; }
+            .routine-card-node { 
+                flex: 0 0 auto; 
+                width: 220px; 
+                scroll-snap-align: start; 
+                margin: 0 !important;
+                white-space: normal;
+                padding: 12px;
+            }
+            .routine-card-node p {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                font-size: 0.75rem !important;
+            }
+        }
+
+        /* ✨ 클릭 시 일시적인 하이라이트 발광 효과 */
+        @keyframes diaryGlowFade {
+            0% {
+                box-shadow: 0 0 0 4px var(--color-brand), 0 0 20px rgba(224, 108, 83, 0.4);
+                background-color: rgba(224, 108, 83, 0.12) !important;
+                transform: scale(1.02);
+            }
+            100% {
+                box-shadow: 0 0 0 0px transparent;
+            }
+        }
+        .blog-diary-section.highlight-focus {
+            animation: diaryGlowFade 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 12px;
+            z-index: 10;
+        }
+
+        /* ♿ 웹 접근성 키보드 포커스 링 개선 */
+        .routine-card-node:focus-visible, .comment-ctrl-btn:focus-visible, .cozy-input:focus-visible, .cozy-btn:focus-visible, .close-btn:focus-visible {
+            outline: 3px solid var(--color-brand);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🌌 공간 렌더링 셰이더 배경 인프라 -->
+    <div class="mesh-gradient-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="notion-grid-mask"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 🛠️ 통합 프리미엄 포털 GNB 헤더 완벽 규격 가동 -->
+        <header class="global-header">
+            <div class="logo-area">
+                <a href="index.html" aria-label="메인 포털 대시보드로 이동" style="text-decoration:none; color:inherit;">🏠 Portal Hub</a>
+            </div>
+            <nav class="theme-select-box" aria-label="4대 멀티 테마 스위치">
+                <button class="theme-btn-node active" data-theme="light">Light</button>
+                <button class="theme-btn-node" data-theme="dark">Dark</button>
+                <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
+                <button class="theme-btn-node" data-theme="forest">Forest</button>
+            </nav>
+        </header>
+
+        <!-- 🏢 네이버 하이브리드 반응형 구조 레이아웃 전격 진입 -->
+        <div class="blog-container-layout">
+            
+            <!-- 👈 좌측 메인 영역: 네이버 조회수 탑어티어 주간일기 챌린지 팩 -->
+            <div class="blog-diary-stream">
+                
+                <article class="blog-post-card">
+                    <div class="blog-meta-header">
+                        <div class="blog-author-avatar">안</div>
+                        <div class="blog-title-meta">
+                            <h3>안성민 엔지니어의 주간일기 챌린지 팩 🌿</h3>
+                            <span>정규 학사 일정 속 삶의 활력을 채우는 자율 리프레시 다이어리</span>
+                        </div>
+                    </div>
+
+                    <!-- 📝 에피소드 1: 코위크 최강런 (러닝 트랙) -->
+                    <div class="blog-diary-section" id="section-running">
+                        <p class="blog-diary-text">
+                            <span class="blog-sticker-emoji">🏃‍♂️</span>이번 코위크 기간 동안 정말 기대했던 <b>최강런</b>에 참여했다! 하필 당일에 비가 주룩주룩 내려서 뛸까 말까 고민도 잠시 했었지만, 역시 사람들과 다 같이 빗속을 뚫고 발을 맞추며 뛰니까 혼자 달릴 때보다 훨씬 지치지 않고 원래 뛰던 거리보다 더 멀리, 잘 뛰게 되어서 스스로도 놀랐다. 무조건 페이스를 올려서 빠르게 뛰는 것보다, 다 같이 호흡을 맞춰 오래 지속하는 유대감이 얼마나 중요한지 온몸으로 깨달은 값진 세션이었다.
+                        </p>
+                        <div class="blog-single-image-box">
+                            <img src="../media/최강런.jpg" class="blog-img-node" alt="최강런 기록" onclick="openLightbox('../media/최강런.jpg', '🏃‍♂️ 빗속을 뚫고 다 같이 완주한 최강런 러닝 데이터')">
+                        </div>
+                    </div>
+
+                    <!-- 📝 에피소드 2: 빵집 투어 & 맛집 탐방 (일본 여행 간판 및 호르몬 전문점) -->
+                    <div class="blog-diary-section" id="section-bakery-gourmet">
+                        <p class="blog-diary-text">
+                            <span class="blog-sticker-emoji">✈️</span>이 프로그램을 시작하기 직전, 소중한 사람과 함께 리프레시를 위해 계획하고 떠났던 일본 여행! 생각했던 것보다 골목골목 훨씬 예쁜 풍경과 감성적인 간판들이 많아서 평소 좋아하는 빵집 투어와 미식 골목을 걷는 내내 힐링 그 자체였다.
+                        </p>
+                        <div class="blog-single-image-box">
+                            <img src="../media/일본간판.jpg" class="blog-img-node" alt="일본 간판" onclick="openLightbox('../media/일본간판.jpg', '✈️ 소중한 사람과 함께 기록한 일본 골목 풍경')">
+                        </div>
+                        <p class="blog-diary-text">
+                            원래 가려던 유명 맛집이 있었는데 웨이팅 줄이 정말 엄두가 안 날 정도로 길어서 과감히 포기하고, 바로 옆에 우연히 숨겨져 있던 호르몬 전문점으로 발길을 돌렸다. 그런데 이게 웬걸? 한 입 먹자마자 감탄이 절로 나올 정도로 생각보다 훨씬 맛있었고, 그야말로 시원한 맥주를 무한으로 부르는 환상적인 맛이었다! 중간에 실수로 메뉴가 잘못 나오는 해프닝이 있었는데, 우리가 웃으며 괜찮다고 말씀드렸더니 사장님이 너무 고마워하시면서 미안하다고 추가 메뉴들을 서비스로 가득 더 얹어주셨다. 맛도 서비스도 기대치를 아득히 초월했던 역대급 식사이자 최고의 여행 기억으로 남았다.
+                        </p>
+                        <div class="blog-multi-image-box">
+                            <img src="../media/호르몬전문점.jpg" class="blog-img-node" alt="호르몬전문점1" onclick="openLightbox('../media/호르몬전문점.jpg', '구이 미식: 불판 위에서 맥주를 부르던 정통 호르몬 구이')">
+                            <img src="../media/호로몬전문점2.jpg" class="blog-img-node" alt="호르몬전문점2" onclick="openLightbox('../media/호로몬전문점2.jpg', '구이 미식: 사장님의 특급 서비스가 더해진 최고의 미식 한 상')">
+                        </div>
+                    </div>
+
+                    <!-- 📝 에피소드 3: 인형뽑기 & 취미 리프레시 -->
+                    <div class="blog-diary-section" id="section-hobby">
+                        <p class="blog-diary-text">
+                            <span class="blog-sticker-emoji">🎯</span>주말에 인형 뽑기 숍에 들렀다가 눈이 돌아가서 무려 2만 원이라는 거금을 태워버렸다. 지갑은 살짝 가벼워졌지만, 내가 가장 좋아하는 최애 캐릭터 인형을 내 손으로 직접 뽑아냈을 때의 찌릿한 전율과 기쁨이 돈을 쓴 아쉬움보다 수백 배는 더 컸다! 지금은 내 책상 모니터 명당자리에 늠름하게 안착해 있는데, 볼 때마다 기분이 좋아지는 최고의 주말 힐링 자산이다.
+                        </p>
+                        <div class="blog-single-image-box">
+                            <img src="../media/인형.jpg" class="blog-img-node" style="max-width: 380px; aspect-ratio: 3/4;" alt="최애 인형" onclick="openLightbox('../media/인형.jpg', '🎯 2만원의 가치를 아득히 뛰어넘는 힐링 최애 인형 생환')">
+                        </div>
+                    </div>
+
+                    <!-- 📝 에피소드 4: 제천 부촌 뼈찜 (맛집 탐방 고도화 파트) -->
+                    <div class="blog-diary-section" id="section-gourmet">
+                        <p class="blog-diary-text">
+                            <span class="blog-sticker-emoji">🔥</span>코위크 정규 일정이 무사히 끝나고 정말 오랜만에 큰형을 만나 즐거운 시간을 보냈다. 최근 내가 찐하게 중독되어서 전국 맛집을 수소문하며 찾아다니던 메뉴가 바로 '뼈찜'이었는데, 마침 형이 제천의 명물인 <b>부촌 뼈찜</b>으로 나를 데려가 주었다! 진짜 눈물 나게 매콤했지만, 한 번 맛보면 멈출 수 없이 손이 계속 가는 마성의 중독성을 자랑해서 땀을 뻘뻘 흘리며 흡입했다. 글을 쓰고 있는 지금 이 순간에도 침이 고이고 자꾸 생각나는 중독성 갑의 미식이었다.
+                        </p>
+                        <div class="blog-multi-image-box">
+                            <img src="../media/부촌.jpg" class="blog-img-node" alt="부촌 식당 외관" onclick="openLightbox('../media/부촌.jpg', '🏢 제천 부촌 뼈찜 전문점 핫플레이스 외관')">
+                            <img src="../media/뼈찜.jpg" class="blog-img-node" alt="부촌 뼈찜 비주얼" onclick="openLightbox('../media/뼈찜.jpg', '🧀 매콤한 양념과 치즈 폭탄의 환상적인 부촌 뼈찜')">
+                        </div>
+                    </div>
+
+                    <!-- 📝 에피소드 5: 게으른 감성의자 (영화 & 음악감상 사색 아키텍처) -->
+                    <div class="blog-diary-section" id="section-cinema-music">
+                        <p class="blog-diary-text">
+                            <span class="blog-sticker-emoji">🛋️</span>우연히 마주친 전시 공간에서 발견한 <b>'게으른 감성의자'</b> 작품의 설명 구절이 진짜 방구석 영화 분석이나 LP 음악 감상 시 깊은 사색을 선호하는 내 성향과 완벽하게 매칭되어서 한참을 웃으며 바라봤다 ㅋㅋㅋㅋㅋ 나는 평소 해야 할 과제나 자동화 태스크가 떨어지면 나만의 철저한 시간 플랜을 미리 구조화해 두고, 초기에는 정말 여유롭고 조용하게 밑작업을 선제 빌드해 두다가 마지막 데드라인 직전 마일스톤에 다다랐을 때 초집중 딥러닝 가속을 폭발시켜 끝장내는 타입이다. 겉보기엔 여유만만해 보이지만 내면은 누구보다 치밀하게 움직이는 '부지런한 게으름뱅이' 아키텍처 성향을 완벽하게 대변해 주는 것 같아서 유독 오랫동안 가슴 깊이 남는 사진이다.
+                        </p>
+                        <div class="blog-multi-image-box">
+                            <img src="../media/게으른감성의자.jpg" class="blog-img-node" alt="게으른 감성의자 텍스트" onclick="openLightbox('../media/게으른감성의자.jpg', '📜 부지런한 게으름뱅이의 심장을 울린 감성의자 철학 구절')">
+                            <img src="../media/게으른감성의자2.jpg" class="blog-img-node" alt="게으른 감성의자 실제 사진" onclick="openLightbox('../media/게으른감성의자2.jpg', '🛋️ 여유로운 사색과 초집중의 밸런스를 상징하는 감성의자 실물')">
+                        </div>
+                    </div>
+
+                </article>
+
+                <!-- 💬 실시간 소통 피드백 엔진 (LocalStorage CRUD 영속성 엔진) -->
+                <section class="dashboard-card">
+                    <div class="widget-headline" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <span>💬 블로그 이웃 방명록 피드 레일</span>
+                        <div style="display: flex; gap: 6px;">
+                            <button class="comment-ctrl-btn" onclick="exportHolidayComments()" aria-label="댓글 백업 다운로드" style="font-size:0.75rem; padding: 4px 8px;">📥 백업</button>
+                            <button class="comment-ctrl-btn" onclick="document.getElementById('importFile').click()" aria-label="댓글 백업 복원" style="font-size:0.75rem; padding: 4px 8px;">📤 복원</button>
+                            <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importHolidayComments(event)">
+                        </div>
+                    </div>
+                    <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <input type="text" id="commentAuthorInput" class="cozy-input" style="margin-bottom: 0;" placeholder="✍️ 이름 (기본값: 익명)">
+                            <input type="password" id="commentPasswordInput" class="cozy-input" style="margin-bottom: 0;" placeholder="🔒 비밀번호 (4자리 이상 필수)">
+                        </div>
+                        <textarea id="holidayTextArea" class="cozy-input" style="width: 100%; height: 80px; padding: 12px; resize: none; font-family: inherit; font-size: 0.9rem; margin-bottom: 0;" placeholder="성민 엔지니어의 일상과 루틴에 공감의 한 줄을 동적으로 적재하세요..."></textarea>
+                        <button class="cozy-btn" style="width: 100%;" onclick="processHolidayComment()">주간일기 댓글 피드백 등록 💬</button>
+                    </div>
+                    <!-- 실시간 및 로컬 저장소 캐시 데이터가 분출되는 컨테이너 레일 -->
+                    <div class="comment-stream-box" id="holidayCommentContainer"></div>
+                </section>
+            </div>
+
+            <!-- 👉 우측 영역: 성민의 [5대 핵심 웰니스 라이프 스펙트럼 매트릭스] 사이드바 (반응형 칩 레일 지원) -->
+            <div class="right-sidebar-stream">
+                <div class="side-routine-sticky">
+                    
+                    <div class="dashboard-card" style="padding: 20px; background: linear-gradient(135deg, #1c1816, #2d221f); color:#fff; border-left:4px solid var(--color-brand); margin:0; width: 100%;">
+                        <h4 style="font-family: var(--font-serif); font-weight:900; font-size:1.05rem; margin-bottom:4px;">🏝️ 성민의 5대 휴일 라이프 맵</h4>
+                        <p style="font-size:0.8rem; color:#bda697; font-weight:600; line-height:1.4;">클릭 시 해당 일지 섹션으로 스마트 스크롤 연산이 가속됩니다.</p>
+                    </div>
+
+                    <!-- 1. 러닝 -->
+                    <div class="routine-card-node" tabindex="0" role="button" aria-label="러닝 일지로 이동" onclick="scrollToBlogSection('section-running')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToBlogSection('section-running')}">
+                        <span class="routine-time-badge" style="background:rgba(59,104,135,0.1); color:#3b6887;">🏃‍♂️ RUNNING</span>
+                        <div style="font-weight: 800; font-size:0.88rem; color:var(--text-main);">코위크 최강런 우중 레이스</div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4; margin:0;">우중에도 페이스를 공유하며 한계를 돌파한 시티 웰니스 트랙</p>
+                    </div>
+
+                    <!-- 2. 빵집 투어 -->
+                    <div class="routine-card-node" tabindex="0" role="button" aria-label="빵집 투어 일지로 이동" onclick="scrollToBlogSection('section-bakery-gourmet')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToBlogSection('section-bakery-gourmet')}">
+                        <span class="routine-time-badge" style="background:rgba(217,119,6,0.1); color:#d97706;">🥐 BAKERY</span>
+                        <div style="font-weight: 800; font-size:0.88rem; color:var(--text-main);">골목 감성 베이커리 오픈런</div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4; margin:0;">일본의 예쁜 풍경 속 숨겨진 시그니처 제빵 에셋과 공간 투어</p>
+                    </div>
+
+                    <!-- 3. 맛집 탐방 -->
+                    <div class="routine-card-node" tabindex="0" role="button" aria-label="맛집 탐방 일지로 이동" onclick="scrollToBlogSection('section-gourmet')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToBlogSection('section-gourmet')}">
+                        <span class="routine-time-badge" style="background:rgba(224,108,83,0.1); color:var(--color-brand);">🍕 GOURMET</span>
+                        <div style="font-weight: 800; font-size:0.88rem; color:var(--text-main);">제천 부촌 매운 뼈찜 명소</div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4; margin:0;">눈물 나게 매콤하지만 손이 자꾸 가는 마성의 인생 중독성 미식</p>
+                    </div>
+
+                    <!-- 4. 영화 & 5. 음악감상 -->
+                    <div class="routine-card-node" tabindex="0" role="button" aria-label="영화 및 음악 감상 일지로 이동" onclick="scrollToBlogSection('section-cinema-music')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToBlogSection('section-cinema-music')}">
+                        <span class="routine-time-badge" style="background:rgba(16,185,129,0.1); color:#10b981;">🎬 CINEMA & MUSIC</span>
+                        <div style="font-weight: 800; font-size:0.88rem; color:var(--text-main);">방구석 시네마 및 LP 청음</div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4; margin:0;">사색을 통해 치밀한 에너지 충전과 영감을 채우는 힐링 시간</p>
+                    </div>
+
+                    <!-- 5. 인형뽑기 -->
+                    <div class="routine-card-node" tabindex="0" role="button" aria-label="인형 뽑기 일지로 이동" onclick="scrollToBlogSection('section-hobby')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToBlogSection('section-hobby')}">
+                        <span class="routine-time-badge" style="background:rgba(139,92,246,0.1); color:#8b5cf6;">🎯 REFRESH HOBBY</span>
+                        <div style="font-weight: 800; font-size:0.88rem; color:var(--text-main);">최애 인형 뽑기 숍 정복</div>
+                        <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4; margin:0;">지출도 아깝지 않은 짜릿한 집게 손맛과 데스크테리어 소장</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 이미지 원본 모달 라이트박스 컴포넌트 -->
+    <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox(event)">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeLightboxDirect()">&times;</button>
+            <img id="lightboxImg" src="" alt="원본 스케일 화면">
+            <div id="lightboxCaption">사진 설명</div>
+        </div>
+    </div>
+
+    <!-- 📍 경로 정정: 공용 스크립트 모듈 정밀 로드 -->
+    <script src="../script/portfolio.js"></script>
+    <script>
+        /**
+         * SKALA SaaS Holiday Matrix & Wellness Blog Engine v9.0
+         * Pure Modern Vanilla Frontend Logic - Highly Functional & Accessible OOP Structure
+         */
+        class HolidayBlogEngine {
+            constructor() {
+                // Default fallback comments with obfuscated passwords ("1234" -> reverse "4321" -> base64 "NDMyMQ==")
+                this.savedHolidayComments = JSON.parse(localStorage.getItem('skala-holiday-comments')) || [
+                    { id: Date.now(), author: "익명_러너 (Guest)", date: "2026-07-16 15:02", body: "최강런 우중 레이스 후기 생동감 넘치네요! 부촌 뼈찜 비주얼 치즈 폭탄 대박입니다. 소통해요! 👍", password: "NDMyMQ==" }
+                ];
+                
+                this.init();
+            }
+
+            init() {
+                this.renderHolidayCommentsDOM();
+                this.setupKeyboardAccessibility();
+            }
+
+            /* Simple reverse base64 obfuscator for client-side password safety */
+            obfuscate(str) {
+                return btoa(str.split('').reverse().join(''));
+            }
+
+            /* 댓글 데이터 렌더링 파이프라인 */
+            renderHolidayCommentsDOM() {
+                const container = document.getElementById('holidayCommentContainer');
+                if (!container) return;
+                
+                if (this.savedHolidayComments.length === 0) {
+                    container.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-muted); font-size:0.88rem; font-weight:600;">📋 작성된 이웃 방명록 피드가 없습니다. 첫 공감을 기입해 보세요!</div>`;
+                    return;
+                }
+
+                container.innerHTML = this.savedHolidayComments.map((comment, index) => {
+                    const isEditing = comment.isEditing || false;
+                    
+                    return `
+                        <div class="comment-instance-node">
+                            <div class="comment-header-row">
+                                <div class="comment-meta-info">
+                                    <strong>${comment.author}</strong>
+                                    <span>${comment.date}</span>
+                                </div>
+                                <div class="comment-action-group">
+                                    ${isEditing ? 
+                                        `<button class="comment-ctrl-btn" onclick="saveHolidayCommentNode(${index})" aria-label="댓글 수정 완료">💾 완료</button>` : 
+                                        `<button class="comment-ctrl-btn" onclick="toggleEditHolidayCommentNode(${index}, true)" aria-label="댓글 수정">✏️ 수정</button>`
+                                    }
+                                    <button class="comment-ctrl-btn comment-delete-btn" onclick="removeHolidayCommentNode(${index})" aria-label="댓글 삭제">🗑️ 삭제</button>
+                                </div>
+                            </div>
+                            <div class="comment-body-wrapper">
+                                ${isEditing ? 
+                                    `<input type="text" class="comment-edit-input" id="editInput-${index}" value="${comment.body.replace(/"/g, '&quot;')}" aria-label="댓글 내용 수정">` : 
+                                    `<div class="comment-body-text">${comment.body}</div>`
+                                }
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            /* 댓글 인스턴스 적재 */
+            processHolidayComment() {
+                const authorInput = document.getElementById('commentAuthorInput');
+                const passwordInput = document.getElementById('commentPasswordInput');
+                const textArea = document.getElementById('holidayTextArea');
+                
+                if (!textArea) return;
+
+                const bodyVal = textArea.value.trim();
+                const passwordVal = passwordInput ? passwordInput.value.trim() : '';
+                let authorVal = authorInput ? authorInput.value.trim() : '';
+
+                if (!bodyVal) {
+                    alert('피드백 버퍼가 비어있습니다. 공감 메시지를 기입하세요.');
+                    return;
+                }
+
+                if (!passwordVal || passwordVal.length < 4) {
+                    alert('보안 및 수정/삭제 권한 검증을 위해 4자리 이상의 비밀번호를 입력해 주세요.');
+                    if (passwordInput) passwordInput.focus();
+                    return;
+                }
+
+                if (!authorVal) {
+                    authorVal = "익명 엔지니어";
+                }
+
+                const now = new Date();
+                const timeStampStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+                this.savedHolidayComments.unshift({
+                    id: Date.now(),
+                    author: authorVal,
+                    date: timeStampStr,
+                    body: bodyVal,
+                    password: this.obfuscate(passwordVal),
+                    isEditing: false
+                });
+
+                this.saveCommentsToStorage();
+                
+                // Form reset
+                textArea.value = '';
+                if (passwordInput) passwordInput.value = '';
+                if (authorInput) authorInput.value = '';
+
+                this.renderHolidayCommentsDOM();
+            }
+
+            /* 수정 모드 토글 (패스코드 권한 검증 포함) */
+            toggleEditHolidayCommentNode(index, state) {
+                if (state) {
+                    const inputPassword = prompt("댓글 작성 시 설정한 비밀번호를 입력하세요:");
+                    if (inputPassword === null) return; // 취소
+
+                    const targetComment = this.savedHolidayComments[index];
+                    if (this.obfuscate(inputPassword) !== targetComment.password) {
+                        alert("비밀번호가 일치하지 않아 수정 권한을 부여할 수 없습니다.");
+                        return;
+                    }
+                }
+
+                this.savedHolidayComments[index].isEditing = state;
+                this.renderHolidayCommentsDOM();
+                
+                if (state) {
+                    const targetInput = document.getElementById(`editInput-${index}`);
+                    if (targetInput) targetInput.focus();
+                }
+            }
+
+            /* 수정 내용 확정 완료 및 로컬 동기화 */
+            saveHolidayCommentNode(index) {
+                const inputEl = document.getElementById(`editInput-${index}`);
+                if (!inputEl) return;
+
+                const updatedBody = inputEl.value.trim();
+                if (!updatedBody) {
+                    alert('수정할 내용물이 비어있습니다.');
+                    return;
+                }
+
+                this.savedHolidayComments[index].body = updatedBody;
+                this.savedHolidayComments[index].isEditing = false;
+                
+                this.saveCommentsToStorage();
+                this.renderHolidayCommentsDOM();
+            }
+
+            /* 댓글 제거 (패스코드 권한 검증 포함) */
+            removeHolidayCommentNode(index) {
+                const inputPassword = prompt("댓글 작성 시 설정한 비밀번호를 입력하세요:");
+                if (inputPassword === null) return; // 취소
+
+                const targetComment = this.savedHolidayComments[index];
+                if (this.obfuscate(inputPassword) !== targetComment.password) {
+                    alert("비밀번호가 일치하지 않아 삭제할 수 없습니다.");
+                    return;
+                }
+
+                this.savedHolidayComments.splice(index, 1);
+                this.saveCommentsToStorage();
+                this.renderHolidayCommentsDOM();
+            }
+
+            saveCommentsToStorage() {
+                localStorage.setItem('skala-holiday-comments', JSON.stringify(this.savedHolidayComments));
+            }
+
+            /* 데이터 백업 (Export) - JSON 다운로드 */
+            exportHolidayComments() {
+                const dataStr = JSON.stringify(this.savedHolidayComments, null, 2);
+                const blob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `skala-comments-backup-${new Date().toISOString().slice(0, 10)}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            /* 데이터 복원 (Import) - JSON 업로드 파싱 */
+            importHolidayComments(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const importedData = JSON.parse(e.target.result);
+                        if (Array.isArray(importedData)) {
+                            // Validation checks on imported comments structure
+                            const isValid = importedData.every(item => item.id && item.author && item.body);
+                            if (isValid) {
+                                if (confirm("기존 저장된 방명록 데이터가 불러온 백업본으로 대체됩니다. 진행할까요?")) {
+                                    this.savedHolidayComments = importedData;
+                                    this.saveCommentsToStorage();
+                                    this.renderHolidayCommentsDOM();
+                                    alert("성공적으로 방명록 데이터를 백업 파일로부터 무결성 복구 완수했습니다! ✅");
+                                }
+                            } else {
+                                alert("가져온 파일 구조가 유효한 방명록 백업 데이터셋이 아닙니다.");
+                            }
+                        } else {
+                            alert("백업 파일 형식이 올바르지 않습니다.");
+                        }
+                    } catch (err) {
+                        alert("JSON 파일을 파싱하는 과정에서 에러가 발생했습니다: " + err.message);
+                    }
+                };
+                reader.readAsText(file);
+                // Clear input
+                event.target.value = '';
+            }
+
+            /* ⚡ 실시간 인터랙티브 앵커 트래킹 스크롤 및 하이라이트 애니메이션 엔진 */
+            scrollToBlogSection(sectionId) {
+                const targetSection = document.getElementById(sectionId);
+                if (!targetSection) return;
+
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                document.querySelectorAll('.blog-diary-section').forEach(sec => {
+                    sec.classList.remove('highlight-focus');
+                });
+
+                // Apply neon glow pulsation
+                targetSection.classList.add('highlight-focus');
+                setTimeout(() => {
+                    targetSection.classList.remove('highlight-focus');
+                }, 1200);
+            }
+
+            setupKeyboardAccessibility() {
+                // Focus rings visibility helper can be extended here
+            }
+        }
+
+        // Initialize Holiday Blog Engine
+        let holidayEngine;
+        document.addEventListener('DOMContentLoaded', () => {
+            holidayEngine = new HolidayBlogEngine();
+        });
+
+        // Global bridges for HTML onclick callbacks
+        window.processHolidayComment = () => holidayEngine.processHolidayComment();
+        window.toggleEditHolidayCommentNode = (index, state) => holidayEngine.toggleEditHolidayCommentNode(index, state);
+        window.saveHolidayCommentNode = (index) => holidayEngine.saveHolidayCommentNode(index);
+        window.removeHolidayCommentNode = (index) => holidayEngine.removeHolidayCommentNode(index);
+        window.scrollToBlogSection = (sectionId) => holidayEngine.scrollToBlogSection(sectionId);
+        window.exportHolidayComments = () => holidayEngine.exportHolidayComments();
+        window.importHolidayComments = (event) => holidayEngine.importHolidayComments(event);
+
+        /* 📸 라이트박스 큐레이션 가동 플러그인 */
+        function openLightbox(imgSrc, captionText) {
+            const modal = document.getElementById('lightboxModal');
+            const img = document.getElementById('lightboxImg');
+            const caption = document.getElementById('lightboxCaption');
+            if (!modal || !img) return;
+
+            img.src = imgSrc;
+            if (caption) caption.textContent = captionText;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Focus Close Button for accessibility
+            const closeBtn = modal.querySelector('.close-btn');
+            if (closeBtn) closeBtn.focus();
+        }
+
+        function lightboxCloseAPI() {
+            const modal = document.getElementById('lightboxModal');
+            if (modal) modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        
+        window.closeLightbox = function(e) { if (e.target.id === 'lightboxModal') lightboxCloseAPI(); };
+        window.closeLightboxDirect = function() { lightboxCloseAPI(); };
+
+        // Keydown support to close lightbox on Esc
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                lightboxCloseAPI();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -4,13 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>안성민 | AI & 데이터 엔지니어 포트폴리오</title>
-    
-    <!-- 최상위 css/style.css 파일을 정확하게 호출하여 명조/고딕 타이포 밸런스를 이식합니다 -->
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 📱 하이엔드 해상도 방어형 그리드 프로필 스타일팩 */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+            padding: 0;
+            list-style: none;
+        }
+        .profile-grid li {
+            background: var(--bg-nested);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-cozy);
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cozy);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: var(--transition-apple);
+        }
+        .project-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-brand);
+            box-shadow: var(--shadow-cozy);
+        }
+        .project-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- 🌌 동적 Mesh 셰이더 및 배경 격자망 레이어 -->
     <div class="mesh-gradient-bg">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
@@ -18,10 +64,9 @@
     </div>
 
     <div class="app-container">
-        <!-- 상단 통합 GNB 헤더 영역 (동일한 디자인 언어 공유) -->
         <header class="global-header">
             <div class="logo-area">
-                <a href="index_.html" aria-label="메인 포털 대시보드로 이동">🏠 Portal Hub</a>
+                <a href="index.html" aria-label="메인 포털 대시보드로 이동" style="text-decoration:none; color:inherit;">🏠 Portal Hub</a>
             </div>
             <nav class="theme-select-box" aria-label="4대 멀티 테마 스위치">
                 <button class="theme-btn-node active" data-theme="light">Light</button>
@@ -31,25 +76,23 @@
             </nav>
         </header>
 
-        <!-- 자기소개 및 핵심 정체성 역량 레이어 -->
         <main>
             <section class="dashboard-card">
                 <h1 class="profile-main-title">안녕하세요! 안성민입니다! 👨‍💻</h1>
-                <blockquote class="profile-blockquote" cite="https://github.com/rntqkdl" style="background: var(--bg-primary); border-left: 5px solid var(--color-brand); padding: 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: var(--text-muted); margin-bottom: 16px;">
+                <blockquote class="profile-blockquote" cite="https://github.com/rntqkdl" style="background: var(--bg-primary); border-left: 5px solid var(--color-brand); padding: 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: var(--text-muted); margin-bottom: 16px; line-height:1.7;">
                     "저는 이론적 배움과 실무 오케스트레이션의 연결고리를 탐구하는 <mark style="background: linear-gradient(120deg, rgba(224, 108, 83, 0.15), rgba(224, 108, 83, 0.3)); padding: 2px 6px; border-radius: 4px; font-weight: 800; color: inherit; font-family: var(--font-sans);">지능형 데이터 엔지니어</mark>입니다. <br>
-                    문제의 본질을 집요하게 분석하여, 날것의 비정형 데이터셋을 유기적인 실용 서비스 파이프라인으로 설계합니다."[cite: 1]
+                    문제의 본질을 집요하게 분석하여, 날것의 비정형 데이터셋을 유기적인 실용 서비스 파이프라인으로 설계합니다."
                 </blockquote>
                 
-                <div class="keyword-container">
+                <div class="keyword-container" style="display:flex; flex-wrap:wrap; gap:8px;">
                     <span class="keyword-tag">#원리주의_엔지니어</span>
                     <span class="keyword-tag">#데이터_센트릭_AI</span>
-                    <span class="keyword-tag">#자동화_아키텍트</span>
+                    <span class="keyword-tag">#자동화_아키젝트</span>
                     <span class="keyword-tag">#집요한_트러블슈터</span>
                     <span class="keyword-tag">#협업_PM</span>
                 </div>
             </section>
 
-            <!-- 📸 라이프 아카이브 갤러리 섹션 (타이포그래피 리밸런싱 완료) -->
             <section class="dashboard-card">
                 <div class="widget-headline">📷 성민의 라이프 아카이브 (Daily Life)</div>
                 <p class="section-desc">💡 사진 카드를 클릭하시면 브라우저 맞춤형 Lightbox 모듈을 통해 원본 스케일로 크게 감상하실 수 있습니다.</p>
@@ -85,7 +128,6 @@
                 </div>
             </section>
 
-            <!-- ✍️ 실전 트러블슈팅 에세이 섹션 (서재형 가독성 행간 탑재) -->
             <section class="dashboard-card">
                 <div class="widget-headline">✍️ 성민의 실전 트러블슈팅 & 철학</div>
                 <div class="story-grid">
@@ -100,7 +142,7 @@
                         <div class="story-icon">🤝</div>
                         <div class="story-content">
                             <h3>역할 분담 없는 협업의 실패와 PM 리더십 극복기</h3>
-                            <p>문서 기반 분할 아키텍처를 구축하여 리소스 중복을 차단하고 대상을 이끌어낸 협업 매니징입니다.[cite: 1]</p>
+                            <p>문서 기반 분할 아키텍처를 구축하여 리소스 중복을 차단하고 대상을 이끌어낸 협업 매니징입니다.</p>
                         </div>
                     </div>
                     <div class="story-card" onclick="openModal('story_mentor')">
@@ -113,24 +155,23 @@
                 </div>
             </section>
 
-            <!-- 📅 마일스톤 보드 -->
             <section class="dashboard-card">
                 <fieldset style="border: 1.5px dashed var(--border-cozy); padding: 20px; border-radius: var(--radius-md); background: var(--bg-card);">
                     <legend class="cozy-legend" style="font-family: var(--font-serif); font-size: 1.1rem; font-weight: 900; padding: 4px 16px; background: var(--bg-nested); border-radius: 30px; border: 1px solid var(--border-cozy);">📅 2026년 마일스톤 보드</legend>
-                    <ul class="todo-list" style="margin-top: 14px;">
-                        <li class="todo-item completed">
+                    <ul class="todo-list" style="margin-top: 14px; list-style:none; padding:0;">
+                        <li class="todo-item completed" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
                             <input type="checkbox" class="todo-checkbox" checked disabled id="p-todo1">
-                            <label for="p-todo1" class="todo-text">국가공인 ADsP (데이터 분석 준전문가) 자격증 최종 취득 완료 (2026.06.05)[cite: 1]</label>
+                            <label for="p-todo1" class="todo-text">국가공인 ADsP (데이터 분석 준전문가) 자격증 최종 취득 완료 (2026.06.05)</label>
                         </li>
-                        <li class="todo-item">
+                        <li class="todo-item" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
                             <input type="checkbox" class="todo-checkbox" disabled id="p-todo2">
                             <label for="p-todo2" class="todo-text">SQLD 자격검정 대비 및 대규모 데이터베이스 인덱싱 쿼리 최적화 리서치</label>
                         </li>
-                        <li class="todo-item">
+                        <li class="todo-item" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
                             <input type="checkbox" class="todo-checkbox" disabled id="p-todo3">
-                            <label for="p-todo3" class="todo-text">COSS 빅데이터 서포터즈 활동 및 학과 후배 멘토링 프로그램 성공적 운영[cite: 1]</label>
+                            <label for="p-todo3" class="todo-text">COSS 빅데이터 서포터즈 활동 및 학과 후배 멘토링 프로그램 성공적 운영</label>
                         </li>
-                        <li class="todo-item">
+                        <li class="todo-item" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
                             <input type="checkbox" class="todo-checkbox" disabled id="p-todo4">
                             <label for="p-todo4" class="todo-text">인공지능(AI) 모델과 임베디드 제어 파이프라인을 유기적으로 융합한 졸업 포트폴리오 완성</label>
                         </li>
@@ -138,96 +179,110 @@
                 </fieldset>
             </section>
 
-            <!-- 📋 인적 사항 명세 -->
             <section class="dashboard-card">
                 <div class="widget-headline">📋 기본 인적 사항 명세</div>
                 <address style="font-style: normal;">
                     <ul class="profile-grid">
-                        <li>👤 <strong>성명:</strong> 안성민 (Seongmin An)[cite: 1]</li>
+                        <li>👤 <strong>성명:</strong> 안성민 (Seongmin An)</li>
                         <li>📞 <strong>네트워크:</strong> <a href="tel:010-2878-5134">010-2878-5134</a></li>
                         <li>✉️ <strong>메일:</strong> <a href="mailto:tjdals2299@gmail.com">tjdals2299@gmail.com</a></li>
-                        <li>📍 <strong>활동권역:</strong> 전북 전주시 완산구[cite: 1]</li>
-                        <li>🎸 <strong>문화라이프:</strong> 코딩, 영화 분석, 여행 동선 설계, 음악 감상[cite: 1]</li>
+                        <li>📍 <strong>활동권역:</strong> 전북 전주시 완산구</li>
+                        <li>🎸 <strong>문화라이프:</strong> 코딩, 영화 분석, 여행 동선 설계, 음악 감상</li>
                     </ul>
                 </address>
             </section>
 
-            <!-- 🛠️ 기술 스택 명세 -->
             <section class="dashboard-card">
                 <div class="widget-headline">🛠️ 엔지니어링 핵심 기술 스택</div>
-                <ol class="tech-list">
+                <ol class="tech-list" style="padding-left:20px; line-height:1.8;">
                     <li><strong>프로그래밍 언어:</strong> Python, SQL, JavaScript, C, C++</li>
                     <li><strong>머신러닝 & 비전 프레임워크:</strong> PyTorch, OpenCV, FastAPI, Flask, React</li>
-                    <li><strong>자동화 & 클라우드 인프라:</strong> n8n 워크플로우 자동화, Docker, AWS, Azure, Git/GitHub[cite: 1]</li>
-                    <li><strong>데이터 처리 기술:</strong> Google API 비비동기 크롤러 수집, JSONL 정형화, 정규표현식 전처리 파싱[cite: 1]</li>
+                    <li><strong>자동화 & 클라우드 인프라:</strong> n8n 워크플로우 자동화, Docker, AWS, Azure, Git/GitHub</li>
+                    <li><strong>데이터 처리 기술:</strong> Google API 비동기 크롤러 수집, JSONL 정형화, 정규표현식 전처리 파싱</li>
                 </ol>
             </section>
 
-            <!-- 🎓 경력 기술서 및 수상 실적 타임라인 (명조 타이포 밸런스 완료) -->
-            <section class="career-section">
-                <div class="dashboard-card">
-                    <div class="widget-headline">🎓 학력 및 대외 활동 프로젝트 실적</div>
-                    <dl class="career-timeline">
-                        <dt>🏫 학력 명세 (Education)</dt>
-                        <dd>
-                            <strong>전북대학교 (Jeonbuk National University)</strong> (2019.03 - 2027.02 졸업 예정)[cite: 1]<br>
-                            - 공과대학 IT기전공학과 / IAB융합전공 (학사 재학 및 졸업예정)[cite: 1]<br>
+            <section class="dashboard-card">
+                <div class="widget-headline" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                    <span>🎓 학력 및 대외 활동 프로젝트 실적</span>
+                    <!-- 🎨 고도화: 동적 기술 스택 필터 레일 -->
+                    <div id="projectFilterRail" style="display:flex; gap:6px; flex-wrap:wrap;">
+                        <button class="comment-ctrl-btn active" data-filter="all" onclick="filterProjects('all', this)" style="padding:4px 10px; font-size:0.75rem;">✨ 전체</button>
+                        <button class="comment-ctrl-btn" data-filter="python" onclick="filterProjects('python', this)" style="padding:4px 10px; font-size:0.75rem;">🐍 Python</button>
+                        <button class="comment-ctrl-btn" data-filter="js" onclick="filterProjects('js', this)" style="padding:4px 10px; font-size:0.75rem;">💻 JavaScript</button>
+                        <button class="comment-ctrl-btn" data-filter="ai" onclick="filterProjects('ai', this)" style="padding:4px 10px; font-size:0.75rem;">🤖 ML/AI</button>
+                    </div>
+                </div>
+                <p class="section-desc" style="margin-bottom:16px;">💡 스택 필터 버튼을 누르면 해당 기술을 적용한 핵심 연구 실적만 즉각 실시간 선별 정제 렌더링됩니다.</p>
+                <div class="career-timeline" style="line-height:1.7;">
+                    <div class="education-block" style="margin-bottom:24px;">
+                        <h4 style="font-weight:900; font-size:1.1rem; margin-bottom:8px; color:var(--color-brand); font-family:var(--font-serif);">🏫 학력 명세 (Education)</h4>
+                        <div style="background:var(--bg-nested); padding:16px; border-radius:12px; border:1px solid var(--border-cozy); font-weight:600;">
+                            <strong>전북대학교 (Jeonbuk National University)</strong> (2019.03 - 2027.02 졸업 예정)<br>
+                            - 공과대학 IT기전공학과 / IAB융합전공 (학사 재학 및 졸업예정)<br>
                             - 이수학점 대비 평점: 3.5 / 4.5
-                        </dd>
+                        </div>
+                    </div>
 
-                        <dt>🏆 연구 프로젝트 및 수상 실적 (All Interactive Cards)</dt>
-                        <dd>
-                            <div class="project-card" onclick="openModal('onlibrary')">
-                                <div class="project-title">
-                                    <span>🗺️ On Library: 공공데이터 기반 의사결정 지원 시스템[cite: 1]</span>
-                                    <span class="project-prize theme-badge">최종 우수 프로젝트</span>
-                                </div>
-                                <p class="project-desc" style="margin-top:6px;">공간 접근성 다기준 평가 입지 선정 및 TSP 순회 알고리즘 최적 노선 모델 개발[cite: 1]</p>
+                    <h4 style="font-weight:900; font-size:1.1rem; margin-bottom:12px; color:var(--color-brand); font-family:var(--font-serif);">🏆 연구 프로젝트 및 수상 실적</h4>
+                    <div class="project-list-container">
+                        <div class="project-card" data-tags="python,js" onclick="openModal('onlibrary')">
+                            <div class="project-title">
+                                <span>🗺️ On Library: 공공데이터 기반 의사결정 지원 시스템</span>
+                                <span class="project-prize theme-badge" style="font-size:0.75rem; background:var(--color-brand); color:#fff; padding:2px 6px; border-radius:4px;">최종 우수 프로젝트</span>
                             </div>
+                            <p class="project-desc" style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">공간 접근성 다기준 평가 입지 선정 및 TSP 순회 알고리즘 최적 노선 모델 개발</p>
+                        </div>
 
-                            <div class="project-card" onclick="openModal('epitext')">
-                                <div class="project-title">
-                                    <span>🏛️ EpiText: 딥러닝 멀티모달 기반 훼손 탁본 복원 시스템[cite: 1]</span>
-                                    <span class="project-prize">대상 (정보통신기획평가원장상)[cite: 1]</span>
-                                </div>
-                                <p class="project-desc" style="margin-top:6px;">13,000종 한자 클래스 불균형 해소를 위한 Loss 함수 설계 및 Swin V2 + SikuRoBERTa 서빙[cite: 1]</p>
+                        <div class="project-card" data-tags="python,ai" onclick="openModal('epitext')">
+                            <div class="project-title">
+                                <span>🏛️ EpiText: 딥러닝 멀티모달 기반 훼손 탁본 복원 시스템</span>
+                                <span class="project-prize" style="font-size:0.75rem; background:var(--color-brand); color:#fff; padding:2px 6px; border-radius:4px;">대상 (정보통신기획평가원장상)</span>
                             </div>
+                            <p class="project-desc" style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">13,000종 한자 클래스 불균형 해소를 위한 Loss 함수 설계 및 Swin V2 + SikuRoBERTa 서빙</p>
+                        </div>
 
-                            <div class="project-card" onclick="openModal('smishing')">
-                                <div class="project-title">
-                                    <span>🛡️ Smishing Forecast: 자가 진화형 스미싱 방어 시스템[cite: 1]</span>
-                                    <span class="project-prize blue-badge">우수상 (DACON)[cite: 1]</span>
-                                </div>
-                                <p class="project-desc" style="margin-top:6px;">비정형 텍스트 크롤링 원천 레이어 필터링 및 전처리 파이프라인 개발[cite: 1]</p>
+                        <div class="project-card" data-tags="python,ai" onclick="openModal('smishing')">
+                            <div class="project-title">
+                                <span>🛡️ Smishing Forecast: 자가 진화형 스미싱 방어 시스템</span>
+                                <span class="project-prize blue-badge" style="font-size:0.75rem; background:#3b6887; color:#fff; padding:2px 6px; border-radius:4px;">우수상 (DACON)</span>
                             </div>
+                            <p class="project-desc" style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">비정형 텍스트 크롤링 원천 레이어 필터링 및 전처리 파이프라인 개발</p>
+                        </div>
 
-                            <div class="project-card" onclick="openModal('iot')">
-                                <div class="project-title">
-                                    <span>🏊 Safe Drain Lock: 수영장 배수구 사고 방지 자동 제어 임베디드[cite: 1]</span>
-                                    <span class="project-prize green-badge">은상 (LINC 3.0 캡스톤)[cite: 1]</span>
-                                </div>
-                                <p class="project-desc" style="margin-top:6px;">수압 센서 데이터 로그 분석 기반의 이상 임계값 도출 및 정격 릴레이 제어 소프트웨어 탑재[cite: 1]</p>
+                        <div class="project-card" data-tags="python" onclick="openModal('iot')">
+                            <div class="project-title">
+                                <span>🏊 Safe Drain Lock: 수영장 배수구 사고 방지 자동 제어 임베디드</span>
+                                <span class="project-prize green-badge" style="font-size:0.75rem; background:#10b981; color:#fff; padding:2px 6px; border-radius:4px;">은상 (LINC 3.0 캡스톤)</span>
                             </div>
-                        </dd>
+                            <p class="project-desc" style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">수압 센서 데이터 로그 분석 기반의 이상 임계값 도출 및 정격 릴레이 제어 소프트웨어 탑재</p>
+                        </div>
+                    </div>
 
-                        <dt>📜 인증 및 라이선스 (Certifications)</dt>
-                        <dd>
-                            - 🎖️ 데이터 분석 준전문가 (ADsP) 자격증 취득 — 한국데이터산업진흥원 (2026.06.05)[cite: 1]<br>
-                            - 📜 Azure AI Fundamentals (AI-900) — Microsoft 글로벌 인증<br>
-                            - 📜 Azure Data Fundamentals (DP-900) — Microsoft 글로벌 인증<br>
-                            - ⚙️ 전기기능사, 승강기기능사 자격증 취득 — 한국산업인력공단
-                        </dd>
-                    </dl>
+                    <h4 style="font-weight:900; font-size:1.1rem; margin-top:24px; margin-bottom:8px; color:var(--color-brand); font-family:var(--font-serif);">📜 인증 및 라이선스 (Certifications)</h4>
+                    <div style="background:var(--bg-nested); padding:16px; border-radius:12px; border:1px solid var(--border-cozy); font-weight:600; line-height: 1.8;">
+                        - 🎖️ 데이터 분석 준전문가 (ADsP) 자격증 취득 — 한국데이터산업진흥원 (2026.06.05)<br>
+                        - 📜 Azure AI Fundamentals (AI-900) — Microsoft 글로벌 인증<br>
+                        - 📜 Azure Data Fundamentals (DP-900) — Microsoft 글로벌 인증<br>
+                        - ⚙️ 전기기능사, 승강기기능사 자격증 취득 — 한국산업인력공단
+                    </div>
                 </div>
             </section>
         </main>
+
+        <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox(event)">
+            <div class="lightbox-content" onclick="event.stopPropagation()">
+                <button class="close-btn" onclick="closeLightboxDirect()">&times;</button>
+                <img id="lightboxImg" src="" alt="원본 스케일 화면">
+                <div id="lightboxCaption">사진 설명</div>
+            </div>
+        </div>
 
         <footer class="global-footer">
             <p>© 2026 안성민. Enterprise Level semantic Portfolio Hub.</p>
         </footer>
     </div>
 
-    <!-- 프로젝트 상세 모달 -->
     <div class="modal-overlay" id="projectModal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModalDirect()">&times;</button>
@@ -236,16 +291,6 @@
         </div>
     </div>
 
-    <!-- 이미지 원본 모달 라이트박스 -->
-    <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox(event)">
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeLightboxDirect()">&times;</button>
-            <img id="lightboxImg" src="" alt="원본 스케일 화면">
-            <div id="lightboxCaption">사진 설명</div>
-        </div>
-    </div>
-
-    <!-- 공용 portfolio.js 스크립트 연결 -->
     <script src="../script/portfolio.js"></script>
 </body>
 </html>

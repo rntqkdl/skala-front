@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SKALA | 회원가입 완료 🎉</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 🥳 회원가입 결과 전용 감성 아키텍처 및 하이라이트 */
+        .result-container {
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .result-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-cozy);
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: var(--shadow-cozy);
+            text-align: center;
+        }
+        .success-animation-wrap {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: successBounce 1.5s infinite alternate cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes successBounce {
+            0% { transform: translateY(0) scale(1); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+            100% { transform: translateY(-10px) scale(1.05); filter: drop-shadow(0 15px 20px rgba(224,108,83,0.35)); }
+        }
+
+        /* 📡 Dynamic query result display card */
+        .dynamic-welcome-board {
+            background: linear-gradient(135deg, #1c1816, #2d221f);
+            color: #fff;
+            border-radius: 14px;
+            padding: 24px;
+            margin: 24px 0;
+            border-left: 5px solid var(--color-brand);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        .welcome-title {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            color: var(--color-brand);
+        }
+        .welcome-meta-list {
+            margin-top: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #bda697;
+        }
+        .welcome-meta-list strong {
+            color: #fff;
+        }
+
+        /* 📋 Informational guides cards list */
+        .guide-box {
+            text-align: left;
+            margin-top: 24px;
+            background: rgba(255,255,255,0.4);
+            border: 1px solid var(--border-cozy);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .guide-box h4 {
+            font-family: var(--font-serif);
+            font-weight: 900;
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+        .guide-box ul {
+            padding-left: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        /* 🔗 Navigation Jump grid links */
+        .jump-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .jump-card {
+            background: var(--bg-nested);
+            border: 1px solid var(--border-cozy);
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.88rem;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: var(--transition-apple);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .jump-card:hover {
+            border-color: var(--color-brand);
+            background: #ffffff;
+            color: var(--color-brand);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(224, 108, 83, 0.08);
+        }
+
+        /* ♿ Focus optimization */
+        .jump-card:focus-visible {
+            outline: 3px solid var(--color-brand);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🌌 공간 렌더링 셰이더 배경 인프라 -->
+    <div class="mesh-gradient-bg">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="notion-grid-mask"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- 🛠️ 통합 프리미엄 포털 GNB 헤더 완벽 규격 가동 -->
+        <header class="global-header">
+            <div class="logo-area">
+                <a href="index.html" aria-label="메인 포털 대시보드로 이동" style="text-decoration:none; color:inherit;">🏠 Portal Hub</a>
+            </div>
+            <nav class="theme-select-box" aria-label="4대 멀티 테마 스위치">
+                <button class="theme-btn-node active" data-theme="light">Light</button>
+                <button class="theme-btn-node" data-theme="dark">Dark</button>
+                <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
+                <button class="theme-btn-node" data-theme="forest">Forest</button>
+            </nav>
+        </header>
+
+        <!-- 🏢 회원가입 성공 결과 뷰 포트 -->
+        <main class="result-container">
+            <div class="result-card">
+                <div class="success-animation-wrap">🎉</div>
+                <h1 style="font-family: var(--font-serif); font-weight: 900; font-size: 1.7rem; color: var(--text-main); margin-bottom: 8px;">회원가입을 진심으로 축하합니다!</h1>
+                <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: 700;">SKALA-FRONT 포털 허브 정식 마스터 회원이 되신 것을 대환영합니다.</p>
+                <hr style="border:none; border-top:1px solid var(--border-cozy); margin-top: 24px;">
+
+                <!-- 📡 Dynamic user metadata card parsed via URL queries -->
+                <div class="dynamic-welcome-board">
+                    <div class="welcome-title" id="dynWelcomeHeader">가입 서명 확인 중... 📡</div>
+                    <p style="font-size:0.85rem; color:#bda697; font-weight:600; line-height:1.4; margin:0;" id="dynWelcomeDesc">
+                        인터페이스 쿼리 파이프라인에서 계정 서명 데이터를 실시간 정밀 디코딩 중입니다.
+                    </p>
+                    <div class="welcome-meta-list" id="dynWelcomeDetails" style="display: none;">
+                        <div>● 계정 아이디: <strong id="metaId">--</strong></div>
+                        <div>● 이메일 주소: <strong id="metaEmail">--</strong></div>
+                        <div>● 가입 경로: <strong id="metaPath">--</strong></div>
+                    </div>
+                </div>
+
+                <div class="guide-box">
+                    <h4>📝 중요 마스터 안내 사항</h4>
+                    <ul>
+                        <li>입력하신 이메일 주소로 안전 가입 인증 보안 토큰이 발송 처리되었습니다.</li>
+                        <li>대시보드 무결성을 보호하기 위해 첫 가동 후 계정 비밀번호 자산을 정밀 검토해 주십시오.</li>
+                        <li>제출하신 가입 프로필 메타 데이터셋은 마이페이지(Profile)에서 실시간 수정 및 동기화 관리가 가능합니다.</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: left; margin-top: 28px;">
+                    <h4 style="font-family: var(--font-serif); font-weight: 900; font-size: 1.05rem; margin-bottom: 4px; color: var(--text-main);">🏢 대시보드 내부 채널 즉시 연결</h4>
+                    <p class="section-desc">클릭하면 방금 제출한 개인 프로필이나 다른 포털 서비스로 스마트 서빙 이동합니다.</p>
+                </div>
+
+                <div class="jump-grid">
+                    <a href="myProfile.html" class="jump-card">👤 나의 프로필 보기</a>
+                    <a href="myClass.html" class="jump-card">📅 수업 시간표 보기</a>
+                    <a href="holiday.html" class="jump-card">🏖️ 나의 휴일 계획 보기</a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="global-footer">
+            <p>© 2026 안성민. SK AX [SKALA 4기] 마스터 교육 일정 거버넌스 시스템.</p>
+        </footer>
+    </div>
+
+    <script src="../script/portfolio.js"></script>
+    <script>
+        /**
+         * SKALA Membership Query String Parser Engine v9.0
+         * Pure Vanilla client-side extraction to render dynamic profiles without database.
+         */
+        class SignUpResultParser {
+            constructor() {
+                this.urlParams = new URLSearchParams(window.location.search);
+                this.init();
+            }
+
+            init() {
+                const userName = this.urlParams.get('userName');
+                const userId = this.urlParams.get('userId');
+                const userEmail = this.urlParams.get('userEmail');
+                const emailDomain = this.urlParams.get('emailDomain');
+                const joinPath = this.urlParams.get('joinPath');
+
+                // If userName is present, parse and render beautifully!
+                if (userName) {
+                    const decodedName = decodeURIComponent(userName);
+                    const decodedId = userId ? decodeURIComponent(userId) : '익명 마스터';
+                    
+                    let combinedEmail = '미기입';
+                    if (userEmail) {
+                        const decodedEmail = decodeURIComponent(userEmail);
+                        const domainSuffix = emailDomain && emailDomain !== 'direct' ? emailDomain : '';
+                        combinedEmail = domainSuffix ? `${decodedEmail}@${domainSuffix}` : decodedEmail;
+                    }
+
+                    const pathMap = {
+                        search: "인터넷 포털 검색",
+                        friend: "지인 및 동료 추천",
+                        sns: "테크 소셜 네트워크 광고",
+                        etc: "기타 가동 캐스트"
+                    };
+                    const decodedPath = joinPath && pathMap[joinPath] ? pathMap[joinPath] : '알 수 없음';
+
+                    // Update DOM
+                    document.getElementById('dynWelcomeHeader').textContent = `✨ ${decodedName} 마스터님, 가입을 진심으로 축하합니다!`;
+                    document.getElementById('dynWelcomeDesc').textContent = `SKALA-FRONT 최상위 마스터 계정의 검증이 완수되었습니다. 아래 계정 권한 정보가 정밀 바인딩되었습니다.`;
+                    
+                    document.getElementById('metaId').textContent = decodedId;
+                    document.getElementById('metaEmail').textContent = combinedEmail;
+                    document.getElementById('metaPath').textContent = decodedPath;
+
+                    // Fade in the list gracefully
+                    const detailsList = document.getElementById('dynWelcomeDetails');
+                    detailsList.style.display = 'flex';
+                    detailsList.style.opacity = '0';
+                    detailsList.style.transition = 'opacity 0.6s ease';
+                    setTimeout(() => detailsList.style.opacity = '1', 100);
+                } else {
+                    // Fallback default message if no query parameters exist
+                    document.getElementById('dynWelcomeHeader').textContent = `✨ 안성민 마스터님, 가입을 진심으로 축하합니다!`;
+                    document.getElementById('dynWelcomeDesc').textContent = `게이트웨이 모의 테스트 서명이 완료되었습니다. 가입 프로필 정보는 마이 프로필에서 확인해 주십시오.`;
+                }
+            }
+        }
+
+        // Initialize parser on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            new SignUpResultParser();
+        });
+    </script>
+</body>
+</html>
