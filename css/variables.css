@@ -1,0 +1,59 @@
+/* ==========================================================================
+   DESIGN SYSTEM TOKENS (Warm Cozy Tech Concept)
+   ========================================================================== */
+
+:root {
+    /* Color Tokens (Vanilla Color Mix) */
+    --color-brand-primary: #e2725b;   /* 따뜻한 테라코타 오렌지 */
+    --color-brand-secondary: #ebd9cc; /* 로스팅 밀크티 베이지 */
+    --color-surface-main: #fcfbfa;    /* 부드러운 크림 미색 베이지 */
+    --color-surface-card: #ffffff;    /* 순백색 내부 카드 레이어 */
+    --color-surface-muted: #f4eae1;   /* 포근한 오트밀 토프 베이지 */
+    --color-text-main: #3a322d;       /* 에스프레소 브라운 다크 */
+    --color-text-muted: #7a6e67;      /* 소프트 로스팅 브라운 */
+    --color-border: #ede4dc;          /* 따뜻한 우드 엣지 라인 */
+    --color-success: #606c38;         /* 올리브 그린 */
+    
+    /* Spacing Tokens */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+
+    /* Radius Tokens */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+
+    /* Shadow Tokens (Vercel Soft Shadow 커스텀) */
+    --shadow-sm: 0 2px 8px rgba(58, 50, 45, 0.04);
+    --shadow-md: 0 12px 24px -4px rgba(58, 50, 45, 0.06), 0 4px 12px -2px rgba(58, 50, 45, 0.03);
+    --shadow-lg: 0 20px 40px -10px rgba(58, 50, 45, 0.12);
+
+    /* Typography Scale (Apple Typography 메커니즘) */
+    --font-size-h1: clamp(2rem, 5vw, 2.75rem);
+    --font-size-h2: clamp(1.35rem, 3vw, 1.75rem);
+    --font-size-body: 1.05rem;
+    --font-size-sm: 0.9rem;
+
+    /* Transition & Animation Tokens */
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    --easing-apple: cubic-bezier(0.16, 1, 0.3, 1);
+    
+    /* Elevation */
+    --z-index-header: 100;
+    --z-index-modal: 1000;
+}
+
+/* Dark Mode Token Override */
+[data-theme="dark"] {
+    --color-surface-main: #140f10;    /* 딥 아로마 다크 에스프레소 브라운 */
+    --color-surface-card: #1f1817;    /* 어두운 진 우드 카카오 */
+    --color-surface-muted: #2c2220;   
+    --color-text-main: #f5efe6;       /* 부드러운 밀크 밀크티 화이트 */
+    --color-text-muted: #bdafa6;      
+    --color-border: #2c2220;          
+    --shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.5);
+}

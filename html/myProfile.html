@@ -5,30 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>안성민 | AI & 데이터 엔지니어 포트폴리오</title>
     
-    <!-- 정밀 매핑된 상대 경로 스타일시트 로드 -->
+    <!-- 1단계에서 빌드한 공통 Cozy 디자인 토큰 및 레이아웃 CSS 로드 -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
     <div class="container">
-        <!-- 상단 헤더 영역 -->
-        <header>
-            <div class="header-controls">
+        <!-- 상단 통합 헤더 영역 (대시보드 복귀 링크 및 테마 스위처 내장) -->
+        <header class="app-header">
+            <div class="brand">
+                <a href="../index.html" aria-label="메인 대시보드로 이동">🏠 Home Dashboard</a>
+            </div>
+            <div class="header-actions">
                 <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()">🌓 테마 전환</button>
             </div>
-            <h1>안녕하세요! 안성민입니다! 👨‍💻</h1>
         </header>
 
-        <!-- 자기소개 본문 (시맨틱 태그 활용 고도화) -->
+        <!-- 자기소개 및 핵심 역량 요약 -->
         <main>
             <section class="intro-section">
-                <blockquote cite="https://github.com/seongminan">
+                <h1>안녕하세요! 안성민입니다! 👨‍💻</h1>
+                <blockquote cite="https://github.com/rntqkdl">
                     "저는 이론적 배움과 실무 오케스트레이션의 연결고리를 탐구하는 <mark>지능형 데이터 엔지니어</mark>입니다. <br>
                     문제의 본질을 집요하게 분석하여, 날것의 비정형 데이터셋을 유기적인 실용 서비스 파이프라인으로 설계합니다."
                 </blockquote>
                 
-                <!-- 키워드 배지 영역 -->
-                <div class="keyword-container">
+                <!-- 정체성 키워드 칩 그룹 -->
+                <div class="keyword-container" aria-label="정체성 키워드">
                     <span class="keyword-tag">#원리주의_엔지니어</span>
                     <span class="keyword-tag">#데이터_센트릭_AI</span>
                     <span class="keyword-tag">#자동화_아키텍트</span>
@@ -37,17 +40,15 @@
                 </div>
             </section>
 
-            <!-- 📸 일상 아카이브 갤러리 섹션 (클릭 시 원본 Lightbox 확대 액션 추가) -->
+            <!-- 📸 라이프 아카이브 갤러리 섹션 (media 폴더 경로 매핑 완료) -->
             <section class="gallery-section">
                 <h2>📷 성민의 라이프 아카이브 (Daily Life)</h2>
-                <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-secondary);">
-                    💡 <strong>사진 카드를 클릭</strong>하시면 잘림 없는 원본 비율의 따뜻한 감성 사진을 크게 보실 수 있습니다.
-                </p>
+                <p class="section-desc">💡 사진 카드를 클릭하시면 브라우저 기본 뷰어 엔진(Lightbox)을 통해 잘림 없는 원본 스케일로 크게 감상하실 수 있습니다.</p>
                 <div class="gallery-grid">
                     
                     <figure class="gallery-card" onclick="openLightbox('../media/인형뽑기.jpeg', '🎯 소소한 탕진잼, 인형뽑기')">
                         <div class="gallery-card-img-wrapper">
-                            <img src="../media/인형뽑기.jpeg" alt="인형뽑기 열정">
+                            <img src="../media/인형뽑기.jpeg" alt="인형뽑기 게임기 조이스틱을 쥐고 집중하는 모습" loading="lazy">
                         </div>
                         <figcaption class="gallery-info">
                             <h3>🎯 소소한 탕진잼, 인형뽑기</h3>
@@ -57,7 +58,7 @@
                     
                     <figure class="gallery-card" onclick="openLightbox('../media/음식.jpeg', '🍕 선(先) 사진, 후(後) 미식')">
                         <div class="gallery-card-img-wrapper">
-                            <img src="../media/음식.jpeg" alt="미식 라이프">
+                            <img src="../media/음식.jpeg" alt="준비된 크리스피 치킨과 양념 치킨 반반 세트" loading="lazy">
                         </div>
                         <figcaption class="gallery-info">
                             <h3>🍕 선(先) 사진, 후(後) 미식</h3>
@@ -67,7 +68,7 @@
 
                     <figure class="gallery-card" onclick="openLightbox('../media/반려동물.jpeg', '🐶 힐링 치트키, 지인 펫 컬렉션')">
                         <div class="gallery-card-img-wrapper">
-                            <img src="../media/반려동물.jpeg" alt="반려동물 사랑">
+                            <img src="../media/반려동물.jpeg" alt="카메라를 응시하는 곱슬곱슬한 흰색 비숑 강아지 증명" loading="lazy">
                         </div>
                         <figcaption class="gallery-info">
                             <h3>🐶 힐링 치트키, 지인 펫 컬렉션</h3>
@@ -77,7 +78,7 @@
 
                     <figure class="gallery-card" onclick="openLightbox('../media/풍경.jpeg', '✈️ 낯선 공기, 기록하는 여행')">
                         <div class="gallery-card-img-wrapper">
-                            <img src="../media/풍경.jpeg" alt="공항과 하늘">
+                            <img src="../media/풍경.jpeg" alt="인천국제공항 여객터미널 천장 구조물과 노을빛 하늘" loading="lazy">
                         </div>
                         <figcaption class="gallery-info">
                             <h3>✈️ 낯선 공기, 기록하는 여행</h3>
@@ -88,18 +89,16 @@
                 </div>
             </section>
 
-            <!-- 💡 성민의 실전 해결 에세이 & 멘토링 철학 섹션 (신규 클릭 액션 바인딩) -->
+            <!-- ✍️ 실전 트러블슈팅 에세이 섹션 (모달 트리거 바인딩 완료) -->
             <section class="story-section">
                 <h2>✍️ 성민의 실전 트러블슈팅 & 철학</h2>
-                <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-secondary);">
-                    💡 <strong>아래 에세이 카드를 클릭</strong>하시면 현업 지향적 극복 과정과 세부 가이드라인을 보실 수 있습니다.
-                </p>
+                <p class="section-desc">💡 에세이 카드를 선택하시면 현업 수준의 예외 처리 레이어 구축 및 팀 R&R 명세 기준을 열람하실 수 있습니다.</p>
                 <div class="story-grid">
                     <div class="story-card" onclick="openModal('story_data')">
                         <div class="story-icon">📊</div>
                         <div class="story-content">
                             <h3>가상 데이터와 현업 데이터의 이질감 극복 경험</h3>
-                            <p>학습용 데이터셋에서는 정상 동작하던 로직이 비정형 및 고노이즈의 필드 데이터를 만났을 때 겪는 실패와, 이를 극복하기 위한 데이터 중심 파이프라인 정제 방안을 소개합니다.</p>
+                            <p>학습용 Mock 데이터와 정제되지 않은 필드 원천 데이터 사이에서 발생하는 괴리를 데이터 중심 인공지능(Data-Centric AI) 전처리 기법으로 돌파한 실전 기록입니다.</p>
                         </div>
                     </div>
 
@@ -107,7 +106,7 @@
                         <div class="story-icon">🤝</div>
                         <div class="story-content">
                             <h3>역할 분담 없는 협업의 실패와 PM 리더십 극복기</h3>
-                            <p>"친밀함과 책임감의 분리"를 핵심 가치로 삼아, 감정이 아닌 시스템 중심의 R&R 구축 및 체계적인 업무 리뷰로 최종 프로젝트 대상을 일궈낸 협업 아키텍처입니다.</p>
+                            <p>"친밀함보다 투명한 분할 시스템이 성과를 보장한다"는 신조 아래, 문서 기반 아키텍처 구조를 정착시켜 작업 중복을 원천 차단하고 대상을 이끌어낸 팀 빌딩 철학입니다.</p>
                         </div>
                     </div>
 
@@ -115,151 +114,148 @@
                         <div class="story-icon">🌱</div>
                         <div class="story-content">
                             <h3>실전 중심의 커리어 로드맵과 멘토링 가이드라인</h3>
-                            <p>진로 탐색에 막막함을 느끼는 후배 멘티들이 한 학기 만에 이력서에 실무적인 가치 한 줄을 추가할 수 있도록 이끄는 구체적인 깃허브 관리 및 공모전 전략 철학입니다.</p>
+                            <p>진로 수렴 과정에서 정체된 후배 기수들이 매력적인 리드미(README) 인덱싱과 체계적인 커밋 컨벤션을 통해 깃허브 자산화를 달성하도록 페이싱하는 교육 가치관입니다.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 📅 2026 To-Do 리스트 -->
+            <!-- 📅 2026년 버킷리스트 및 활동 계획 (fieldset / legend 패턴) -->
             <section class="todo-section">
-                <fieldset>
-                    <legend>📅 2026년 버킷리스트 및 활동 계획</legend>
+                <fieldset class="cozy-fieldset">
+                    <legend class="cozy-legend">📅 2026년 마일스톤 보드</legend>
                     <ul class="todo-list">
                         <li class="todo-item completed">
-                            <input type="checkbox" class="todo-checkbox" checked disabled>
-                            <span class="todo-text">🎓 국가공인 ADsP (데이터 분석 준전문가) 자격증 취득하기 (완료)</span>
+                            <input type="checkbox" class="todo-checkbox" checked disabled id="p-todo1">
+                            <label for="p-todo1" class="todo-text">국가공인 ADsP (데이터 분석 준전문가) 자격증 최종 취득 완료 (2026.06.05)</label>
                         </li>
                         <li class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" disabled>
-                            <span class="todo-text">📈 SQLD 자격증 취득 및 데이터베이스 정밀 분석 공부하기</span>
+                            <input type="checkbox" class="todo-checkbox" disabled id="p-todo2">
+                            <label for="p-todo2" class="todo-text">SQLD 자격검정 대비 및 대규모 엔터프라이즈급 트래픽 DB 쿼리 튜닝 리서치</label>
                         </li>
                         <li class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" disabled>
-                            <span class="todo-text">🤝 COSS 빅데이터 서포터즈 및 학과 후배 멘토링 프로그램 성공적으로 마무리지어보기</span>
+                            <input type="checkbox" class="todo-checkbox" disabled id="p-todo3">
+                            <label for="p-todo3" class="todo-text">COSS 빅데이터 서포터즈 활동 및 하위 기수 멘토링 프로그램 최종 수료</label>
                         </li>
                         <li class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" disabled>
-                            <span class="todo-text">📚 인공지능(AI)과 전공 지식을 유기적으로 결합한 졸업 포트폴리오 완성하기</span>
+                            <input type="checkbox" class="todo-checkbox" disabled id="p-todo4">
+                            <label for="p-todo4" class="todo-text">인공지능(AI) 모델과 임베디드 제어 파이프라인을 유기적으로 융합한 졸업 포트폴리오 고도화</label>
                         </li>
                     </ul>
                 </fieldset>
             </section>
 
-            <!-- 📋 기본 인적 사항 -->
+            <!-- 📋 인적 사항 명세 영역 -->
             <section class="profile-section">
                 <h2>📋 기본 인적 사항</h2>
-                <address>
+                <address class="contact-address">
                     <ul class="profile-grid">
-                        <li>👤 <strong>이름:</strong> 안성민 (Seongmin An)</li>
-                        <li>📞 <strong>연락처:</strong> <a href="tel:010-2878-5134">010-2878-5134</a></li>
-                        <li>✉️ <strong>이메일:</strong> <a href="mailto:tjdals2299@gmail.com">tjdals2299@gmail.com</a></li>
+                        <li>👤 <strong>성명:</strong> 안성민 (Seongmin An)</li>
+                        <li>📞 <strong>네트워크:</strong> <a href="tel:010-2878-5134">010-2878-5134</a></li>
+                        <li>✉️ <strong>메일:</strong> <a href="mailto:tjdals2299@gmail.com">tjdals2299@gmail.com</a></li>
                         <li>📍 <strong>활동권역:</strong> 전북 전주시</li>
-                        <li>🎸 <strong>개인 취미:</strong> 코딩, 영화 분석, 여행 설계, 음악 감상</li>
+                        <li>🎸 <strong>문화라이프:</strong> 코딩, 영화 분석, 여행 동선 설계, 음악 감상</li>
                     </ul>
                 </address>
             </section>
 
-            <!-- 🛠️ 기술 스택 -->
+            <!-- 🛠️ 기술 스택 명세 영역 (ol 순서 기반) -->
             <section class="tech-section">
-                <h2>🛠️ 프로그래밍 & 데이터 기술 스택</h2>
-                <ol>
+                <h2>🛠️ 엔지니어링 핵심 기술 스택</h2>
+                <ol class="tech-list">
                     <li><strong>프로그래밍 언어:</strong> Python, SQL, JavaScript, C, C++</li>
-                    <li><strong>프레임워크 & 라이브러리:</strong> PyTorch, FastAPI, OpenCV, Flask, React</li>
-                    <li><strong>자동화 & 인프라:</strong> n8n, Docker, AWS, Azure, Git/GitHub</li>
-                    <li><strong>데이터 가공 및 엔지니어링:</strong> Google API 수집, JSONL 구조화, 정규표현식 파싱</li>
+                    <li><strong>머신러닝 & 비전 프레임워크:</strong> PyTorch, OpenCV, FastAPI, Flask, React</li>
+                    <li><strong>자동화 & 클라우드 아키텍처:</strong> n8n 워크플로우 자동화, Docker, AWS, Azure, Git/GitHub</li>
+                    <li><strong>데이터 엔지니어링 파이프라인:</strong> Google API 비비동기 크롤러 수집, JSONL 정형화, 정규표현식(Regex) 전처리</li>
                 </ol>
             </section>
 
-            <!-- 🎓 학력 및 경력 -->
+            <!-- 🎓 경력 기술서 및 수상 실적 타임라인 (dl 기반 및 전 프로젝트 모달 바인딩 종결) -->
             <section class="career-section">
-                <h2>🎓 학력 및 대외 활동 경력</h2>
-                <dl>
-                    <dt>🏫 학력 사항 (Education)</dt>
+                <h2>🎓 학력 및 대외 활동 프로젝트 실적</h2>
+                <dl class="career-timeline">
+                    <dt>🏫 학력 명세 (Education)</dt>
                     <dd>
-                        <strong>전북대학교</strong> (2019.03 - 2027.02 졸업 예정)<br>
-                        - IT기전공학과 / IAB융합전공 학사 재학 중<br>
-                        - GPA: 3.5 / 4.5
+                        <strong>전북대학교 (Jeonbuk National University)</strong> (2019.03 - 2027.02 졸업 예정)<br>
+                        - 공과대학 IT기전공학과 / IAB융합전공 (학사 재학 및 졸업예정)<br>
+                        - 이수학점 대비 평점: 3.5 / 4.5
                     </dd>
 
-                    <dt>🏆 수상 실적 및 대외 프로젝트 (Awards & Projects)</dt>
+                    <dt>🏆 연구 프로젝트 및 수상 실적 (All Interactive Cards)</dt>
                     <dd>
-                        <p style="font-size: 0.95rem; margin-bottom: 15px; color: var(--text-secondary);">
-                            💡 <strong>카드를 클릭</strong>하면 상세 문제 해결 경험(STAR)을 확인할 수 있습니다.
-                        </p>
-
-                        <!-- On Library 프로젝트 카드 -->
+                        <!-- 1. On Library 카드 -->
                         <div class="project-card" onclick="openModal('onlibrary')">
                             <div class="project-title">
-                                <span>🗺️ On Library: Public Data 기반 이동식 도서관 운영 의사결정 지원 시스템</span>
-                                <span class="project-prize" style="background-color: #6d5d50;">최종 프로젝트</span>
+                                <span>🗺️ On Library: 공공데이터 기반 이동식 도서관 운영 의사결정 지원 시스템</span>
+                                <span class="project-prize theme-badge">최종 우수 프로젝트</span>
                             </div>
-                            <div style="font-size: 0.9rem; margin-top: 5px;">공간 접근성 분석 및 실제 도로 시간 반영 TSP 최적화 순회 노선 모델 개발</div>
+                            <p class="project-desc">공간 접근성 다기준 평가(MCDA) 방식의 입지 분석 및 실제 도로 노면 주행 시간을 반영한 TSP 순회 알고리즘 구현</p>
                         </div>
 
+                        <!-- 2. Epitext 카드 -->
                         <div class="project-card" onclick="openModal('epitext')">
                             <div class="project-title">
-                                <span>🏛️ Epitext: 고문서 탁본 복원 및 해석 AI 솔루션</span>
+                                <span>🏛️ EpiText: 딥러닝 멀티모달 기반 훼손 탁본 복원 시스템</span>
                                 <span class="project-prize">대상 (정보통신기획평가원장상)</span>
                             </div>
-                            <div style="font-size: 0.9rem; margin-top: 5px;">Swin Transformer V2와 SikuRoBERTa 기반 멀티모달 앙상블 복원 파이프라인 개발</div>
+                            <p class="project-desc">13,000종 한자 클래스 롱테일 불균형 해소를 위한 커스텀 가중치 Loss 함수 설계 및 Swin V2 + SikuRoBERTa 결합 서빙</p>
                         </div>
 
+                        <!-- 3. Smishing Forecast 카드 -->
                         <div class="project-card" onclick="openModal('smishing')">
                             <div class="project-title">
-                                <span>🛡️ Smishing Forecast: 자가 진화형 스미싱 방어 AI</span>
-                                <span class="project-prize" style="background-color: #8c7a6b;">우수상 (DACON)</span>
+                                <span>🛡️ Smishing Forecast: 자가 진화형 스미싱 방어 시스템</span>
+                                <span class="project-prize blue-badge">우수상 (DACON)</span>
                             </div>
-                            <div style="font-size: 0.9rem; margin-top: 5px;">비정형 텍스트 광고 제거, 계층적 예외 처리 및 정제 파이프라인 구축</div>
+                            <p class="project-desc">비정형 RSS 크롤링 원천 데이터 레이어 필터링 및 변종 단축 URL/이모지 삽입 유형 무력화 파이프라인 개발</p>
                         </div>
 
+                        <!-- 4. IoT 수영장 카드 -->
                         <div class="project-card" onclick="openModal('iot')">
                             <div class="project-title">
-                                <span>🏊 IoT 기반 스마트 모니터링 제어 시스템</span>
-                                <span class="project-prize" style="background-color: #8c7a6b;">우수상 (캡스톤 디자인)</span>
+                                <span>🏊 Safe Drain Lock: 수영장 배수구 끼임 사고 방지 자동 제어 임베디드</span>
+                                <span class="project-prize green-badge">은상 (LINC 3.0 캡스톤)</span>
                             </div>
-                            <div style="font-size: 0.9rem; margin-top: 5px;">수압 센서 노이즈 필터링 및 0.1초 이내 제어 로직 설계</div>
+                            <p class="project-desc">Python 노이즈 필터링 데이터 분석 기반의 긴급 정격 제어 임계값 도출 및 아두이노 역회전 수압 해제 모듈 코딩</p>
                         </div>
                     </dd>
 
-                    <dt>📜 보유 국가공인 및 글로벌 자격증 (Certifications)</dt>
+                    <dt>📜 인증 및 라이선스 (Certifications)</dt>
                     <dd>
-                        - 🎖️ <strong>ADsP (데이터 분석 준전문가)</strong> — 한국데이터산업진흥원 (취득일자: 2026.06.05)<br>
-                        - 📜 <strong>AI-900 (Azure AI Fundamentals)</strong> — Microsoft<br>
-                        - 📜 <strong>DP-900 (Azure Data Fundamentals)</strong> — Microsoft<br>
-                        - ⚙️ 전기기능사, 승강기 기능사 — 한국산업인력공단
+                        - 🎖️ 데이터 분석 준전문가 (ADsP) 자격증 취득 — 한국데이터산업진흥원<br>
+                        - 📜 Azure AI Fundamentals (AI-900) — Microsoft 글로벌 인증<br>
+                        - 📜 Azure Data Fundamentals (DP-900) — Microsoft 글로벌 인증<br>
+                        - ⚙️ 전기기능사, 승강기기능사 자격증 취득 — 한국산업인력공단
                     </dd>
                 </dl>
             </section>
         </main>
 
-        <!-- 푸터 영역 -->
-        <footer>
-            <p style="text-align: center; margin-top: 40px; font-size: 0.85rem; color: var(--text-secondary);">
-                © 2026 Seongmin An. All rights reserved. Powered by Pure HTML/CSS/JS.
-            </p>
+        <!-- 하단 푸터 영역 -->
+        <footer class="app-footer">
+            <p>© 2026 안성민. All rights reserved. Powered by Single Design System Variable Library.</p>
         </footer>
     </div>
 
-    <!-- 팝업 상세 모달 레이아웃 -->
+    <!-- 프로젝트 상세 분리 모달 구조 레이아웃 -->
     <div class="modal-overlay" id="projectModal" onclick="closeModal(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeModalDirect()">&times;</button>
-            <h2 id="modalTitle" style="border-left: 5px solid var(--accent-color); margin-top: 10px;">프로젝트 상세</h2>
-            <div id="modalBody" style="margin-top: 15px; font-size: 1rem;"></div>
+            <h2 id="modalTitle">프로젝트 명세 리포트</h2>
+            <div id="modalBody"></div>
         </div>
     </div>
 
-    <!-- 📸 이미지 원본 확대용 Lightbox 모달 구조 -->
+    <!-- 이미지 원본 모달 레이아웃 (Lightbox) -->
     <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox(event)">
         <div class="lightbox-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeLightboxDirect()">&times;</button>
-            <img id="lightboxImg" src="" alt="원본 크기">
+            <img id="lightboxImg" src="" alt="원본 스케일 화면">
             <div id="lightboxCaption">사진 설명</div>
         </div>
     </div>
 
-    <!-- 스크립트 상대 경로 정밀 매핑 -->
+    <!-- 비동기 인터랙티브 모듈 로드 -->
     <script src="../js/portfolio.js"></script>
 </body>
 </html>
