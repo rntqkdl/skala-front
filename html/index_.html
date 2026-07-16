@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKALA | Portal 캐스트 대시보드</title>
-    <!-- 라이브 서버 최적화 절대 안전 상대 경로 통합 팩 연동 -->
+    <title>SKALA | Portal 마스터 허브 대시보드</title>
+    <!-- 4대 멀티 테마 인프라 오류가 전면 해결된 단일 통합 시트 바인딩 -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-    <!-- 🌌 고도화 배경 인프라 레이어 -->
+    <!-- 🌌 공간 렌더링 셰이더 배경 인프라 -->
     <div class="mesh-gradient-bg">
         <div class="gradient-orb orb-1"></div>
         <div class="gradient-orb orb-2"></div>
@@ -17,130 +17,167 @@
     </div>
 
     <div class="app-container">
-        <!-- 상단 내비게이션 바 -->
+        <!-- 마스터 헤더 및 4대 멀티 테마 전환 노드부 -->
         <header class="global-header">
-            <div class="logo-area">SKALA<span>.Cast</span></div>
-            <nav aria-label="테마 내비게이션">
-                <button class="theme-toggle" id="themeBtn">🌓 테마 전환</button>
+            <div class="logo-area">SKALA<span>.Hub</span></div>
+            <nav class="theme-select-box" aria-label="멀티 테마 스위치">
+                <button class="theme-btn-node active" data-theme="light">Light</button>
+                <button class="theme-btn-node" data-theme="dark">Dark</button>
+                <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
+                <button class="theme-btn-node" data-theme="forest">Forest</button>
             </nav>
         </header>
 
-        <!-- 네이버 포털형 2열 분할 레이아웃 본문 진입 -->
+        <!-- 네이버 포털형 구조 본문 2열 파티션 진입 -->
         <main class="naver-main-layout">
             
-            <!-- 👈 좌측 거대 영역: 실시간 위젯 지표 및 테크 샌드박스 캐스트 -->
+            <!-- 👈 좌측 메인 스트림 영역 (포털 맵 허브 및 샌드박스 캐스트) -->
             <div class="left-content-stream">
                 
-                <!-- 실시간 모니터링 컴포넌트 팩 -->
-                <div class="widget-row" style="grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-                    <!-- 1. 고성능 타이머 클록 -->
-                    <div class="dashboard-card" style="margin-bottom:0; padding: 20px;">
-                        <div style="font-size:0.85rem; font-weight:800; color:var(--color-brand); margin-bottom:4px;">REALTIME CLOCK</div>
-                        <div class="clock-time" id="realtimeClock" style="font-size:2rem; line-height:1.2;">00:00:00</div>
-                        <div class="clock-date" id="realtimeDate" style="font-size:0.8rem; margin-top:4px;">계측 중...</div>
-                    </div>
-                    <!-- 2. 환경 센서 날씨 동화 위젯 -->
-                    <div class="dashboard-card" style="margin-bottom:0; padding: 20px;">
-                        <div style="font-size:0.85rem; font-weight:800; color:var(--color-brand); margin-bottom:4px;">WEATHER SYNC</div>
-                        <div class="weather-info-block">
-                            <div>
-                                <div class="clock-time" id="wTemp" style="font-size:2rem; line-height:1.2; color:var(--text-main);">--°C</div>
-                                <div id="wDesc" class="weather-desc-text" style="font-size:0.8rem; font-weight:700;">기상청 동기화 중</div>
+                <!-- 📂 하이엔드 서비스 스탠드 허브 (메인 페이지 본연의 게이트웨이 기능 고도화) -->
+                <section class="dashboard-card" style="padding: 26px;">
+                    <div class="widget-headline">📂 SKALA Portal 서비스 캐스트 (과제물 내비게이션 바)</div>
+                    <div class="portal-service-grid">
+                        
+                        <!-- 1. Profile 서비스 카드 -->
+                        <div class="service-nav-card">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">👤</div>
+                                <div class="service-nav-title">Master Profile</div>
                             </div>
-                            <div style="text-align:right; font-size:0.75rem; color:var(--text-muted); font-weight:700;">
-                                <div id="wLoc">위치 조회 중</div>
-                                <div id="wHumi">습도: --%</div>
-                            </div>
+                            <p class="service-nav-desc">AI 및 지능형 데이터 엔지니어링 수행 이력과 STAR 트러블슈팅 명세 기술서</p>
+                            <a href="myProfile.html" class="service-jump-btn">채널 입장 &rarr;</a>
                         </div>
-                    </div>
-                </div>
 
-                <!-- 네이버 캐스트형 모던 테크 샌드박스 위젯 -->
+                        <!-- 2. Holiday 서비스 카드 -->
+                        <div class="service-nav-card">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">🏖️</div>
+                                <div class="service-nav-title">Holiday Matrix</div>
+                            </div>
+                            <p class="service-nav-desc">연간 법정 공휴일 지표 분석 및 마일스톤 타임라인 렌더링 시스템</p>
+                            <a href="실습/holyday.html" class="service-jump-btn">채널 입장 &rarr;</a>
+                        </div>
+
+                        <!-- 3. Calendar 서비스 카드 -->
+                        <div class="service-nav-card">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">📅</div>
+                                <div class="service-nav-title">Class Scheduler</div>
+                            </div>
+                            <p class="service-nav-desc">학과 학기 시간표 및 데이터 배치 자동화 스케줄 관리 달력 대시보드</p>
+                            <a href="myClass.html" class="service-jump-btn">채널 입장 &rarr;</a>
+                        </div>
+
+                        <!-- 4. 준비중인 확장 채널 게이트웨이 (네이버 감성 포털 플레이스홀더) -->
+                        <div class="service-nav-card" style="opacity: 0.65; background: rgba(0,0,0,0.02);">
+                            <div class="service-nav-header">
+                                <div class="service-icon-wrap">⚙️</div>
+                                <div class="service-nav-title">Portal Gateway</div>
+                            </div>
+                            <p class="service-nav-desc">추후 연동 고도화될 SKALA 프론트엔드 로그인 및 자동화 관리 인터페이스</p>
+                            <span class="service-jump-btn" style="color:var(--text-muted);">연동 준비 중</span>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- 🧪 핵심 알고리즘 연산 샌드박스 위젯 캐스트 -->
                 <section class="dashboard-card">
-                    <div class="widget-headline">🧪 Core Logic Sandbox (기존 자바스크립트 실습 통합)</div>
-                    
-                    <!-- 탭 스위처 -->
+                    <div class="widget-headline">🧪 Core Logic Sandbox (기존 자바스크립트 알고리즘 실습)</div>
                     <div class="sandbox-tabs" role="tablist">
                         <button class="tab-btn active" onclick="switchSandboxTab('gradePanel', this)">📊 Grade</button>
                         <button class="tab-btn" onclick="switchSandboxTab('updownPanel', this)">🔢 UpDown</button>
                         <button class="tab-btn" onclick="switchSandboxTab('bagPanel', this)">🎒 Bag</button>
                     </div>
 
-                    <!-- Panel 1: Grade (성적 계산 로직) -->
                     <div class="tab-panel active" id="gradePanel" role="tabpanel">
-                        <input type="number" class="cozy-input" id="gradeInput" placeholder="전공 성적 점수를 입력하세요 (0 ~ 100)">
-                        <button class="cozy-btn" onclick="executeGradeCalc()">학점 연산 컨버팅 📈</button>
-                        <div class="sandbox-log-list" id="gradeLog">
-                            <div class="sandbox-log-item">대기 중... 점수 버퍼 입력 후 작동시키세요.</div>
-                        </div>
+                        <input type="number" class="cozy-input" id="gradeInput" placeholder="성적 수치 점수를 기입하세요 (0 ~ 100)">
+                        <button class="cozy-btn" onclick="executeGradeCalc()">성적 학점 변환 연산 📈</button>
+                        <div class="sandbox-log-list" id="gradeLog"><div class="sandbox-log-item">대기 중... 점수 버퍼 입력 후 작동시키세요.</div></div>
                     </div>
 
-                    <!-- Panel 2: UpDown (게임 로직) -->
                     <div class="tab-panel" id="updownPanel" role="tabpanel">
-                        <input type="number" class="cozy-input" id="updownInput" placeholder="예측 난수 입력 (1 ~ 100)">
+                        <input type="number" class="cozy-input" id="updownInput" placeholder="추측 난수값 기입 (1 ~ 100)">
                         <div class="sandbox-btn-group">
-                            <button class="cozy-btn" onclick="executeUpDownGame()">정답 스나이핑 🎯</button>
-                            <button class="cozy-btn reset-btn" style="background:var(--text-muted);" onclick="resetUpDownGame()">시퀀스 리셋</button>
+                            <button class="cozy-btn" onclick="executeUpDownGame()">정답 확인 매칭 🎯</button>
+                            <button class="cozy-btn" style="background:var(--text-muted);" onclick="resetUpDownGame()">난수 초기화</button>
                         </div>
-                        <div class="sandbox-log-list" id="updownLog">
-                            <div class="sandbox-log-item">게임 세션이 활성화되었습니다. 난수를 추측하세요!</div>
-                        </div>
+                        <div class="sandbox-log-list" id="updownLog"><div class="sandbox-log-item">게임이 준비되었습니다. 난수를 예측해 보세요!</div></div>
                     </div>
 
-                    <!-- Panel 3: Bag (자료구조 가방 로직) -->
                     <div class="tab-panel" id="bagPanel" role="tabpanel">
-                        <input type="text" class="cozy-input" id="bagInput" placeholder="가방 스택에 적재할 아이템 아이디">
+                        <input type="text" class="cozy-input" id="bagInput" placeholder="적재할 데이터 아이템 명칭 명세">
                         <div class="sandbox-btn-group">
-                            <button class="cozy-btn" onclick="executeBagAction('add')">아이템 적재 ➕</button>
-                            <button class="cozy-btn" style="background:#ba7a70;" onclick="executeBagAction('remove')">상단 제거(Pop) ➖</button>
-                            <button class="cozy-btn" style="background:var(--text-main);" onclick="executeBagAction('clear')">메모리 클리어</button>
+                            <button class="cozy-btn" onclick="executeBagAction('add')">스택 적재 ➕</button>
+                            <button class="cozy-btn" style="background:#ba7a70;" onclick="executeBagAction('remove')">상단 제거 ➖</button>
+                            <button class="cozy-btn" style="background:var(--text-main);" onclick="executeBagAction('clear')">일괄 파쇄</button>
                         </div>
-                        <div class="sandbox-log-list" id="bagLog">
-                            <div class="sandbox-log-item">가방 데이터 인스턴스가 비어있습니다.</div>
+                        <div class="sandbox-log-list" id="bagLog"><div class="sandbox-log-item">가방 인스턴스가 비어있습니다.</div></div>
+                    </div>
+                </section>
+
+                <!-- 🔄 n8n 자동화 파이프라인 실시간 모니터링 캐스트 (마우스 호버 일시정지 인터랙션 탑재) -->
+                <section class="dashboard-card n8n-live-panel">
+                    <div class="n8n-header-meta">
+                        <div>🔄 n8n WORKFLOW LIVE PIPELINE MONITOR (Node Flow System)</div>
+                        <div id="n8nStatus" style="color:#a3e635; font-weight: 900; letter-spacing: 0.05em;">● ACTIVE</div>
+                    </div>
+                    <div class="n8n-terminal-box" title="마우스 호버 시 로그 스트림 흐름이 정지되어 가독성을 확보합니다">
+                        <div class="n8n-scroller" id="n8nTerminalScroller">
+                            <!-- JS 오토메이션 스트림 스크롤 버퍼 동적 로드 -->
                         </div>
                     </div>
                 </section>
             </div>
 
-            <!-- 👉 우측 영역: 네이버 로그인 연동형 프로필 및 라우팅 채널 마스크 -->
+            <!-- 👉 우측 사이드바 스트림 영역 (네이버 개인화 로그인 박스 밸런싱) -->
             <div class="right-sidebar-stream">
-                <!-- 네이버 감성 개인화 게이트웨이 프로필 위젯 -->
+                <!-- 네이버 로그인 감성 개인화 프로필 카드 -->
                 <div class="dashboard-card naver-profile-box">
-                    <div class="profile-avatar">👤</div>
+                    <div class="profile-avatar">👨‍💻</div>
                     <div class="profile-name">안성민 (Seongmin An)</div>
-                    <div class="profile-duty">AI & Data Agent Architect</div>
+                    <div class="profile-duty">AI Agent & Data Engineer</div>
                     
-                    <!-- 현재 창 라우팅 완벽 호환 보존 -->
-                    <a href="myProfile.html" class="assignment-btn">👤 마스터 프로필 열람</a>
-                    
-                    <!-- 나머지 과제 게이트웨이 그리드 배열 배치 -->
-                    <div class="sub-links">
-                        <a href="실습/holyday.html">🏖️ Holiday</a>
-                        <a href="myClass.html">📅 Calendar</a>
+                    <!-- 📱 네이버 홈 스타일 모던 4대 퀵 아이콘 바 컴포넌트 -->
+                    <div class="portal-quick-bar" aria-label="개인 서재 핫라인 링크">
+                        <a href="https://github.com/rntqkdl" target="_blank" class="quick-chip" title="GitHub 코드 저장소 오픈">🐙 GitHub</a>
+                        <a href="mailto:tjdals2299@gmail.com" class="quick-chip" title="이메일 다이렉트 전송">✉️ Mail</a>
+                        <a href="tel:010-2878-5134" class="quick-chip" title="유선 모바일 핫라인 연결">📞 Call</a>
+                        <a href="../README.md" target="_blank" class="quick-chip" title="대시보드 운영 아키텍처 명세서">📄 Specs</a>
+                    </div>
+
+                    <!-- 실시간 광주 권역 미니 날씨 및 시계 센서 바 내장 배치 -->
+                    <div class="milestone-counter" style="flex-direction:column; align-items:stretch; gap:10px; margin-top:16px; background:var(--bg-card); border:1px solid var(--border-cozy);">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span id="realtimeClock" style="font-size:1.4rem; font-weight:900; letter-spacing:-0.03em;">00:00:00</span>
+                            <span id="wTemp" style="font-weight:900; color:var(--color-brand);">--°C</span>
+                        </div>
+                        <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.78rem; color:var(--text-muted);">
+                            <span id="realtimeDate">날짜 연산 중</span>
+                            <span id="wDesc" style="font-weight:700;">광주광역시 동화</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 모던 정보 알림 판넬 -->
-                <div class="dashboard-card" style="padding:20px; background:rgba(255,255,255,0.4);">
-                    <div style="font-size:0.88rem; font-weight:800; color:var(--text-main); margin-bottom:8px;">💡 인포메이션 허브</div>
-                    <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
-                        로컬 라이브 서버 환경에서 상대 경로 깊이를 완전히 연동하여 페이지 무너짐 위험도를 0%로 통제한 안정화 패키지 버전입니다.
-                    </p>
+                <!-- 시스템 세션 무결성 판넬 -->
+                <div class="dashboard-card" style="padding: 20px; background: rgba(255,255,255,0.3); font-size: 0.82rem; line-height: 1.5; color: var(--text-muted); font-weight:600;">
+                    <div style="font-weight: 900; color: var(--text-main); margin-bottom: 6px;">⚙️ Micro Hub Architecture Stable</div>
+                    4대 멀티 테마 변수 스케일 오차 버그를 완벽 패치하여 라이트, 다크, 오트밀라떼, 포레스트 모드가 완벽 연동되는 무결성 게이트웨이 버전입니다.
                 </div>
             </div>
 
         </main>
 
-        <!-- 글로벌 하단 영역 -->
         <footer class="global-footer">
-            <p>© 2026 안성민. All rights reserved. Powered by Pure Modern Vanilla Architecture.</p>
+            <p>© 2026 안성민. Multi-Theme Automated Portal Dashboard Engine.</p>
         </footer>
     </div>
 
-    <!-- 비동기 오케스트레이터 중앙 스크립트 임포트 -->
+    <!-- 비동기 오케스트레이션 엔트리 스크립트 모듈 로드 -->
     <script type="module" src="../script/app.js"></script>
     <script>
-        /* 💡 인라인 고속 캐스트 탭 전환 어댑터 */
+        /* 탭 가동용 스크립트 */
         function switchSandboxTab(panelId, btnElement) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
