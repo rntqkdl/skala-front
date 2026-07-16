@@ -100,9 +100,42 @@
         .action-caption { display: block; font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-top: 6px; letter-spacing: 0.02em; }
 
         /* 🪵 A안: 슬라이드 인포 패널 컴포넌트 */
-        .slide-info-panel { position: fixed; top: 0; right: -420px; width: 400px; height: 100vh; background: var(--bg-card); border-left: 1px solid var(--border-cozy); box-shadow: -10px 0 40px rgba(0,0,0,0.15); z-index: 3000; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 32px 24px; display: flex; flex-direction: column; justify-content: space-between; }
+        .slide-info-panel { 
+            position: fixed; 
+            top: 0; 
+            right: -450px; 
+            width: 420px; 
+            height: 100vh; 
+            background: var(--bg-card); 
+            border-left: 2px solid var(--color-brand); 
+            box-shadow: -15px 0 50px rgba(0, 0, 0, 0.2), 0 0 30px rgba(224, 108, 83, 0.15); 
+            z-index: 3000; 
+            backdrop-filter: blur(24px); 
+            -webkit-backdrop-filter: blur(24px); 
+            transition: right 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+            padding: 40px 28px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        [data-theme="dark"] .slide-info-panel, [data-theme="forest"] .slide-info-panel {
+            box-shadow: -15px 0 50px rgba(0, 0, 0, 0.65), 0 0 40px rgba(232, 123, 96, 0.3);
+            border-left-color: var(--color-brand);
+        }
         .slide-info-panel.opened { right: 0; }
-        .slide-panel-mask { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.15); z-index: 2900; display: none; backdrop-filter: blur(2px); }
+        .slide-panel-mask { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100vw; 
+            height: 100vh; 
+            background: rgba(30, 26, 24, 0.3); 
+            z-index: 2900; 
+            display: none; 
+            backdrop-filter: blur(4px); 
+            -webkit-backdrop-filter: blur(4px);
+            animation: overlayFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
 
         /* ✨ 클릭 시 일시적인 하이라이트 발광 효과 */
         @keyframes highlightGlowFade {
@@ -180,7 +213,7 @@
             <div class="calendar-pane active" id="weekPane" role="tabpanel">
                 <h2 class="widget-headline">SKALA 4반 인텔리전트 주간 훈련 매트릭스 (7월 13일 ~ 7월 19일)</h2>
                 <p class="section-desc">
-                    7월 14일 화요일 교육 트랙 공식 개강 여정 명세서입니다. 금요일(7/17)은 법정 대체휴일(개천절)로 지정되어 공식 휴강 처리됩니다.
+                    설레는 첫발을 내디뎠던 7월 14일 화요일, 공식 개강 여정을 담은 훈련 시간표입니다. 돌아오는 금요일(7/17)은 리프레시를 위해 공식 휴강으로 진행되는 대체휴일(개천절) 세션입니다.
                     <span class="action-caption">💡 교재 데이터 노드를 선택하면 '왜(Why)'에 마땅히 답하는 사수 레벨의 아키텍처 인포 패널이 확장됩니다.</span>
                 </p>
                 
@@ -278,7 +311,7 @@
                 </div>
 
                 <p class="section-desc" style="margin-bottom:12px;">
-                    SKALA 4반의 전주기 교육 타임라인 타임스탬프 맵입니다.
+                    스칼라 과정의 전체적인 흐름을 한눈에 살펴보실 수 있는 통합 학사일정 로드맵입니다.
                     <span class="action-caption">💡 날짜 격자를 선택하면 우측 인포 패널이 열려 비즈니스 밸류 검증 리포트를 반환합니다.</span>
                 </p>
 
@@ -303,7 +336,7 @@
                 <div class="debugging-todo-plate">
                     <h4 style="font-family:var(--font-serif); font-weight:900; font-size:1.1rem; margin-bottom:4px;">🛠️ 24H 리얼타임 디버깅 자율 제어 플러그인</h4>
                     <p class="section-desc" style="margin-bottom:12px;">
-                        n8n 예외 노드나 프론트엔드 비동기 렌더링 버그 노드를 로컬 버퍼에 동적 적재하여 소거 제어하세요.
+                        학습 도중 만나는 다양한 코드 이슈나 디버깅 과제들을 꼼꼼하게 기록하고 관리하며, 한 단계 더 성장해 나가는 자기 주도 오답노트 공간입니다.
                     </p>
                     <div class="todo-sync-form" onsubmit="return false;">
                         <input type="text" class="todo-sync-input" id="todoRawInput" placeholder="예: n8n Webhook 파싱 특수문자 Regex 정밀 디버깅...">
@@ -330,7 +363,7 @@
                     </select>
                 </h2>
                 <p class="section-desc">
-                    7월 대규모 엑셀 식단표 데이터 파이프라인에서 정밀 파싱 추출한 광주 캠퍼스 전용 오프라인 급식 식단 배급 명세입니다.
+                    보내주신 7월 광주 캠퍼스 급식 식단을 기반으로, 매일 든든하고 맛있는 조식, 중식, 석식 메뉴를 정밀하게 가공하여 안내해 드립니다.
                 </p>
 
                 <!-- 식단 입체 트레이 렌더링 카드 구조체 -->
@@ -340,7 +373,7 @@
                 <div class="debugging-todo-plate" style="margin-top: 28px;">
                     <h4 style="font-family:var(--font-serif); font-weight:900; font-size:1.1rem; margin-bottom:4px;">💬 광주 캠퍼스 식식 톡톡 (이웃 한 줄 리뷰)</h4>
                     <p class="section-desc" style="margin-bottom:14px;">
-                        오늘 급식 메뉴에 대한 따뜻한 소통 한 줄을 영속 적재하세요. (수정/삭제 비밀번호 4자리 필수 검증)
+                        오늘 하루 맛있는 에너지가 되어준 급식 메뉴에 대한 따뜻한 응원이나 유쾌한 소통 한 마디를 가볍게 남겨보세요. (수정/삭제용 비밀번호 4자리 필수 검증)
                     </p>
                     
                     <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
@@ -415,6 +448,11 @@
                     "index_.html 상대 경로 자산 파이프라인 누락 체크"
                 ];
 
+                this.activeMealDay = 'thu'; // 기본 목요일 (오늘)
+                this.mealComments = JSON.parse(localStorage.getItem('skala-meal-comments')) || [
+                    { author: "영양학마스터", body: "7월 15일 초복 닭다리 죽에 쌈배추 수박까지 최고였어요! 🍗🍉", date: "2026-07-15 12:45", password: "NDMyMQ==" }
+                ];
+
                 this.whyDatabase = {
                     git: { title: "[SK AX] Git 환경 설정 및 AI 코딩 맛보기", metrics: ["Git Flow", "Collab Infrastructure", "Basic"], type: "basic", text: "팀 프로젝트의 사적 결속과 공적 산출물 무결성을 분리하기 위해 저장소 브랜치 전략 및 단위 커밋 컨벤션을 선제 수립합니다. 현업과 동일한 무충돌 형상관리를 달성하는 초석입니다." },
                     htmlcss: { title: "[SK AX] HTML, CSS, JavaScript", metrics: ["Full-Stack", "DOM Control", "Basic"], type: "basic", text: "실제 기업 현장에서 가동되는 AI 서비스는 기술 독단으로 완성되지 않으며 프론트, 백엔드 API, 인프라가 유기적으로 물려야만 탄생하기에 전 과정을 연마합니다." },
@@ -446,24 +484,17 @@
             }
 
             init() {
-                this.runLiveSchedulerEngine();
+                // 💡 글로벌 포어 모듈(portfolio.js) 통합 호출로 시간 중복 리소스 전면 파쇄!
+                if (typeof window.initCommonClock === "function") {
+                    window.initCommonClock("liveClockBuffer");
+                }
                 this.buildDynamicCalendarGridDOM();
                 this.renderDebuggingTodoDOM();
                 this.initAriaAttributes();
                 this.setupAccessibility();
                 this.bindDynamicInteractions();
-            }
-
-            /* ⏱️ 24H 리얼타임 클록 트래킹 모듈 */
-            runLiveSchedulerEngine() {
-                const clockBuffer = document.getElementById('liveClockBuffer');
-                if (!clockBuffer) return;
-                const updateFlow = () => {
-                    const now = new Date();
-                    clockBuffer.textContent = now.toTimeString().split(' ')[0];
-                };
-                setInterval(updateFlow, 1000); 
-                updateFlow();
+                this.renderMealTrayDOM();
+                this.renderMealCommentsDOM();
             }
 
             /* 📅 동적 달력 격자 렌더링 */
@@ -778,6 +809,151 @@
                 if (targetPane) {
                     targetPane.classList.add('active');
                 }
+            }
+
+            /* 🍽️ 식단 트레이 동적 렌더링 (GwangjuMealDB 실시간 영속 연계) */
+            renderMealTrayDOM() {
+                const container = document.getElementById('mealTrayContainer');
+                if (!container) return;
+
+                const dayMap = {
+                    mon: "2026-07-13",
+                    tue: "2026-07-14",
+                    wed: "2026-07-15",
+                    thu: "2026-07-16",
+                    fri: "2026-07-17",
+                    sat: "2026-07-18",
+                    sun: "2026-07-19"
+                };
+
+                const targetDate = dayMap[this.activeMealDay];
+                const mealData = window.GwangjuMealDB ? window.GwangjuMealDB[targetDate] : null;
+
+                if (!mealData) {
+                    container.innerHTML = `<div style="text-align:center; grid-column:1/-1; padding:24px; color:var(--text-muted); font-weight:800;">🍽️ 해당 요일의 급식 식단 정보가 없습니다.</div>`;
+                    return;
+                }
+
+                const renderMenuHtml = (menuList) => {
+                    if (!menuList || menuList.length === 0) return `<li class="meal-item-node">제공 메뉴 없음</li>`;
+                    return menuList.map(item => `<li class="meal-item-node">${item}</li>`).join('');
+                };
+
+                container.innerHTML = `
+                    <div class="meal-tray-card" style="border-top: 4px solid var(--color-brand); border-radius:12px;">
+                        <div class="meal-title-row">
+                            <h3 style="font-family:var(--font-serif); font-weight:900; font-size:1.05rem; color:var(--text-main);">⛅ 아침 조식 (Breakfast)</h3>
+                            <span class="meal-badge" style="background:var(--color-brand); font-size:0.75rem;">08:00공급</span>
+                        </div>
+                        <ul class="meal-item-list">
+                            ${renderMenuHtml(mealData.breakfast)}
+                        </ul>
+                    </div>
+
+                    <div class="meal-tray-card" style="border-top: 4px solid var(--color-success); border-radius:12px; transform: scale(1.02); box-shadow: var(--shadow-hover);">
+                        <div class="meal-title-row">
+                            <h3 style="font-family:var(--font-serif); font-weight:900; font-size:1.1rem; color:var(--text-main);">☀️ 점심 중식 (Lunch)</h3>
+                            <span class="meal-badge" style="background:var(--color-success); font-size:0.75rem;">12:00공급</span>
+                        </div>
+                        <ul class="meal-item-list">
+                            ${renderMenuHtml(mealData.lunch)}
+                        </ul>
+                    </div>
+
+                    <div class="meal-tray-card" style="border-top: 4px solid var(--color-info); border-radius:12px;">
+                        <div class="meal-title-row">
+                            <h3 style="font-family:var(--font-serif); font-weight:900; font-size:1.05rem; color:var(--text-main);">🌙 저녁 석식 (Dinner)</h3>
+                            <span class="meal-badge" style="background:var(--color-info); font-size:0.75rem;">18:00공급</span>
+                        </div>
+                        <ul class="meal-item-list">
+                            ${renderMenuHtml(mealData.dinner)}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            switchMealDay(val) {
+                this.activeMealDay = val;
+                this.renderMealTrayDOM();
+            }
+
+            /* 💬 식단 한줄평 리뷰 댓글 제어 */
+            renderMealCommentsDOM() {
+                const container = document.getElementById('mealCommentContainer');
+                if (!container) return;
+
+                if (this.mealComments.length === 0) {
+                    container.innerHTML = `<div style="text-align:center; padding:12px; color:var(--text-muted); font-size:0.85rem; font-weight:600;">📋 작성된 이웃 식식평이 없습니다. 첫 한줄평을 적어주세요!</div>`;
+                    return;
+                }
+
+                container.innerHTML = this.mealComments.map((comment, index) => `
+                    <div class="dynamic-todo-item" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; background:var(--bg-card); border:1px solid var(--border-cozy); padding:10px 14px; border-radius:8px;">
+                        <div style="text-align:left;">
+                            <span style="font-size:0.85rem; font-weight:800; color:var(--text-main);">${comment.author}</span>
+                            <span style="font-size:0.72rem; color:var(--text-muted); margin-left:6px;">(${comment.date})</span>
+                            <p style="font-size:0.88rem; font-weight:600; color:var(--text-main); margin-top:2px;">${comment.body}</p>
+                        </div>
+                        <span class="todo-delete-trigger" style="cursor:pointer; color:var(--color-brand); font-weight:900; font-size:1.2rem;" role="button" aria-label="댓글 삭제" onclick="removeMealCommentNode(${index})">&times;</span>
+                    </div>
+                `).join('');
+            }
+
+            addMealCommentNode() {
+                const authorInput = document.getElementById('mealAuthorInput');
+                const passwordInput = document.getElementById('mealPasswordInput');
+                const commentInput = document.getElementById('mealCommentInput');
+
+                if (!commentInput || !authorInput || !passwordInput) return;
+
+                const body = commentInput.value.trim();
+                const author = authorInput.value.trim() || "익명식객";
+                const password = passwordInput.value.trim();
+
+                if (!body) {
+                    alert("한줄평 내용을 기입해 주세요.");
+                    return;
+                }
+                if (!password || password.length < 4) {
+                    alert("수정/삭제 권한 비밀번호를 4자리 이상 설정해 주세요.");
+                    return;
+                }
+
+                const now = new Date();
+                const timeStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+                this.mealComments.unshift({
+                    author,
+                    body,
+                    date: timeStr,
+                    password: btoa(password.split('').reverse().join(''))
+                });
+
+                localStorage.setItem('skala-meal-comments', JSON.stringify(this.mealComments));
+                
+                // 폼 리셋
+                commentInput.value = '';
+                authorInput.value = '';
+                passwordInput.value = '';
+
+                this.renderMealCommentsDOM();
+            }
+
+            removeMealCommentNode(index) {
+                const password = prompt("한줄평 등록 시 설정한 비밀번호를 기입해 주세요:");
+                if (password === null) return;
+
+                const obfuscated = btoa(password.split('').reverse().join(''));
+                const target = this.mealComments[index];
+
+                if (obfuscated !== target.password) {
+                    alert("비밀번호가 일치하지 않아 삭제 권한을 증명할 수 없습니다.");
+                    return;
+                }
+
+                this.mealComments.splice(index, 1);
+                localStorage.setItem('skala-meal-comments', JSON.stringify(this.mealComments));
+                this.renderMealCommentsDOM();
             }
         }
 
