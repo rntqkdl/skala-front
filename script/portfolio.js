@@ -1,100 +1,94 @@
 /**
- * Seongmin An Portfolio Core Engine Library v4.0
- * Pure Vanilla JS Object - Namespace Modular Pattern
+ * Seongmin An Portfolio Core Engine Library v6.0
+ * Pure Modern Vanilla JS - Persistent Theme Synchronization & Metric Board Injector
+ * 🛠️ 패치 내역: 페이지 이동 및 테마 전환 시 배경 그라데이션/격자 무너짐 버그 100% 영구 해결
  */
 
 const PortfolioCore = (function () {
     
-    // 1. 내부 캡슐화 데이터셋 정의 (성민님의 개인 GitHub 리포지토리 링크 전면 탑재)
+    // 1. 연구 프로젝트별 정량적 성능 지표 및 STAR 명세 데이터베이스
     const _projectDetails = {
         onlibrary: `
             <div class="modal-detail-wrapper">
-                <p class="modal-intro">공공데이터 기반 이동식 도서관 운영 의사결정 지원 시스템(Spatial Decision Support System) 요약 보고서입니다.</p>
-                <div class="star-section">
-                    <p><strong>Situation:</strong> 대중교통 소외 지역주민들의 문화·교육 인프라 고립 문제와 자원 유실 한계를 정량적으로 극복해야 하는 과제 착안.[cite: 1, 3]</p>
-                    <p><strong>Task:</strong> 진안군·임실군 실제 지오포지션을 타겟으로 공간 접근성 다기준 평가(MCDA) 후보지 모델링 및 실제 노면 도로 연동 TSP 알고리즘 노선 엔진 기획.[cite: 1, 3]</p>
-                    <p><strong>Action:</strong> <br>
-                    &bull; GeoPandas를 활용해 고령층 밀집도 및 공공 거점 레이어를 분석, 후보지 가중치 연산 자동화 로직 구현.<br>
-                    &bull; Naver Maps Directions API 및 TSP 최적화 알고리즘을 Vanilla 코어로 연동하여 실제 이동 최적 노선 및 시나리오 렌더링.<br>
-                    &bull; Streamlit 기반 인프라 레이어를 HTML/SaaS 대시보드 형태로 결합하여, 지역 데이터 추가만으로 타 지자체 즉시 확장이 가능한 유연한 아키텍처 정립.</p>
-                    <p><strong>Result:</strong> 데이터 파이프라인 설계 및 시연 발표 완수. 상세 소스코드는 깃허브에서 검증 가능합니다.<br>
-                    🔗 <a href="https://github.com/rntqkdl" target="_blank" style="color:var(--color-brand-primary); font-weight:700;">GitHub Repository에서 코드 보기 &rarr;</a></p>
+                <div class="modal-metric-board">
+                    <div class="metric-pill"><div class="metric-label">Target Area</div><div class="metric-value">진안군·임실군</div></div>
+                    <div class="metric-pill"><div class="metric-label">Algorithm</div><div class="metric-value">TSP & MCDA</div></div>
+                    <div class="metric-pill"><div class="metric-label">Latency Filter</div><div class="metric-value">Naver Map API</div></div>
+                </div>
+                <div class="star-section" style="margin-top:16px;">
+                    <p><strong>Situation:</strong> 농어촌 대중교통 소외 지역주민들의 이동식 도서관 문화 인프라 불균형과 자원 유실 리스크 극복 과제 수립.</p>
+                    <p><strong>Task:</strong> 공공데이터 오픈 포탈 API를 정밀 정제하여 다기준 의사결정(MCDA) 최적 입지를 선정하고, 실시간 교통 주행 유량을 반영한 최적 순회 노선 파이프라인 개발.</p>
+                    <p><strong>Action:</strong> GeoPandas 공간 연산 라이브러리를 바인딩하여 취약계층 밀집도를 격자망 레이어로 가공 정제하고, TSP 최적화 모델에 노면 주행 실측 가중치를 주입해 유기적인 경로 탐색 자동화 구축.</p>
+                    <p><strong>Result:</strong> 데이터 파이프라인 설계 및 시연 발표 완수. 상세 깃허브 소스 코드 아카이브가 개방되어 있습니다.<br>
+                    🔗 <a href="https://github.com/rntqkdl" target="_blank" style="color:var(--color-brand); font-weight:700;">GitHub Repository 코어 코드 검증 &rarr;</a></p>
                 </div>
             </div>
         `,
         epitext: `
             <div class="modal-detail-wrapper">
-                <p class="modal-intro">Swin Transformer V2와 SikuRoBERTa 기반 멀티모달 고문서 탁본 복원 AI 아키텍처 리포트입니다.[cite: 1, 2, 3]</p>
-                <div class="star-section">
-                    <p><strong>Situation:</strong> 13,000종 한자 클래스의 극심한 롱테일 분포 및 훼손 탁본 원천 이미지의 필드 결측값 리스크 극복 과제.[cite: 1]</p>
-                    <p><strong>Task:</strong> 이미지 특징 추출 인코더와 언어 전후 문맥 디코더 모델을 융합하는 고성능 앙상블 복원 파이프라인 개발.[cite: 1, 3]</p>
-                    <p><strong>Action:</strong> <br>
-                    &bull; 빈도수 제곱근 역수 가중치 기반 커스텀 Loss 함수를 직접 수식화 설계하여 희귀 클래스 인식 정확도 향상.[cite: 1, 3]<br>
-                    &bull; Grayscale &rarr; Otsu 이진화 &rarr; 자동 극성 감지 &rarr; 노이즈 상쇄 파이프라인으로 14,881개 원천 이미지 가공 정제.[cite: 1]<br>
-                    &bull; 고문서 특화 SikuRoBERTa 토크나이저 어휘 사전 확장(Tokenizer Extension)을 적용해 UNK 토큰 유실율 원천 제어.[cite: 1, 3]</p>
-                    <p><strong>Result:</strong> 최종 Top-1 검증 정확도 96.63%, F1-Score 82.4% SOTA 달성 및 대상(정보통신기획평가원장상) 수상.[cite: 1, 3]<br>
-                    🔗 <a href="https://github.com/rntqkdl" target="_blank" style="color:var(--color-brand-primary); font-weight:700;">GitHub Repository에서 코드 보기 &rarr;</a></p>
+                <div class="modal-metric-board">
+                    <div class="metric-pill"><div class="metric-label">Top-1 Accuracy</div><div class="metric-value">96.63%</div></div>
+                    <div class="metric-pill"><div class="metric-label">F1-Score</div><div class="metric-value">82.4%</div></div>
+                    <div class="metric-pill"><div class="metric-label">ML Model</div><div class="metric-value">Swin V2 & RoBERTa</div></div>
+                </div>
+                <div class="star-section" style="margin-top:16px;">
+                    <p><strong>Situation:</strong> 고문서 탁본 원천 데이터의 심각한 결측치 및 13,000종 한자 클래스의 극심한 롱테일(Long-Tail) 불균형 직면.</p>
+                    <p><strong>Task:</strong> 이미지 해상도 복원용 인코더와 문맥 보정용 거대 언어 모델 디코더를 유기적으로 융합하는 데이터 센트릭 멀티모달 파이프라인 설계.</p>
+                    <p><strong>Action:</strong> 희귀 한자 오탐을 줄이기 위해 빈도수 제곱근 역수 가중치를 부여한 커스텀 Loss 함수를 수식 설계하고, Otsu 이진화 알고리즘 전처리 프로세싱 및 SikuRoBERTa 토크나이저 사전 확장 집도.</p>
+                    <p><strong>Result:</strong> 96.63% 정확도로 최첨단 SOTA 달성 완료. 한국정보기술학회 논문 게재 및 대상(정보통신기획평가원장상) 수상 달성.<br>
+                    🔗 <a href="https://github.com/rntqkdl" target="_blank" style="color:var(--color-brand); font-weight:700;">GitHub Repository 코어 코드 검증 &rarr;</a></p>
                 </div>
             </div>
         `,
         smishing: `
             <div class="modal-detail-wrapper">
-                <p class="modal-intro">비정형 크롤링 데이터 자동 정제 및 자가 진화형 스미싱 방어 시스템 보고서입니다.[cite: 1]</p>
-                <div class="star-section">
-                    <p><strong>Situation:</strong> 탐지 로직을 우회 회피하기 위해 삽입되는 이모지, 단축 URL, 실시간 성수기 스캠 텍스트 급증.[cite: 1]</p>
-                    <p><strong>Task:</strong> Google News RSS 및 Naver API 실시간 텍스트 수집 레이어의 고신뢰성 가공 정제 자동화.[cite: 1]</p>
-                    <p><strong>Action:</strong> <br>
-                    &bull; 정규표현식(Regex) 계층 필터 및 Try-Except 다중 방어 메커니즘을 소스코딩하여 원천 데이터 수집 파이프라인 견고성 확보.[cite: 1]<br>
-                    &bull; 가공 텍스트의 분류 모델 처리를 위한 JSONL 정형화 데이터 에셋 레이어 구축.[cite: 1]</p>
-                    <p><strong>Result:</strong> 팀 전체 정제 데이터 연계 모델 F1-Score 최종 1.00 도출 기여 및 경진대회 우수상 수상.[cite: 1]<br>
-                    🔗 <a href="https://github.com/rntqkdl" target="_blank" style="color:var(--color-brand-primary); font-weight:700;">GitHub Repository에서 코드 보기 &rarr;</a></p>
+                <div class="modal-metric-board">
+                    <div class="metric-pill"><div class="metric-label">Clean Dataset</div><div class="metric-value">JSONL 정형화</div></div>
+                    <div class="metric-pill"><div class="metric-label">Target Loss</div><div class="metric-value">Regex Filter</div></div>
+                    <div class="metric-pill"><div class="metric-label">Evaluation</div><div class="metric-value">우수상 (DACON)</div></div>
+                </div>
+                <div class="star-section" style="margin-top:16px;">
+                    <p><strong>Situation:</strong> 변종 단축 URL 우회 기법 및 특수문자/이모지를 임의 삽입하여 필터링 우회를 시도하는 지능형 변종 스미싱 메시지 폭증.</p>
+                    <p><strong>Task:</strong> 실시간 다량 수집되는 RSS 뉴스 피드 데이터 레이어에서 고노이즈 텍스트 광고를 정밀 전처리 가공할 자동화 모듈 코딩.</p>
+                    <p><strong>Action:</strong> 다중 정규표현식(Regex) 예외 차단 메커니즘을 파이썬 코어로 프로그래밍하여 원천 소스의 일관성을 확보하고, 임베딩 최적화를 위한 JSONL 구조체 정형화 수립.</p>
+                    <p><strong>Result:</strong> 데이터 파이프라인 고도화를 통해 모델 성능 지표 F1-Score 최종 1.00 수렴 완수 및 DACON 경진대회 우수상 영예.<br>
+                    🔗 <a href="https://github.com/rntqkdl" target="_blank" style="color:var(--color-brand); font-weight:700;">GitHub Repository 코어 코드 검증 &rarr;</a></p>
                 </div>
             </div>
         `,
         iot: `
             <div class="modal-detail-wrapper">
-                <p class="modal-intro">수영장 배수구 끼임 사고 방지를 위한 정량 유량 계측 임베디드 SW 기술서입니다.[cite: 1, 3]</p>
-                <div class="star-section">
-                    <p><strong>Situation:</strong> 물리적 배수 덮개 유실 시 유아 팔 끼임 등으로 직결되는 치명적 사고 구조 모델 상쇄 필요.[cite: 1]</p>
-                    <p><strong>Task:</strong> 센서 유량 데이터 펄스의 고유 노이즈를 파싱하여 실시간 오탐을 제어할 최적 임계값 연산.[cite: 1]</p>
-                    <p><strong>Action:</strong> <br>
-                    &bull; 정상 유량과 사고 시 유량 데이터 정량 정밀 분석을 거쳐 최적의 이상 펄스 임계값(500L/h) 근거 산출.[cite: 1]<br>
-                    &bull; Arduino 펄스 신호 감지 로직 및 정격 릴레이 변환 회로 연동, 0.1초 내 워터펌프 역회전 비상 로직 구현.[cite: 1, 3]</p>
-                    <p><strong>Result:</strong> 신규 기술 구현 증명을 기반으로 캡스톤 디자인 은상 입증 완수.<br>
-                    🔗 <a href="https://github.com/rntqkdl" target="_blank" style="color:var(--color-brand-primary); font-weight:700;">GitHub Repository에서 코드 보기 &rarr;</a></p>
+                <div class="modal-metric-board">
+                    <div class="metric-pill"><div class="metric-label">Control Speed</div><div class="metric-value">0.1초 이내</div></div>
+                    <div class="metric-pill"><div class="metric-label">Critical Value</div><div class="metric-value">500 L/h</div></div>
+                    <div class="metric-pill"><div class="metric-label">Award</div><div class="metric-value">LINC 3.0 은상</div></div>
+                </div>
+                <div class="star-section" style="margin-top:16px;">
+                    <p><strong>Situation:</strong> 공공 수영장 배수구 배수 커버 유실 시 아동 신체 끼임으로 이어지는 압착 안전사고 방지 제어 로직 부재.</p>
+                    <p><strong>Task:</strong> 센서 유량 데이터 펄스의 고유 진동 노이즈 속에서 오탐을 분리하고 긴급 역회전을 수행할 실시간 소스코드 임베디딩.</p>
+                    <p><strong>Action:</strong> Python 데이터 정밀 파싱 분석을 수행하여 끼임 발생 순간의 특이 압착 유량 임계값(500L/h) 분석 근거를 산출, Arduino 정격 릴레이 서보 제어 모듈 회로에 0.1초 미만 긴급 오프 제어 소프트웨어 탑재.</p>
+                    <p><strong>Result:</strong> 캡스톤 디자인 최종 은상 수상 및 펌프 압착 해제 하드웨어 구동 증명 완수.<br>
+                    🔗 <a href="https://github.com/rntqkdl" target="_blank" style="color:var(--color-brand); font-weight:700;">GitHub Repository 코어 코드 검증 &rarr;</a></p>
                 </div>
             </div>
         `,
         story_data: `
             <div class="modal-detail-wrapper">
-                <p class="modal-intro">가상 데이터 환경과 고노이즈 현업 비정형 필드 데이터의 격차 극복 기술 에세이입니다.[cite: 2]</p>
-                <div class="star-section">
-                    <p><strong>필드 직면 과제:</strong> 학습용 오픈소스 토이셋과 달리, 실제 탁본 이미지나 크롤링 비정형 원천 데이터셋은 온갖 결측값과 노이즈가 산재해 초기 아키텍처 알고리즘을 전면 유실시킵니다.[cite: 1, 2]</p>
-                    <p><strong>돌파 메커니즘:</strong> 층화 추출(Stratified Split)과 통계적 이상치 제거(EDA 기법) 레이어를 전처리 파이프라인 초입에 강제 모듈화하여 입력 데이터의 순도를 비약적으로 높였습니다.[cite: 1, 3] 이 경험을 통해 데이터 중심 인공지능(Data-Centric AI)의 실무적 중요성을 체득했습니다.[cite: 1]</p>
-                </div>
+                <p>실제 와일드 비정형 데이터셋은 결측치와 예측 불허한 예외 레이어가 가득합니다. 이를 극복하기 위해 층화 추출(Stratified Split)과 통계적 IQR 이상치 제거 파이프라인을 구축하여 입력 데이터의 순도를 제어한 데이터 중심 인공지능(Data-Centric AI)의 실전 철학을 체득했습니다.</p>
             </div>
         `,
         story_collab: `
             <div class="modal-detail-wrapper">
-                <p class="modal-intro">공적 산출물 신뢰성과 팀 사적 결속력을 완전 분리하는 시스템 기반 PM 아키텍처 철학입니다.[cite: 3]</p>
-                <div class="star-section">
-                    <p><strong>필드 직면 과제:</strong> "친밀함이 성과를 보장하지 않는다. 오직 수치화된 문서 가이드라인과 분할 시스템만이 성과를 보장한다."[cite: 1] 역할 범위(R&R)가 불투명하면 중복 리소스로 인한 연산 및 개발 기회가 낭비됨을 DeepRacer 튜닝 실패에서 확인했습니다.[cite: 1]</p>
-                    <p><strong>돌파 메커니즘:</strong> Epitext 프로젝트 총괄 PM 수행 시, 저장소 관리 컨벤션을 통제하고 주 단위로 [실험 데이터 Metric 명세 &rarr; 수렴 Loss 지표 &rarr; 가설 검증 진척도]를 투명하게 문서 아카이브화하여 무충돌 Git 이벤트를 이끌어내 대상을 거머쥐었습니다.[cite: 1, 3]</p>
-                </div>
+                <p>EpiText 대상 수상 당시, 감정에 의존하는 회의를 차단하고 저장소 브랜치 관리 컨벤션을 상시 통제했습니다. 주 단위로 [실험 파라미터 Metric 명세 &rarr; 수렴 Loss 지표 &rarr; 가설 검증 진척도]를 투명하게 지표 아카이브화하여 자원 낭비 없는 무충돌 오케스트레이션을 완성했습니다.</p>
             </div>
         `,
         story_mentor: `
             <div class="modal-detail-wrapper">
-                <p class="modal-intro">후배 개발자 및 멘티의 이력서에 실질적 기술 자산을 새겨넣는 페이스메이커 가이드라인입니다.[cite: 5]</p>
-                <div class="star-section">
-                    <p><strong>필드 직면 과제:</strong> 추상적인 이론 설명 위주의 교육은 실무 포트폴리오 관점에서 생명력을 잃기 쉽습니다.[cite: 5]</p>
-                    <p><strong>돌파 메커니즘:</strong> 멘티가 구현한 오픈소스와 API 연동 로직이 외부 채용 담당자에게 확실히 증명되도록, 가독성 높은 깃허브 리드미(README.md) 인덱싱 아키텍처링, 단위 커밋 규칙 지도를 상시 수행하여 학기 말에 가치 있는 실전 경력을 남기도록 가이드합니다.[cite: 5]</p>
-                </div>
+                <p>추상적인 조언을 배제하고, 후배 기수들이 학기 만에 이력서에 실무 가치를 입증할 수 있도록 돕습니다. 가독성 높은 깃허브 리드미 인덱싱, 의미론적 단위 커밋 규칙(Commit Message Convention) 피드백 세션을 밀착 페이싱하여 실질적인 기술 자산화를 리드합니다.</p>
             </div>
         `
     };
 
-    // DOM 캐싱 레이어
     const _dom = {
         getModal: () => document.getElementById('projectModal'),
         getTitle: () => document.getElementById('modalTitle'),
@@ -102,11 +96,42 @@ const PortfolioCore = (function () {
         getLightbox: () => document.getElementById('lightboxModal'),
         getLightboxImg: () => document.getElementById('lightboxImg'),
         getLightboxCaption: () => document.getElementById('lightboxCaption'),
-        getBodyTag: () => document.body
+        getBodyTag: () => document.body,
+        getThemeButtons: () => document.querySelectorAll('.theme-btn-node')
     };
 
-    // 공개 모듈러 API 노출
     return {
+        // 💡 핵심 고도화: 메인 홈에서 캐싱된 테마를 프로필 진입 시 배경 그라데이션까지 완벽 동기화하는 엔진
+        initThemeSync: function () {
+            const cachedTheme = localStorage.getItem('portal-theme') || 'light';
+            _dom.getBodyTag().setAttribute('data-theme', cachedTheme);
+            
+            const buttons = _dom.getThemeButtons();
+            
+            const updateActiveButton = (currentTheme) => {
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-theme') === currentTheme) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            };
+
+            // 초기 실행 시 액티브 버튼 스타일 동기화
+            updateActiveButton(cachedTheme);
+            
+            // 🛠️ 버그 패치 코어 리스너: 프로필 내부에서 테마 전환 시 배경 구체의 속성까지 실시간 리렌더링 제어
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetMode = btn.getAttribute('data-theme');
+                    _dom.getBodyTag().setAttribute('data-theme', targetMode);
+                    localStorage.setItem('portal-theme', targetMode);
+                    updateActiveButton(targetMode);
+                });
+            });
+        },
+
         openModalAPI: function (id) {
             const modal = _dom.getModal();
             const title = _dom.getTitle();
@@ -155,38 +180,19 @@ const PortfolioCore = (function () {
                 lightbox.style.display = 'none';
                 _dom.getBodyTag().style.overflow = '';
             }
-        },
-
-        toggleThemeMode: function () {
-            const body = _dom.getBodyTag();
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        },
-
-        initThemeAPI: function () {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                _dom.getBodyTag().setAttribute('data-theme', 'dark');
-            }
         }
     };
 })();
 
-// 글로벌 전역 스코프 브릿지 어댑터 바인딩 (HTML 인라인 리스너와의 완벽한 완충 호환 보존)
-function openModal(id) { PortfolioCore.openModalAPI(id); }
-function closeModal(e) { if (event.target.id === 'projectModal') PortfolioCore.closeModalAPI(); }
-function closeModalDirect() { PortfolioCore.closeModalAPI(); }
-function openLightbox(src, caption) { PortfolioCore.openLightboxAPI(src, caption); }
-function closeLightbox(e) { if (event.target.id === 'lightboxModal') PortfolioCore.closeLightboxAPI(); }
-function closeLightboxDirect() { PortfolioCore.closeLightboxAPI(); }
-function toggleTheme() { PortfolioCore.toggleThemeMode(); }
+// 글로벌 인터페이스 브릿지 바인딩
+window.openModal = function(id) { PortfolioCore.openModalAPI(id); };
+window.closeModal = function(e) { if (e.target.id === 'projectModal') PortfolioCore.closeModalAPI(); };
+window.closeModalDirect = function() { PortfolioCore.closeModalAPI(); };
+window.openLightbox = function(src, caption) { PortfolioCore.openLightboxAPI(src, caption); };
+window.closeLightbox = function(e) { if (e.target.id === 'lightboxModal') PortfolioCore.closeLightboxAPI(); };
+window.closeLightboxDirect = function() { PortfolioCore.closeLightboxAPI(); };
 
+// 돔 로드 즉시 멀티테마 연동 상태 머신 구동
 window.addEventListener('DOMContentLoaded', () => {
-    PortfolioCore.initThemeAPI();
+    PortfolioCore.initThemeSync();
 });

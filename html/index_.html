@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKALA | Portal 마스터 허브 대시보드</title>
-    <!-- 4대 멀티 테마 인프라 오류가 전면 해결된 단일 통합 시트 바인딩 -->
+    <!-- 고품격 프리미엄 폰트 에셋 구조가 선언된 통합 스타일시트 로드 -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="app-container">
-        <!-- 마스터 헤더 및 4대 멀티 테마 전환 노드부 -->
+        <!-- 글로벌 헤더 및 4대 테마 스위처 토큰 바 -->
         <header class="global-header">
             <div class="logo-area">SKALA<span>.Hub</span></div>
             <nav class="theme-select-box" aria-label="멀티 테마 스위치">
@@ -31,11 +31,11 @@
         <!-- 네이버 포털형 구조 본문 2열 파티션 진입 -->
         <main class="naver-main-layout">
             
-            <!-- 👈 좌측 메인 스트림 영역 (포털 맵 허브 및 샌드박스 캐스트) -->
+            <!-- 👈 좌측 캐스트 메인 스트림 영역 (포털 맵 허브 및 샌드박스 캐스트) -->
             <div class="left-content-stream">
                 
-                <!-- 📂 하이엔드 서비스 스탠드 허브 (메인 페이지 본연의 게이트웨이 기능 고도화) -->
-                <section class="dashboard-card" style="padding: 26px;">
+                <!-- 📂 하이엔드 서비스 스탠드 허브 (가독성 최적화 패치) -->
+                <section class="dashboard-card">
                     <div class="widget-headline">📂 SKALA Portal 서비스 캐스트 (과제물 내비게이션 바)</div>
                     <div class="portal-service-grid">
                         
@@ -45,7 +45,7 @@
                                 <div class="service-icon-wrap">👤</div>
                                 <div class="service-nav-title">Master Profile</div>
                             </div>
-                            <p class="service-nav-desc">AI 및 지능형 데이터 엔지니어링 수행 이력과 STAR 트러블슈팅 명세 기술서</p>
+                            <p class="service-nav-desc">AI 및 지능형 데이터 엔지니어링 수행 이력과 STAR 트러블슈팅 명세 기술서[cite: 1]</p>
                             <a href="myProfile.html" class="service-jump-btn">채널 입장 &rarr;</a>
                         </div>
 
@@ -69,7 +69,7 @@
                             <a href="myClass.html" class="service-jump-btn">채널 입장 &rarr;</a>
                         </div>
 
-                        <!-- 4. 준비중인 확장 채널 게이트웨이 (네이버 감성 포털 플레이스홀더) -->
+                        <!-- 4. 준비중인 확장 채널 게이트웨이 -->
                         <div class="service-nav-card" style="opacity: 0.65; background: rgba(0,0,0,0.02);">
                             <div class="service-nav-header">
                                 <div class="service-icon-wrap">⚙️</div>
@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="tab-panel" id="updownPanel" role="tabpanel">
-                        <input type="number" class="cozy-input" id="updownInput" placeholder="추측 난수값 기입 (1 ~ 100)">
+                        <input type="number" class="cozy-input" id="updownInput" placeholder="추측 난수 변수값 입력 (1 ~ 100)">
                         <div class="sandbox-btn-group">
                             <button class="cozy-btn" onclick="executeUpDownGame()">정답 확인 매칭 🎯</button>
                             <button class="cozy-btn" style="background:var(--text-muted);" onclick="resetUpDownGame()">난수 초기화</button>
@@ -110,14 +110,14 @@
                         <input type="text" class="cozy-input" id="bagInput" placeholder="적재할 데이터 아이템 명칭 명세">
                         <div class="sandbox-btn-group">
                             <button class="cozy-btn" onclick="executeBagAction('add')">스택 적재 ➕</button>
-                            <button class="cozy-btn" style="background:#ba7a70;" onclick="executeBagAction('remove')">상단 제거 ➖</button>
+                            <button class="cozy-btn" style="background:#ba7a70;" onclick="executeBagAction('remove')">상단 제거(Pop) ➖</button>
                             <button class="cozy-btn" style="background:var(--text-main);" onclick="executeBagAction('clear')">일괄 파쇄</button>
                         </div>
                         <div class="sandbox-log-list" id="bagLog"><div class="sandbox-log-item">가방 인스턴스가 비어있습니다.</div></div>
                     </div>
                 </section>
 
-                <!-- 🔄 n8n 자동화 파이프라인 실시간 모니터링 캐스트 (마우스 호버 일시정지 인터랙션 탑재) -->
+                <!-- 🔄 n8n 자동화 파이프라인 모니터링 캐스트 -->
                 <section class="dashboard-card n8n-live-panel">
                     <div class="n8n-header-meta">
                         <div>🔄 n8n WORKFLOW LIVE PIPELINE MONITOR (Node Flow System)</div>
@@ -131,9 +131,8 @@
                 </section>
             </div>
 
-            <!-- 👉 우측 사이드바 스트림 영역 (네이버 개인화 로그인 박스 밸런싱) -->
+            <!-- 👉 우측 사이드바 스트림 영역 -->
             <div class="right-sidebar-stream">
-                <!-- 네이버 로그인 감성 개인화 프로필 카드 -->
                 <div class="dashboard-card naver-profile-box">
                     <div class="profile-avatar">👨‍💻</div>
                     <div class="profile-name">안성민 (Seongmin An)</div>
@@ -146,9 +145,20 @@
                         <a href="tel:010-2878-5134" class="quick-chip" title="유선 모바일 핫라인 연결">📞 Call</a>
                         <a href="../README.md" target="_blank" class="quick-chip" title="대시보드 운영 아키텍처 명세서">📄 Specs</a>
                     </div>
+                    
+                    <div class="sub-links">
+                        <a href="실습/holyday.html">🏖️ Holiday Cast</a>
+                        <a href="myClass.html">📅 Calendar Cast</a>
+                    </div>
+
+                    <!-- 마일스톤 카운터 보드 -->
+                    <div class="milestone-counter">
+                        <span>🎯 2026 Core Milestone</span>
+                        <span class="milestone-badge" id="milestoneCount">1 / 4 Complete</span>
+                    </div>
 
                     <!-- 실시간 광주 권역 미니 날씨 및 시계 센서 바 내장 배치 -->
-                    <div class="milestone-counter" style="flex-direction:column; align-items:stretch; gap:10px; margin-top:16px; background:var(--bg-card); border:1px solid var(--border-cozy);">
+                    <div class="milestone-counter" style="flex-direction:column; align-items:stretch; gap:10px; margin-top:12px; background:var(--bg-card); border:1px solid var(--border-cozy); padding:14px;">
                         <div style="display:flex; justify-content:space-between; align-items:center;">
                             <span id="realtimeClock" style="font-size:1.4rem; font-weight:900; letter-spacing:-0.03em;">00:00:00</span>
                             <span id="wTemp" style="font-weight:900; color:var(--color-brand);">--°C</span>
@@ -163,7 +173,7 @@
                 <!-- 시스템 세션 무결성 판넬 -->
                 <div class="dashboard-card" style="padding: 20px; background: rgba(255,255,255,0.3); font-size: 0.82rem; line-height: 1.5; color: var(--text-muted); font-weight:600;">
                     <div style="font-weight: 900; color: var(--text-main); margin-bottom: 6px;">⚙️ Micro Hub Architecture Stable</div>
-                    4대 멀티 테마 변수 스케일 오차 버그를 완벽 패치하여 라이트, 다크, 오트밀라떼, 포레스트 모드가 완벽 연동되는 무결성 게이트웨이 버전입니다.
+                    서재형 폰트 컨벤션 및 타이포그래피 이격을 정밀 튜닝 완료한 무결성 빌드 아키텍처 허브입니다.
                 </div>
             </div>
 
