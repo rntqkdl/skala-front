@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SKALA | Portal 마스터 허브 대시보드</title>
+    <title>SKALA | Portal 안성민 허브 대시보드</title>
     <link rel="stylesheet" href="../css/style.css" />
     <style>
       /* 📱 고속 줌인 및 반응형 픽셀 무결성 스타일팩 */
@@ -117,7 +117,7 @@
         margin-bottom: 8px;
       }
 
-      /* 🐾 성장형 마스터 아바타 캐릭터 */
+      /* 🐾 성장형 안성민 아바타 캐릭터 */
       .avatar-stage-wrap {
         display: flex;
         flex-direction: column;
@@ -276,10 +276,10 @@
               <div class="service-nav-card" style="border: 1px solid var(--border-cozy)">
                 <div class="service-nav-header">
                   <div class="service-icon-wrap">👤</div>
-                  <div class="service-nav-title">마스터 프로필 명세</div>
+                  <div class="service-nav-title">안성민 프로필 명세</div>
                 </div>
                 <p class="service-nav-desc" style="word-break: keep-all">
-                  지능형 AI 모델 분석과 데이터 엔지니어링 여정을 담은 안성민 매니저의 상세 기술서 및 트러블슈팅 스토리입니다.
+                  지능형 AI 모델 분석과 데이터 엔지니어링 여정을 담은 안성민의 상세 기술서 및 트러블슈팅 스토리입니다.
                 </p>
                 <a href="myProfile.html" class="service-jump-btn">채널 입장 &rarr;</a>
               </div>
@@ -347,7 +347,7 @@
               style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px"
             >
               <span>🎮 알고리즘 미니 게임 실습 상자 (Sandbox v9.0)</span>
-              <!-- 🎁 마스터 퀘스트 배지 현황판 -->
+              <!-- 🎁 안성민의 일상 퀘스트 배지 현황판 -->
               <div style="display: flex; gap: 6px">
                 <span
                   id="badgeRunning"
@@ -395,7 +395,7 @@
             </div>
             <p class="section-desc" style="margin-bottom: 16px; word-break: keep-all">
               순수 자바스크립트로 세심하게 설계한 미니 게임형 알고리즘 놀이터입니다. 아래의 세 가지 유쾌한 미션을 차근차근 완수하시면서,
-              마스터 안성민 매니저의 일상에 숨겨진 특별한 이스터에그 세레머니를 경험해 보세요!
+              안성민의 일상에 숨겨진 특별한 이스터에그 세레머니를 경험해 보세요!
             </p>
             <div class="sandbox-tabs" role="tablist">
               <button class="tab-btn active" onclick="switchSandboxTab('gradePanel', this)">📊 1단계. 학점 변환 (Grade)</button>
@@ -540,9 +540,28 @@
           </section>
 
           <section class="dashboard-card n8n-live-panel">
-            <div class="n8n-header-meta">
+            <div class="n8n-header-meta" style="align-items: center">
               <div>🔄 n8n 워크플로우 실시간 파이프라인 모니터</div>
-              <div id="n8nStatus" style="color: #a3e635; font-weight: 900; letter-spacing: 0.05em">● 정상 작동 중</div>
+              <div style="display: flex; gap: 8px; align-items: center">
+                <button
+                  onclick="triggerInteractiveN8nPipeline()"
+                  class="cozy-btn"
+                  style="
+                    padding: 4px 12px;
+                    font-size: 0.72rem;
+                    min-width: auto;
+                    background: #a3e635;
+                    color: #120e0c;
+                    border: none;
+                    font-weight: 900;
+                    border-radius: 12px;
+                    cursor: pointer;
+                  "
+                >
+                  ⚡ 수동 파이프라인 트리거
+                </button>
+                <div id="n8nStatus" style="color: #a3e635; font-weight: 900; letter-spacing: 0.05em">● 정상 작동 중</div>
+              </div>
             </div>
             <div class="n8n-terminal-box" title="마우스 호버 시 로그 스트림 흐름이 정지되어 가독성을 확보합니다">
               <div class="n8n-scroller" id="n8nTerminalScroller"></div>
@@ -635,7 +654,7 @@
                   padding-bottom: 6px;
                 "
               >
-                7월 16일 (목요일)
+                7월 18일 (토요일)
               </div>
               <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 4px">
                 <div style="display: flex; justify-content: space-between; font-weight: 700; align-items: flex-start; gap: 10px">

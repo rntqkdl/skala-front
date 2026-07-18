@@ -160,7 +160,7 @@ class IntegratedPortalController {
   }
 
   /**
-   * 🔄 n8n 자동화 파이프라인 무한 순환 라이브 터미널 보드
+   * 🔄 n8n 자동화 파이프라인 무한 순환 라이브 터미널 보드 (수동 트리거 연동)
    */
   runN8nLiveStreamTerminal() {
     const scroller = document.getElementById("n8nTerminalScroller");
@@ -186,7 +186,95 @@ class IntegratedPortalController {
     };
 
     renderLogs();
-    setInterval(renderLogs, 4000);
+    this.n8nIntervalId = setInterval(renderLogs, 4000);
+
+    // ⚡ A: 수동 파이프라인 트리거 시뮬레이션
+    window.triggerInteractiveN8nPipeline = () => {
+      const statusNode = document.getElementById("n8nStatus");
+      if (this.isPipelineRunning) {
+        alert("현재 비정형 소스 파이프라인 정제 작업이 진행 중입니다. 잠시만 대기해 주세요!");
+        return;
+      }
+
+      this.isPipelineRunning = true;
+      if (statusNode) {
+        statusNode.textContent = "● 전처리 연산 중...";
+        statusNode.style.color = "var(--color-brand)";
+      }
+
+      clearInterval(this.n8nIntervalId);
+      scroller.innerHTML = "";
+
+      let step = 0;
+      const pipelineSteps = [
+        { type: "trigger", text: "⚡ [1단계] 크론 트리거 가동 ➔ 수동 오케스트레이션 정제 시퀀스 시작" },
+        { type: "api", text: "📡 [2단계] Google Sheets API 커넥터 가동 ➔ 7월 광주 캠퍼스 급식 원천 데이터 인입 수렴" },
+        { type: "parse", text: "🧼 [3단계] 정규표현식(Regex) 전처리 필터 개시 ➔ 공백, 특수문자, 노이즈 파쇄 정밀 정제 완료" },
+        { type: "parse", text: "📝 [4단계] JSONL 비정형 구조체 정형 변환 마일스톤 가동 ➔ 수렴 데이터 무결성 체크 통과" },
+        { type: "db", text: "💾 [5단계] 로컬 상태 관리 레지스터 동기화 ➔ GwangjuMealDB 영속성 파이프라인 캐시 주입 마감" },
+      ];
+
+      const runNextStep = () => {
+        if (step < pipelineSteps.length) {
+          const log = pipelineSteps[step];
+          const now = new Date();
+          const timeStr = now.toTimeString().split(" ")[0];
+
+          const line = document.createElement("div");
+          line.className = "n8n-log-line";
+          line.innerHTML = `
+            <span style="color:var(--color-brand); font-weight:700;">[${timeStr}]</span>
+            <span class="n8n-badge ${badgeClassMap[log.type]}">${log.type.toUpperCase()}</span>
+            <span style="color:var(--text-main); font-weight:600;">${log.text}</span>
+          `;
+          scroller.appendChild(line);
+          scroller.scrollTop = scroller.scrollHeight; // Auto scroll to bottom
+
+          // 가상 디스플레이 캔버스에도 실시간 파이프라인 공정 상태 투영!
+          const progressPercent = Math.round(((step + 1) / pipelineSteps.length) * 100);
+          const canvasHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px; width:100%;">
+              <div style="font-size:2rem; animation: successBounce 1s infinite alternate;">📡⚙️</div>
+              <div style="font-size:0.75rem; color:var(--text-muted); font-weight:800; text-align:center;">
+                파이프라인 무결 연산 공정: ${progressPercent}%<br>
+                <span style="color:var(--color-brand);">${log.text}</span>
+              </div>
+              <div class="progress-rail" style="max-width:140px; height:6px; margin-top: 4px;">
+                <div class="progress-bar-fill" style="width: ${progressPercent}%; background:var(--color-brand); height:100%;"></div>
+              </div>
+            </div>
+          `;
+          this.renderDisplayScreen("실시간 데이터 전처리 파이프라인", canvasHTML);
+
+          step++;
+          setTimeout(runNextStep, 1000);
+        } else {
+          // 완료 분기
+          if (statusNode) {
+            statusNode.textContent = "● 정상 작동 중";
+            statusNode.style.color = "#a3e635";
+          }
+          this.isPipelineRunning = false;
+          window.triggerNeonCelebration(); // 완료 축포 발사!
+
+          const successHTML = `
+            <div style="display:flex; flex-direction:column; align-items:center; gap:8px; width:100%;">
+              <div style="font-size:2.5rem; animation: successBounce 1.5s infinite alternate;">💯✅</div>
+              <div style="font-size:0.75rem; color:var(--color-success); font-weight:900; text-align:center;">
+                PIPELINE PROCESSING COMPLETE<br>
+                <span style="color:var(--text-main);">7월 광주 식단 원천 수렴 정제 무결성 완수!</span>
+              </div>
+            </div>
+          `;
+          this.renderDisplayScreen("파이프라인 연산 무결 완료", successHTML);
+
+          // 무한 반복용 주기적 호출 복구
+          this.n8nIntervalId = setInterval(renderLogs, 4000);
+        }
+      };
+
+      runNextStep();
+    };
   }
 
   /**
@@ -645,8 +733,8 @@ class IntegratedPortalController {
 
     if (!dateLabel || !bNode || !lNode || !dNode) return;
 
-    const targetDateStr = this.activeNoticeDay === "today" ? "2026-07-16" : "2026-07-17";
-    const dayName = this.activeNoticeDay === "today" ? "7월 16일 (목요일 - 오늘)" : "7월 17일 (금요일 - 내일)";
+    const targetDateStr = this.activeNoticeDay === "today" ? "2026-07-18" : "2026-07-19";
+    const dayName = this.activeNoticeDay === "today" ? "7월 18일 (토요일 - 오늘)" : "7월 19일 (일요일 - 내일)";
 
     dateLabel.textContent = dayName;
 
@@ -701,6 +789,44 @@ class IntegratedPortalController {
     this.gradeSubjects = [];
     localStorage.setItem("skala-grade-subjects", JSON.stringify(this.gradeSubjects));
     this.reCalculateGPA(false);
+  }
+
+  switchUpDownDifficulty(diff) {
+    this.updownDifficulty = diff;
+    if (diff === "easy") {
+      this.updownMin = 1;
+      this.updownMax = 50;
+      this.updownMaxAttempts = 10;
+    } else if (diff === "hard") {
+      this.updownMin = 1;
+      this.updownMax = 150;
+      this.updownMaxAttempts = 5;
+    } else {
+      this.updownMin = 1;
+      this.updownMax = 100;
+      this.updownMaxAttempts = 7;
+    }
+
+    // 버튼 스타일 실시간 반영 업데이트
+    const btnEasy = document.getElementById("udEasyBtn");
+    const btnNormal = document.getElementById("udNormalBtn");
+    const btnHard = document.getElementById("udHardBtn");
+
+    if (btnEasy && btnNormal && btnHard) {
+      const activeStyle =
+        "font-size: 0.7rem; padding: 2px 8px; background: var(--color-brand); color: #fff; border: 1px solid var(--color-brand);";
+      const inactiveStyle =
+        "font-size: 0.7rem; padding: 2px 8px; background: var(--bg-nested); color: var(--text-muted); border: 1px solid var(--border-cozy);";
+
+      btnEasy.setAttribute("style", diff === "easy" ? activeStyle : inactiveStyle);
+      btnNormal.setAttribute("style", diff === "normal" ? activeStyle : inactiveStyle);
+      btnHard.setAttribute("style", diff === "hard" ? activeStyle : inactiveStyle);
+    }
+
+    // 게임 상태 리셋 및 난수 재설정 구동
+    if (typeof window.resetUpDownGame === "function") {
+      window.resetUpDownGame();
+    }
   }
 
   getGradeFromScore(score) {

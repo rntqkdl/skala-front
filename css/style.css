@@ -6,7 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;900&family=Pretendard:wght@400;600;800;900&display=swap");
 
 :root {
-  /* 🎨 4-Way 테마 시스템 마스터 토큰 */
+  /* 🎨 4-Way 테마 시스템 디자인 토큰 */
   --bg-primary: #fdfbf7;
   --bg-card: rgba(255, 255, 255, 0.85);
   --bg-nested: #f5eedf;
@@ -1116,7 +1116,7 @@ a {
   }
 }
 
-/* 🎉 마스터 축하 네온 파티클 효과 (GPU 가속 최적화) */
+/* 🎉 안성민 축하 네온 파티클 효과 (GPU 가속 최적화) */
 .celebration-particle {
   position: fixed;
   pointer-events: none;

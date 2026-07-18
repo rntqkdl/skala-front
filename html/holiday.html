@@ -893,7 +893,7 @@
           URL.revokeObjectURL(url);
         }
 
-        /* 데이터 복원 (Import) - JSON 업로드 파싱 */
+        /* 데이터 복원 (Import) - JSON 업로드 파싱 (C: 초정밀 스키마 검증 엔진 고도화!) */
         importHolidayComments(event) {
           const file = event.target.files[0];
           if (!file) return;
@@ -903,9 +903,34 @@
             try {
               const importedData = JSON.parse(e.target.result);
               if (Array.isArray(importedData)) {
-                // Validation checks on imported comments structure
-                const isValid = importedData.every((item) => item.id && item.author && item.body);
-                if (isValid) {
+                // 🚀 C: 초정밀 JSON 데이터 스키마 벨리데이션 검증
+                let schemaErrors = [];
+                const isValid = importedData.every((item, idx) => {
+                  let localValid = true;
+                  if (!item.id || typeof item.id !== "number") {
+                    schemaErrors.push(`[슬롯 #${idx}] "id" 필드가 누락되었거나 숫자 형식이 아닙니다.`);
+                    localValid = false;
+                  }
+                  if (!item.author || typeof item.author !== "string") {
+                    schemaErrors.push(`[슬롯 #${idx}] "author" 필드가 누락되었거나 문자열 형식이 아닙니다.`);
+                    localValid = false;
+                  }
+                  if (!item.body || typeof item.body !== "string") {
+                    schemaErrors.push(`[슬롯 #${idx}] "body" 필드가 누락되었거나 문자열 형식이 아닙니다.`);
+                    localValid = false;
+                  }
+                  if (!item.date || typeof item.date !== "string") {
+                    schemaErrors.push(`[슬롯 #${idx}] "date" 필드가 누락되었거나 문자열 형식이 아닙니다.`);
+                    localValid = false;
+                  }
+                  if (!item.password || typeof item.password !== "string") {
+                    schemaErrors.push(`[슬롯 #${idx}] "password" 필드가 누락되었거나 문자열 형식이 아닙니다.`);
+                    localValid = false;
+                  }
+                  return localValid;
+                });
+
+                if (isValid && schemaErrors.length === 0) {
                   if (confirm("기존 저장된 방명록 데이터가 불러온 백업본으로 대체됩니다. 진행할까요?")) {
                     this.savedHolidayComments = importedData;
                     this.saveCommentsToStorage();
@@ -913,13 +938,16 @@
                     alert("성공적으로 방명록 데이터를 백업 파일로부터 무결성 복구 완수했습니다! ✅");
                   }
                 } else {
-                  alert("가져온 파일 구조가 유효한 방명록 백업 데이터셋이 아닙니다.");
+                  // 검증 위반 내역을 세련되게 반환
+                  alert(
+                    `⚠️ [정규 스키마 불일치: Data Validation Error]\n가져온 파일 구조가 유효한 방명록 백업 데이터셋이 아닙니다.\n\n[상세 에러 리스트]\n${schemaErrors.slice(0, 3).join("\n")}${schemaErrors.length > 3 ? "\n...외 추가 오류 검출" : ""}`,
+                  );
                 }
               } else {
-                alert("백업 파일 형식이 올바르지 않습니다.");
+                alert("⚠️ [백업 규격 위반] 백업 파일 형식이 올바른 JSON 리스트 구조가 아닙니다.");
               }
             } catch (err) {
-              alert("JSON 파일을 파싱하는 과정에서 에러가 발생했습니다: " + err.message);
+              alert("⚠️ [JSON 파싱 에러] 파일을 파싱하는 과정에서 에러가 발생했습니다: " + err.message);
             }
           };
           reader.readAsText(file);
