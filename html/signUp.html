@@ -1,443 +1,503 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SKALA | 회원가입 패스포트 👤</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css" />
     <style>
-        /* 📝 회원가입 전용 폼 레이아웃 및 폼 유효성 디자인 통제 */
-        .signup-container {
-            max-width: 680px;
-            margin: 0 auto;
-        }
-        .signup-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-cozy);
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: var(--shadow-cozy);
-        }
-        
-        fieldset {
-            border: 1px solid var(--border-cozy);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-            background: rgba(255, 255, 255, 0.4);
-            transition: var(--transition-apple);
-        }
-        fieldset:hover, fieldset:focus-within {
-            border-color: var(--color-brand);
-            background: rgba(255, 255, 255, 0.85);
-            box-shadow: 0 4px 16px rgba(224, 108, 83, 0.04);
-        }
-        legend {
-            font-family: var(--font-serif);
-            font-weight: 900;
-            font-size: 0.95rem;
-            color: var(--color-brand);
-            padding: 4px 14px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-cozy);
-            border-radius: 20px;
-            letter-spacing: -0.01em;
-        }
+      /* 📝 회원가입 전용 폼 레이아웃 및 폼 유효성 디자인 통제 (index.html과 일치하도록 정교화) */
+      .signup-container {
+        width: 100%;
+        max-width: 1040px; /* index.html과 완벽 동화되는 레이아웃 규격 적용 */
+        margin: 0 auto;
+      }
+      .signup-card {
+        width: 100%;
+        box-sizing: border-box;
+        background: var(--bg-card);
+        border: 1px solid var(--border-cozy);
+        border-radius: 20px;
+        padding: 40px; /* 좀 더 여유롭고 웅장한 여백 부여 */
+        box-shadow: var(--shadow-cozy);
+      }
 
-        /* 📋 Form controls grid arrangement */
-        .form-row {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-bottom: 16px;
+      /* 📋 데스크톱 전용 멀티 컬럼 그리드 시스템 */
+      @media (min-width: 769px) {
+        .fieldset-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
         }
-        .form-row:last-child {
-            margin-bottom: 0;
+        .grid-full-width {
+          grid-column: span 2;
         }
-        .form-label {
-            font-size: 0.88rem;
-            font-weight: 800;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .form-required-star {
-            color: var(--color-brand);
-            font-size: 0.8rem;
-            font-weight: 900;
-        }
-        
-        .form-row select, .form-row textarea {
-            width: 100%;
-            background: var(--bg-nested);
-            border: 1px solid var(--border-cozy);
-            padding: 12px 14px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-main);
-            transition: var(--transition-apple);
-            box-sizing: border-box;
-        }
-        .form-row select:focus, .form-row textarea:focus {
-            border-color: var(--color-brand);
-            background: #ffffff;
-            outline: none;
-        }
-        
-        /* Inline custom selects / checkboxes & radio rows */
-        .radio-checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 6px;
-        }
-        .custom-label-chip {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--bg-nested);
-            border: 1px solid var(--border-cozy);
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--text-main);
-            cursor: pointer;
-            transition: var(--transition-apple);
-            user-select: none;
-        }
-        .custom-label-chip input[type="radio"], .custom-label-chip input[type="checkbox"] {
-            margin: 0;
-            accent-color: var(--color-brand);
-            cursor: pointer;
-        }
-        .custom-label-chip:hover {
-            border-color: var(--color-brand);
-            background: #ffffff;
-        }
-        .custom-label-chip input:checked + span, .custom-label-chip:has(input:checked) {
-            background: rgba(224, 108, 83, 0.08);
-            border-color: var(--color-brand);
-            color: var(--color-brand);
-            font-weight: 800;
-        }
+      }
 
-        /* 🚀 Action Buttons Grid */
-        .btn-action-wrapper {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 12px;
-            margin-top: 12px;
-        }
-        .btn-submit {
-            background: var(--color-brand);
-            color: #fff;
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-weight: 900;
-            font-size: 0.92rem;
-            transition: var(--transition-apple);
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(224, 108, 83, 0.2);
-        }
-        .btn-submit:hover {
-            background: var(--color-brand-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(224, 108, 83, 0.3);
-        }
-        .btn-reset {
-            background: var(--bg-nested);
-            color: var(--text-muted);
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 0.92rem;
-            transition: var(--transition-apple);
-            border: 1px solid var(--border-cozy);
-            cursor: pointer;
-        }
-        .btn-reset:hover {
-            background: #ffffff;
-            color: var(--text-main);
-            border-color: var(--color-brand);
-        }
+      fieldset {
+        border: 1px solid var(--border-cozy);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 24px;
+        background: rgba(255, 255, 255, 0.4);
+        transition: var(--transition-apple);
+      }
+      fieldset:hover,
+      fieldset:focus-within {
+        border-color: var(--color-brand);
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 4px 16px rgba(224, 108, 83, 0.04);
+      }
+      legend {
+        font-family: var(--font-serif);
+        font-weight: 900;
+        font-size: 0.95rem;
+        color: var(--color-brand);
+        padding: 4px 14px;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-cozy);
+        border-radius: 20px;
+        letter-spacing: -0.01em;
+      }
 
-        /* Email combined field control */
-        .email-combined-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .email-combined-row input {
-            flex: 1;
-            min-width: 140px;
-        }
-        .email-combined-row select {
-            width: auto;
-            flex: 1;
-            min-width: 140px;
-        }
+      /* 📋 Form controls grid arrangement */
+      .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+      .form-row:last-child {
+        margin-bottom: 0;
+      }
+      .form-label {
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .form-required-star {
+        color: var(--color-brand);
+        font-size: 0.8rem;
+        font-weight: 900;
+      }
 
-        /* ♿ Focus ring */
-        .cozy-input:focus-visible, select:focus-visible, textarea:focus-visible, .btn-submit:focus-visible, .btn-reset:focus-visible {
-            outline: 3px solid var(--color-brand);
-            outline-offset: 2px;
-        }
+      .form-row select,
+      .form-row textarea {
+        width: 100%;
+        background: var(--bg-nested);
+        border: 1px solid var(--border-cozy);
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-main);
+        transition: var(--transition-apple);
+        box-sizing: border-box;
+      }
+      .form-row select:focus,
+      .form-row textarea:focus {
+        border-color: var(--color-brand);
+        background: #ffffff;
+        outline: none;
+      }
 
-        /* 🔐 고도화: 실시간 패스워드 강도 에이전트 */
-        .entropy-rail {
-            width: 100%;
-            height: 6px;
-            background: var(--bg-nested);
-            border-radius: 10px;
-            margin-top: 8px;
-            overflow: hidden;
-            position: relative;
-        }
-        .entropy-bar {
-            width: 0%;
-            height: 100%;
-            background: #ef4444;
-            border-radius: 10px;
-            transition: var(--transition-apple);
-        }
-        .entropy-desc {
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: var(--text-muted);
-            display: flex;
-            justify-content: space-between;
-            margin-top: 4px;
-        }
+      /* Inline custom selects / checkboxes & radio rows */
+      .radio-checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 6px;
+      }
+      .custom-label-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--bg-nested);
+        border: 1px solid var(--border-cozy);
+        padding: 8px 14px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--text-main);
+        cursor: pointer;
+        transition: var(--transition-apple);
+        user-select: none;
+      }
+      .custom-label-chip input[type="radio"],
+      .custom-label-chip input[type="checkbox"] {
+        margin: 0;
+        accent-color: var(--color-brand);
+        cursor: pointer;
+      }
+      .custom-label-chip:hover {
+        border-color: var(--color-brand);
+        background: #ffffff;
+      }
+      .custom-label-chip input:checked + span,
+      .custom-label-chip:has(input:checked) {
+        background: rgba(224, 108, 83, 0.08);
+        border-color: var(--color-brand);
+        color: var(--color-brand);
+        font-weight: 800;
+      }
+
+      /* 🚀 Action Buttons Grid */
+      .btn-action-wrapper {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .btn-submit {
+        background: var(--color-brand);
+        color: #fff;
+        padding: 14px 20px;
+        border-radius: 10px;
+        font-weight: 900;
+        font-size: 0.92rem;
+        transition: var(--transition-apple);
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(224, 108, 83, 0.2);
+      }
+      .btn-submit:hover {
+        background: var(--color-brand-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(224, 108, 83, 0.3);
+      }
+      .btn-reset {
+        background: var(--bg-nested);
+        color: var(--text-muted);
+        padding: 14px 20px;
+        border-radius: 10px;
+        font-weight: 800;
+        font-size: 0.92rem;
+        transition: var(--transition-apple);
+        border: 1px solid var(--border-cozy);
+        cursor: pointer;
+      }
+      .btn-reset:hover {
+        background: #ffffff;
+        color: var(--text-main);
+        border-color: var(--color-brand);
+      }
+
+      /* Email combined field control */
+      .email-combined-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .email-combined-row input {
+        flex: 1;
+        min-width: 140px;
+      }
+      .email-combined-row select {
+        width: auto;
+        flex: 1;
+        min-width: 140px;
+      }
+
+      /* ♿ Focus ring */
+      .cozy-input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible,
+      .btn-submit:focus-visible,
+      .btn-reset:focus-visible {
+        outline: 3px solid var(--color-brand);
+        outline-offset: 2px;
+      }
+
+      /* 🔐 고도화: 실시간 패스워드 강도 에이전트 */
+      .entropy-rail {
+        width: 100%;
+        height: 6px;
+        background: var(--bg-nested);
+        border-radius: 10px;
+        margin-top: 8px;
+        overflow: hidden;
+        position: relative;
+      }
+      .entropy-bar {
+        width: 0%;
+        height: 100%;
+        background: #ef4444;
+        border-radius: 10px;
+        transition: var(--transition-apple);
+      }
+      .entropy-desc {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4px;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- 🌌 공간 렌더링 셰이더 배경 인프라 -->
     <div class="mesh-gradient-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="notion-grid-mask"></div>
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="notion-grid-mask"></div>
     </div>
 
     <div class="app-container">
-        <!-- 🛠️ 통합 프리미엄 포털 GNB 헤더 완벽 규격 가동 -->
-        <header class="global-header">
-            <div class="logo-area">
-                <a href="index.html" aria-label="메인 포털 대시보드로 이동" style="text-decoration:none; color:inherit;">🏠 Portal Hub</a>
-            </div>
-            <nav class="theme-select-box" aria-label="4대 멀티 테마 스위치">
-                <button class="theme-btn-node active" data-theme="light">Light</button>
-                <button class="theme-btn-node" data-theme="dark">Dark</button>
-                <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
-                <button class="theme-btn-node" data-theme="forest">Forest</button>
-            </nav>
-        </header>
+      <!-- 🛠️ 통합 프리미엄 포털 GNB 헤더 완벽 규격 가동 -->
+      <header class="global-header">
+        <div class="logo-area">
+          <a href="index.html" aria-label="메인 포털 대시보드로 이동" style="text-decoration: none; color: inherit">🏠 Portal Hub</a>
+        </div>
+        <nav class="theme-select-box" aria-label="4대 멀티 테마 스위치">
+          <button class="theme-btn-node active" data-theme="light">Light</button>
+          <button class="theme-btn-node" data-theme="dark">Dark</button>
+          <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
+          <button class="theme-btn-node" data-theme="forest">Forest</button>
+        </nav>
+      </header>
 
-        <!-- 🏢 회원가입 콘텐츠 전용 스펙트럼 뷰 -->
-        <main class="signup-container">
-            <div class="signup-card">
-                <div class="auth-header">
-                    <h2>👤 회원가입</h2>
-                    <p>SKALA-FRONT 대시보드 회원가입을 진심으로 환영합니다.</p>
+      <!-- 🏢 회원가입 콘텐츠 전용 스펙트럼 뷰 -->
+      <main class="signup-container">
+        <div class="signup-card">
+          <div class="auth-header">
+            <h2>👤 회원가입</h2>
+            <p>SKALA-FRONT 대시보드 회원가입을 진심으로 환영합니다.</p>
+          </div>
+          <hr style="border: none; border-top: 1px solid var(--border-cozy); margin-bottom: 24px" />
+
+          <!-- 💡 회원제 폼 action: signUpResult.html, method: get 표준 탑재 -->
+          <form action="signUpResult.html" method="get">
+            <!-- 1. 계정 정보 fieldset -->
+            <fieldset class="fieldset-grid">
+              <legend>계정 정보</legend>
+
+              <div class="form-row">
+                <label for="userId" class="form-label">
+                  <span>아이디</span>
+                  <span class="form-required-star">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="userId"
+                  name="userId"
+                  class="cozy-input"
+                  style="margin-bottom: 0"
+                  minlength="4"
+                  maxlength="15"
+                  required
+                  placeholder="4~15자 영문/숫자 혼용"
+                />
+                <small style="color: var(--text-muted); font-weight: 700; font-size: 0.75rem">(필수 항목)</small>
+              </div>
+
+              <div class="form-row">
+                <label for="userPw" class="form-label">
+                  <span>비밀번호</span>
+                  <span class="form-required-star">*</span>
+                </label>
+                <input
+                  type="password"
+                  id="userPw"
+                  name="userPw"
+                  class="cozy-input"
+                  style="margin-bottom: 0"
+                  minlength="8"
+                  required
+                  placeholder="8자 이상 안전한 키 생성"
+                  oninput="checkPasswordStrength(this.value)"
+                />
+                <!-- 🔐 패스워드 엔트로피 계측기 컴포넌트 장착 -->
+                <div class="entropy-rail">
+                  <div class="entropy-bar" id="entropyBar"></div>
                 </div>
-                <hr style="border:none; border-top:1px solid var(--border-cozy); margin-bottom: 24px;">
+                <div class="entropy-desc">
+                  <span>비밀번호 보안 강도</span>
+                  <span id="entropyStatus" style="color: #ef4444">미입력</span>
+                </div>
+              </div>
 
-                <!-- 💡 회원제 폼 action: signUpResult.html, method: get 표준 탑재 -->
-                <form action="signUpResult.html" method="get">
-                    
-                    <!-- 1. 계정 정보 fieldset -->
-                    <fieldset>
-                        <legend>계정 정보</legend>
-                        
-                        <div class="form-row">
-                            <label for="userId" class="form-label">
-                                <span>아이디</span>
-                                <span class="form-required-star">*</span>
-                            </label>
-                            <input type="text" id="userId" name="userId" class="cozy-input" style="margin-bottom:0;" minlength="4" maxlength="15" required placeholder="4~15자 영문/숫자 혼용">
-                            <small style="color:var(--text-muted); font-weight:700; font-size:0.75rem;">(필수 항목)</small>
-                        </div>
+              <div class="form-row grid-full-width">
+                <label for="userEmail" class="form-label">이메일</label>
+                <div class="email-combined-row">
+                  <input type="text" id="userEmail" name="userEmail" class="cozy-input" style="margin-bottom: 0" placeholder="example" />
+                  <span style="font-weight: 900; color: var(--text-muted)">@</span>
+                  <select name="emailDomain" id="emailDomain" aria-label="이메일 도메인 선택">
+                    <option value="direct">직접 입력</option>
+                    <option value="naver.com">naver.com</option>
+                    <option value="gmail.com">gmail.com</option>
+                    <option value="daum.net">daum.net</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
 
-                        <div class="form-row" style="margin-top:12px;">
-                            <label for="userPw" class="form-label">
-                                <span>비밀번호</span>
-                                <span class="form-required-star">*</span>
-                            </label>
-                            <input type="password" id="userPw" name="userPw" class="cozy-input" style="margin-bottom:0;" minlength="8" required placeholder="8자 이상 안전한 키 생성" oninput="checkPasswordStrength(this.value)">
-                            <!-- 🔐 패스워드 엔트로피 계측기 컴포넌트 장착 -->
-                            <div class="entropy-rail">
-                                <div class="entropy-bar" id="entropyBar"></div>
-                            </div>
-                            <div class="entropy-desc">
-                                <span>비밀번호 보안 강도</span>
-                                <span id="entropyStatus" style="color:#ef4444;">미입력</span>
-                            </div>
-                        </div>
+            <!-- 2. 개인 프로필 정보 fieldset -->
+            <fieldset class="fieldset-grid">
+              <legend>개인 프로필 정보</legend>
 
-                        <div class="form-row" style="margin-top:12px;">
-                            <label for="userEmail" class="form-label">이메일</label>
-                            <div class="email-combined-row">
-                                <input type="text" id="userEmail" name="userEmail" class="cozy-input" style="margin-bottom:0;" placeholder="example">
-                                <span style="font-weight:900; color:var(--text-muted);">@</span>
-                                <select name="emailDomain" id="emailDomain" aria-label="이메일 도메인 선택">
-                                    <option value="direct">직접 입력</option>
-                                    <option value="naver.com">naver.com</option>
-                                    <option value="gmail.com">gmail.com</option>
-                                    <option value="daum.net">daum.net</option>
-                                </select>
-                            </div>
-                        </div>
-                    </fieldset>
+              <div class="form-row">
+                <label for="userName" class="form-label">
+                  <span>이름</span>
+                  <span class="form-required-star">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="userName"
+                  name="userName"
+                  class="cozy-input"
+                  style="margin-bottom: 0"
+                  placeholder="성민 마스터 성함 기입"
+                  required
+                />
+              </div>
 
-                    <!-- 2. 개인 프로필 정보 fieldset -->
-                    <fieldset>
-                        <legend>개인 프로필 정보</legend>
+              <div class="form-row">
+                <label for="userBirth" class="form-label">생년월일</label>
+                <input
+                  type="date"
+                  id="userBirth"
+                  name="userBirth"
+                  class="cozy-input"
+                  style="margin-bottom: 0; font-family: var(--font-sans)"
+                />
+              </div>
 
-                        <div class="form-row">
-                            <label for="userName" class="form-label">
-                                <span>이름</span>
-                                <span class="form-required-star">*</span>
-                            </label>
-                            <input type="text" id="userName" name="userName" class="cozy-input" style="margin-bottom:0;" placeholder="성민 마스터 성함 기입" required>
-                        </div>
+              <div class="form-row">
+                <span class="form-label">성별</span>
+                <div class="radio-checkbox-group">
+                  <label class="custom-label-chip">
+                    <input type="radio" name="gender" value="male" checked />
+                    <span>남성</span>
+                  </label>
+                  <label class="custom-label-chip">
+                    <input type="radio" name="gender" value="female" />
+                    <span>여성</span>
+                  </label>
+                  <label class="custom-label-chip">
+                    <input type="radio" name="gender" value="none" />
+                    <span>선택안함</span>
+                  </label>
+                </div>
+              </div>
 
-                        <div class="form-row" style="margin-top:14px;">
-                            <label for="userBirth" class="form-label">생년월일</label>
-                            <input type="date" id="userBirth" name="userBirth" class="cozy-input" style="margin-bottom:0; font-family:var(--font-sans);">
-                        </div>
+              <div class="form-row">
+                <label for="joinPath" class="form-label">가입 경로</label>
+                <select id="joinPath" name="joinPath">
+                  <option value="" disabled selected>-- 가입 경로를 선택해 주세요 --</option>
+                  <option value="search">인터넷 포털 검색</option>
+                  <option value="friend">동료 및 지인 추천</option>
+                  <option value="sns">SNS 테크 광고</option>
+                  <option value="etc">기타 가동 경로</option>
+                </select>
+              </div>
 
-                        <div class="form-row" style="margin-top:14px;">
-                            <span class="form-label">성별</span>
-                            <div class="radio-checkbox-group">
-                                <label class="custom-label-chip">
-                                    <input type="radio" name="gender" value="male" checked>
-                                    <span>남성</span>
-                                </label>
-                                <label class="custom-label-chip">
-                                    <input type="radio" name="gender" value="female">
-                                    <span>여성</span>
-                                </label>
-                                <label class="custom-label-chip">
-                                    <input type="radio" name="gender" value="none">
-                                    <span>선택안함</span>
-                                </label>
-                            </div>
-                        </div>
+              <div class="form-row grid-full-width">
+                <span class="form-label">관심 분야 (중복 선택 가능)</span>
+                <div class="radio-checkbox-group" style="flex-direction: column; align-items: flex-start; gap: 8px">
+                  <label class="custom-label-chip" style="width: 100%; box-sizing: border-box">
+                    <input type="checkbox" name="interest" value="frontend" />
+                    <span>웹 프론트엔드 (Vue.js / Vanilla HTML)</span>
+                  </label>
+                  <label class="custom-label-chip" style="width: 100%; box-sizing: border-box">
+                    <input type="checkbox" name="interest" value="uiux" />
+                    <span>UI/UX 디자인 가이드라인 웹 표준</span>
+                  </label>
+                  <label class="custom-label-chip" style="width: 100%; box-sizing: border-box">
+                    <input type="checkbox" name="interest" value="backend" />
+                    <span>백엔드 & 데이터 엔지니어링 파이프라인</span>
+                  </label>
+                  <label class="custom-label-chip" style="width: 100%; box-sizing: border-box">
+                    <input type="checkbox" name="interest" value="devops" />
+                    <span>클라우드 인프라 & AIOps 오케스트레이션</span>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
 
-                        <div class="form-row" style="margin-top:14px;">
-                            <span class="form-label">관심 분야 (중복 선택 가능)</span>
-                            <div class="radio-checkbox-group" style="flex-direction: column; align-items: flex-start; gap: 8px;">
-                                <label class="custom-label-chip" style="width: 100%; box-sizing: border-box;">
-                                    <input type="checkbox" name="interest" value="frontend">
-                                    <span>웹 프론트엔드 (Vue.js / Vanilla HTML)</span>
-                                </label>
-                                <label class="custom-label-chip" style="width: 100%; box-sizing: border-box;">
-                                    <input type="checkbox" name="interest" value="uiux">
-                                    <span>UI/UX 디자인 가이드라인 웹 표준</span>
-                                </label>
-                                <label class="custom-label-chip" style="width: 100%; box-sizing: border-box;">
-                                    <input type="checkbox" name="interest" value="backend">
-                                    <span>백엔드 & 데이터 엔지니어링 파이프라인</span>
-                                </label>
-                                <label class="custom-label-chip" style="width: 100%; box-sizing: border-box;">
-                                    <input type="checkbox" name="interest" value="devops">
-                                    <span>클라우드 인프라 & AIOps 오케스트레이션</span>
-                                </label>
-                            </div>
-                        </div>
+            <!-- 3. 자기소개 fieldset -->
+            <fieldset>
+              <legend>자기소개</legend>
+              <div class="form-row">
+                <label for="intro" class="form-label">나를 표현하는 한 줄 소개 또는 가입 인사:</label>
+                <textarea
+                  id="intro"
+                  name="intro"
+                  rows="5"
+                  placeholder="여기에 대시보드 가동 포인터를 기입하세요 (최대 200자 내외로 권장)"
+                ></textarea>
+              </div>
+            </fieldset>
 
-                        <div class="form-row" style="margin-top:14px;">
-                            <label for="joinPath" class="form-label">가입 경로</label>
-                            <select id="joinPath" name="joinPath">
-                                <option value="" disabled selected>-- 가입 경로를 선택해 주세요 --</option>
-                                <option value="search">인터넷 포털 검색</option>
-                                <option value="friend">동료 및 지인 추천</option>
-                                <option value="sns">SNS 테크 광고</option>
-                                <option value="etc">기타 가동 경로</option>
-                            </select>
-                        </div>
-                    </fieldset>
-
-                    <!-- 3. 자기소개 fieldset -->
-                    <fieldset>
-                        <legend>자기소개</legend>
-                        <div class="form-row">
-                            <label for="intro" class="form-label">나를 표현하는 한 줄 소개 또는 가입 인사:</label>
-                            <textarea id="intro" name="intro" rows="5" placeholder="여기에 대시보드 가동 포인터를 기입하세요 (최대 200자 내외로 권장)"></textarea>
-                        </div>
-                    </fieldset>
-
-                    <!-- 4. Submit / Reset 마스터 제어 버튼 -->
-                    <div class="btn-action-wrapper">
-                        <input type="submit" class="btn-submit" value="동의하고 회원가입 완료">
-                        <input type="reset" class="btn-reset" value="다시 기입" onclick="resetStrength()">
-                    </div>
-
-                </form>
+            <!-- 4. Submit / Reset 마스터 제어 버튼 -->
+            <div class="btn-action-wrapper">
+              <input type="submit" class="btn-submit" value="동의하고 회원가입 완료" />
+              <input type="reset" class="btn-reset" value="다시 기입" onclick="resetStrength()" />
             </div>
-        </main>
+          </form>
+        </div>
+      </main>
 
-        <footer class="global-footer">
-            <p>© 2026 안성민. SK AX [SKALA 4기] 마스터 교육 일정 거버넌스 시스템.</p>
-        </footer>
+      <footer class="global-footer">
+        <p>© 2026 안성민. SK AX [SKALA 4기] 마스터 교육 일정 거버넌스 시스템.</p>
+      </footer>
     </div>
 
     <script src="../script/portfolio.js"></script>
     <script>
-        /**
-         * Realtime Password Entropy Security Gauge Engine v9.0
-         * Evaluates combinations of lowercase, uppercase, numbers, and symbols.
-         */
-        function checkPasswordStrength(password) {
-            const bar = document.getElementById('entropyBar');
-            const status = document.getElementById('entropyStatus');
-            if (!bar || !status) return;
+      /**
+       * Realtime Password Entropy Security Gauge Engine v9.0
+       * Evaluates combinations of lowercase, uppercase, numbers, and symbols.
+       */
+      function checkPasswordStrength(password) {
+        const bar = document.getElementById("entropyBar");
+        const status = document.getElementById("entropyStatus");
+        if (!bar || !status) return;
 
-            if (!password) {
-                bar.style.width = '0%';
-                status.textContent = '미입력';
-                status.style.color = 'var(--text-muted)';
-                return;
-            }
-
-            let score = 0;
-            if (password.length >= 8) score += 25;
-            if (password.length >= 12) score += 15;
-            if (/[a-z]/.test(password)) score += 15;
-            if (/[A-Z]/.test(password)) score += 15;
-            if (/[0-9]/.test(password)) score += 15;
-            if (/[^a-zA-Z0-9]/.test(password)) score += 15;
-
-            // Cap at 100%
-            if (score > 100) score = 100;
-
-            bar.style.width = score + '%';
-
-            if (score < 40) {
-                status.textContent = '❌ 취약 (보안 위험)';
-                status.style.color = '#ef4444';
-                bar.style.background = '#ef4444';
-            } else if (score < 75) {
-                status.textContent = '⚠️ 보통 (기존 안전)';
-                status.style.color = '#f59e0b';
-                bar.style.background = '#f59e0b';
-            } else {
-                status.textContent = '✅ 안전 (최상위 보안)';
-                status.style.color = '#10b981';
-                bar.style.background = '#10b981';
-            }
+        if (!password) {
+          bar.style.width = "0%";
+          status.textContent = "미입력";
+          status.style.color = "var(--text-muted)";
+          return;
         }
 
-        function resetStrength() {
-            setTimeout(() => {
-                checkPasswordStrength('');
-            }, 50);
+        let score = 0;
+        if (password.length >= 8) score += 25;
+        if (password.length >= 12) score += 15;
+        if (/[a-z]/.test(password)) score += 15;
+        if (/[A-Z]/.test(password)) score += 15;
+        if (/[0-9]/.test(password)) score += 15;
+        if (/[^a-zA-Z0-9]/.test(password)) score += 15;
+
+        // Cap at 100%
+        if (score > 100) score = 100;
+
+        bar.style.width = score + "%";
+
+        if (score < 40) {
+          status.textContent = "❌ 취약 (보안 위험)";
+          status.style.color = "#ef4444";
+          bar.style.background = "#ef4444";
+        } else if (score < 75) {
+          status.textContent = "⚠️ 보통 (기존 안전)";
+          status.style.color = "#f59e0b";
+          bar.style.background = "#f59e0b";
+        } else {
+          status.textContent = "✅ 안전 (최상위 보안)";
+          status.style.color = "#10b981";
+          bar.style.background = "#10b981";
         }
+      }
+
+      function resetStrength() {
+        setTimeout(() => {
+          checkPasswordStrength("");
+        }, 50);
+      }
     </script>
-</body>
+  </body>
 </html>

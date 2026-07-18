@@ -239,14 +239,67 @@ const PortfolioCore = (function () {
     openLightboxAPI: function (src, caption) {
       const lightbox = _dom.getLightbox();
       const img = _dom.getLightboxImg();
+      const video = document.getElementById("lightboxVideo");
       const cap = _dom.getLightboxCaption();
-      if (!lightbox || !img) return;
+      if (!lightbox) return;
 
       // 웹 접근성 대응: 이전 포커스 엘리먼트 백업
       _focusedElementBeforeModal = document.activeElement;
 
-      img.src = src;
-      cap.innerText = caption;
+      if (src.toLowerCase().endsWith(".mp4")) {
+        if (img) img.style.display = "none";
+        if (video) {
+          video.style.display = "block";
+          video.muted = false; // 사색 BGM 감상 중 유저 클릭 시 사운드 동시 재생 시도
+
+          // 🚀 대대적 비디오 버그 정복 (라이트박스 팝업창 전용 Fetch-to-Blob 파이프라인 가동)
+          if (!src.startsWith("blob:") && !src.startsWith("data:")) {
+            fetch(src)
+              .then((res) => {
+                if (!res.ok) throw new Error("Fetch failed");
+                return res.blob();
+              })
+              .then((blob) => {
+                const blobUrl = URL.createObjectURL(blob);
+                video.src = blobUrl;
+                video.load();
+                video.play().catch((e) => {
+                  console.warn("Blob play failed, trying muted fallback...", e);
+                  video.muted = true;
+                  video.play();
+                });
+              })
+              .catch((err) => {
+                console.warn("Fallback to range src", err);
+                video.src = src;
+                video.load();
+                video.play().catch((e) => {
+                  video.muted = true;
+                  video.play();
+                });
+              });
+          } else {
+            video.src = src;
+            video.load();
+            video.play().catch((e) => {
+              video.muted = true;
+              video.play();
+            });
+          }
+        }
+      } else {
+        if (video) {
+          video.pause();
+          video.src = "";
+          video.style.display = "none";
+        }
+        if (img) {
+          img.src = src;
+          img.style.display = "block";
+        }
+      }
+
+      if (cap) cap.innerText = caption;
       lightbox.style.display = "flex";
       _dom.getBodyTag().style.overflow = "hidden";
 
@@ -260,6 +313,17 @@ const PortfolioCore = (function () {
     closeLightboxAPI: function () {
       const lightbox = _dom.getLightbox();
       if (lightbox) {
+        const video = document.getElementById("lightboxVideo");
+        if (video) {
+          video.pause();
+          video.src = "";
+          video.style.display = "none";
+        }
+        const img = _dom.getLightboxImg();
+        if (img) {
+          img.src = "";
+          img.style.display = "none";
+        }
         lightbox.style.display = "none";
         _dom.getBodyTag().style.overflow = "";
 

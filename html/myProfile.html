@@ -1,296 +1,450 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>안성민 | AI & 데이터 엔지니어 포트폴리오</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css" />
     <style>
-        /* 📱 하이엔드 해상도 방어형 그리드 프로필 스타일팩 */
-        .profile-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 12px;
-            padding: 0;
-            list-style: none;
-        }
-        .profile-grid li {
-            background: var(--bg-nested);
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-cozy);
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 16px;
-        }
-        .story-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-        }
-        .project-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-cozy);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: var(--transition-apple);
-        }
-        .project-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--color-brand);
-            box-shadow: var(--shadow-cozy);
-        }
-        .project-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            font-weight: 800;
-            color: var(--text-main);
-        }
+      /* 📱 하이엔드 해상도 방어형 그리드 프로필 스타일팩 */
+      .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 12px;
+        padding: 0;
+        list-style: none;
+      }
+      .profile-grid li {
+        background: var(--bg-nested);
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border-cozy);
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+      .story-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .project-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-cozy);
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        transition: var(--transition-apple);
+      }
+      .project-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--color-brand);
+        box-shadow: var(--shadow-cozy);
+      }
+      .project-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-weight: 800;
+        color: var(--text-main);
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="mesh-gradient-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="notion-grid-mask"></div>
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+      <div class="notion-grid-mask"></div>
     </div>
 
     <div class="app-container">
-        <header class="global-header">
-            <div class="logo-area">
-                <a href="index.html" aria-label="메인 포털 대시보드로 이동" style="text-decoration:none; color:inherit;">🏠 Portal Hub</a>
-            </div>
-            <nav class="theme-select-box" aria-label="4대 멀티 테마 스위치">
-                <button class="theme-btn-node active" data-theme="light">Light</button>
-                <button class="theme-btn-node" data-theme="dark">Dark</button>
-                <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
-                <button class="theme-btn-node" data-theme="forest">Forest</button>
-            </nav>
-        </header>
-
-        <main>
-            <section class="dashboard-card">
-                <h1 class="profile-main-title">안녕하세요! 안성민입니다! 👨‍💻</h1>
-                <blockquote class="profile-blockquote" cite="https://github.com/rntqkdl" style="background: var(--bg-primary); border-left: 5px solid var(--color-brand); padding: 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; color: var(--text-muted); margin-bottom: 16px; line-height:1.7;">
-                    "저는 이론적 배움과 실무 오케스트레이션의 연결고리를 탐구하는 <mark style="background: linear-gradient(120deg, rgba(224, 108, 83, 0.15), rgba(224, 108, 83, 0.3)); padding: 2px 6px; border-radius: 4px; font-weight: 800; color: inherit; font-family: var(--font-sans);">지능형 데이터 엔지니어</mark>입니다. <br>
-                    문제의 본질을 집요하게 분석하여, 날것의 비정형 데이터셋을 유기적인 실용 서비스 파이프라인으로 설계합니다."
-                </blockquote>
-                
-                <div class="keyword-container" style="display:flex; flex-wrap:wrap; gap:8px;">
-                    <span class="keyword-tag">#원리주의_엔지니어</span>
-                    <span class="keyword-tag">#데이터_센트릭_AI</span>
-                    <span class="keyword-tag">#자동화_아키젝트</span>
-                    <span class="keyword-tag">#집요한_트러블슈터</span>
-                    <span class="keyword-tag">#협업_PM</span>
-                </div>
-            </section>
-
-            <section class="dashboard-card">
-                <div class="widget-headline">📷 성민의 라이프 아카이브 (Daily Life)</div>
-                <p class="section-desc">💡 사진 카드를 클릭하시면 브라우저 맞춤형 Lightbox 모듈을 통해 원본 스케일로 크게 감상하실 수 있습니다.</p>
-                <div class="gallery-grid">
-                    <figure class="gallery-card" onclick="openLightbox('../media/인형뽑기.jpeg', '🎯 소소한 탕진잼, 인형뽑기')">
-                        <div class="gallery-card-img-wrapper"><img src="../media/인형뽑기.jpeg" alt="인형뽑기" loading="lazy"></div>
-                        <figcaption class="gallery-info">
-                            <h3>🎯 소소한 탕진잼, 인형뽑기</h3>
-                            <p>최근 귀여운 인형뽑기에 제대로 맛을 들였습니다. 집게의 찰나의 손맛에 빠져 야금야금 전 재산을 행복하게 탕진하고 있는 요즘의 힐링 취미 중 하나입니다.</p>
-                        </figcaption>
-                    </figure>
-                    <figure class="gallery-card" onclick="openLightbox('../media/음식.jpeg', '🍕 선(先) 사진, 후(後) 미식')">
-                        <div class="gallery-card-img-wrapper"><img src="../media/음식.jpeg" alt="미식" loading="lazy"></div>
-                        <figcaption class="gallery-info">
-                            <h3>🍕 선(先) 사진, 후(後) 미식</h3>
-                            <p>맛있는 음식을 먹을 때 가장 짜릿한 행복을 느낍니다. 사진 기록을 남겨두는 것은 저만의 필수 루틴입니다.</p>
-                        </figcaption>
-                    </figure>
-                    <figure class="gallery-card" onclick="openLightbox('../media/반려동물.jpeg', '🐶 힐링 치트키, 지인 펫 컬렉션')">
-                        <div class="gallery-card-img-wrapper"><img src="../media/반려동물.jpeg" alt="반려동물" loading="lazy"></div>
-                        <figcaption class="gallery-info">
-                            <h3>🐶 힐링 치트키, 지인 펫 컬렉션</h3>
-                            <p>강아지나 고양이 등 귀여운 반려동물들을 정말 좋아합니다. 지인들의 사랑스러운 반려동물 사진들을 보며 활력을 얻습니다.</p>
-                        </figcaption>
-                    </figure>
-                    <figure class="gallery-card" onclick="openLightbox('../media/풍경.jpeg', '✈️ 낯선 공기, 기록하는 여행')">
-                        <div class="gallery-card-img-wrapper"><img src="../media/풍경.jpeg" alt="여행" loading="lazy"></div>
-                        <figcaption class="gallery-info">
-                            <h3>✈️ 낯선 공기, 기록하는 여행</h3>
-                            <p>새로운 도시, 탁 트인 하늘과 낯선 공기가 주는 여행의 해방감을 사랑합니다.</p>
-                        </figcaption>
-                    </figure>
-                </div>
-            </section>
-
-            <section class="dashboard-card">
-                <div class="widget-headline">✍️ 성민의 실전 트러블슈팅 & 철학</div>
-                <div class="story-grid">
-                    <div class="story-card" onclick="openModal('story_data')">
-                        <div class="story-icon">📊</div>
-                        <div class="story-content">
-                            <h3>가상 데이터와 현업 데이터의 이질감 극복 경험</h3>
-                            <p>학습용 데이터와 비정형 필드 데이터 사이에서 발생하는 격차를 데이터 중심 AI 전처리 기법으로 돌파한 기록입니다.</p>
-                        </div>
-                    </div>
-                    <div class="story-card" onclick="openModal('story_collab')">
-                        <div class="story-icon">🤝</div>
-                        <div class="story-content">
-                            <h3>역할 분담 없는 협업의 실패와 PM 리더십 극복기</h3>
-                            <p>문서 기반 분할 아키텍처를 구축하여 리소스 중복을 차단하고 대상을 이끌어낸 협업 매니징입니다.</p>
-                        </div>
-                    </div>
-                    <div class="story-card" onclick="openModal('story_mentor')">
-                        <div class="story-icon">🌱</div>
-                        <div class="story-content">
-                            <h3>실전 중심의 커리어 로드맵과 멘토링 가이드라인</h3>
-                            <p>후배 기수들이 매력적인 인덱싱 리드미와 커밋 컨벤션을 달성하도록 페이싱하는 교육 가치관입니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="dashboard-card">
-                <fieldset style="border: 1.5px dashed var(--border-cozy); padding: 20px; border-radius: var(--radius-md); background: var(--bg-card);">
-                    <legend class="cozy-legend" style="font-family: var(--font-serif); font-size: 1.1rem; font-weight: 900; padding: 4px 16px; background: var(--bg-nested); border-radius: 30px; border: 1px solid var(--border-cozy);">📅 2026년 마일스톤 보드</legend>
-                    <ul class="todo-list" style="margin-top: 14px; list-style:none; padding:0;">
-                        <li class="todo-item completed" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-                            <input type="checkbox" class="todo-checkbox" checked disabled id="p-todo1">
-                            <label for="p-todo1" class="todo-text">국가공인 ADsP (데이터 분석 준전문가) 자격증 최종 취득 완료 (2026.06.05)</label>
-                        </li>
-                        <li class="todo-item" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-                            <input type="checkbox" class="todo-checkbox" disabled id="p-todo2">
-                            <label for="p-todo2" class="todo-text">SQLD 자격검정 대비 및 대규모 데이터베이스 인덱싱 쿼리 최적화 리서치</label>
-                        </li>
-                        <li class="todo-item" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-                            <input type="checkbox" class="todo-checkbox" disabled id="p-todo3">
-                            <label for="p-todo3" class="todo-text">COSS 빅데이터 서포터즈 활동 및 학과 후배 멘토링 프로그램 성공적 운영</label>
-                        </li>
-                        <li class="todo-item" style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-                            <input type="checkbox" class="todo-checkbox" disabled id="p-todo4">
-                            <label for="p-todo4" class="todo-text">인공지능(AI) 모델과 임베디드 제어 파이프라인을 유기적으로 융합한 졸업 포트폴리오 완성</label>
-                        </li>
-                    </ul>
-                </fieldset>
-            </section>
-
-            <section class="dashboard-card">
-                <div class="widget-headline">📋 기본 인적 사항 명세</div>
-                <address style="font-style: normal;">
-                    <ul class="profile-grid">
-                        <li>👤 <strong>성명:</strong> 안성민 (Seongmin An)</li>
-                        <li>📞 <strong>네트워크:</strong> <a href="tel:010-2878-5134">010-2878-5134</a></li>
-                        <li>✉️ <strong>메일:</strong> <a href="mailto:tjdals2299@gmail.com">tjdals2299@gmail.com</a></li>
-                        <li>📍 <strong>활동권역:</strong> 전북 전주시 완산구</li>
-                        <li>🎸 <strong>문화라이프:</strong> 코딩, 영화 분석, 여행 동선 설계, 음악 감상</li>
-                    </ul>
-                </address>
-            </section>
-
-            <section class="dashboard-card">
-                <div class="widget-headline">🛠️ 엔지니어링 핵심 기술 스택</div>
-                <ol class="tech-list" style="padding-left:20px; line-height:1.8;">
-                    <li><strong>프로그래밍 언어:</strong> Python, SQL, JavaScript, C, C++</li>
-                    <li><strong>머신러닝 & 비전 프레임워크:</strong> PyTorch, OpenCV, FastAPI, Flask, React</li>
-                    <li><strong>자동화 & 클라우드 인프라:</strong> n8n 워크플로우 자동화, Docker, AWS, Azure, Git/GitHub</li>
-                    <li><strong>데이터 처리 기술:</strong> Google API 비동기 크롤러 수집, JSONL 정형화, 정규표현식 전처리 파싱</li>
-                </ol>
-            </section>
-
-            <section class="dashboard-card">
-                <div class="widget-headline" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-                    <span>🎓 학력 및 대외 활동 프로젝트 실적</span>
-                    <!-- 🎨 고도화: 동적 기술 스택 필터 레일 -->
-                    <div id="projectFilterRail" style="display:flex; gap:6px; flex-wrap:wrap;">
-                        <button class="comment-ctrl-btn active" data-filter="all" onclick="filterProjects('all', this)" style="padding:4px 10px; font-size:0.75rem;">✨ 전체</button>
-                        <button class="comment-ctrl-btn" data-filter="python" onclick="filterProjects('python', this)" style="padding:4px 10px; font-size:0.75rem;">🐍 Python</button>
-                        <button class="comment-ctrl-btn" data-filter="js" onclick="filterProjects('js', this)" style="padding:4px 10px; font-size:0.75rem;">💻 JavaScript</button>
-                        <button class="comment-ctrl-btn" data-filter="ai" onclick="filterProjects('ai', this)" style="padding:4px 10px; font-size:0.75rem;">🤖 ML/AI</button>
-                    </div>
-                </div>
-                <p class="section-desc" style="margin-bottom:16px;">💡 스택 필터 버튼을 누르면 해당 기술을 적용한 핵심 연구 실적만 즉각 실시간 선별 정제 렌더링됩니다.</p>
-                <div class="career-timeline" style="line-height:1.7;">
-                    <div class="education-block" style="margin-bottom:24px;">
-                        <h4 style="font-weight:900; font-size:1.1rem; margin-bottom:8px; color:var(--color-brand); font-family:var(--font-serif);">🏫 학력 명세 (Education)</h4>
-                        <div style="background:var(--bg-nested); padding:16px; border-radius:12px; border:1px solid var(--border-cozy); font-weight:600;">
-                            <strong>전북대학교 (Jeonbuk National University)</strong> (2019.03 - 2027.02 졸업 예정)<br>
-                            - 공과대학 IT기전공학과 / IAB융합전공 (학사 재학 및 졸업예정)<br>
-                            - 이수학점 대비 평점: 3.5 / 4.5
-                        </div>
-                    </div>
-
-                    <h4 style="font-weight:900; font-size:1.1rem; margin-bottom:12px; color:var(--color-brand); font-family:var(--font-serif);">🏆 연구 프로젝트 및 수상 실적</h4>
-                    <div class="project-list-container">
-                        <div class="project-card" data-tags="python,js" onclick="openModal('onlibrary')">
-                            <div class="project-title">
-                                <span>🗺️ On Library: 공공데이터 기반 의사결정 지원 시스템</span>
-                                <span class="project-prize theme-badge" style="font-size:0.75rem; background:var(--color-brand); color:#fff; padding:2px 6px; border-radius:4px;">최종 우수 프로젝트</span>
-                            </div>
-                            <p class="project-desc" style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">공간 접근성 다기준 평가 입지 선정 및 TSP 순회 알고리즘 최적 노선 모델 개발</p>
-                        </div>
-
-                        <div class="project-card" data-tags="python,ai" onclick="openModal('epitext')">
-                            <div class="project-title">
-                                <span>🏛️ EpiText: 딥러닝 멀티모달 기반 훼손 탁본 복원 시스템</span>
-                                <span class="project-prize" style="font-size:0.75rem; background:var(--color-brand); color:#fff; padding:2px 6px; border-radius:4px;">대상 (정보통신기획평가원장상)</span>
-                            </div>
-                            <p class="project-desc" style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">13,000종 한자 클래스 불균형 해소를 위한 Loss 함수 설계 및 Swin V2 + SikuRoBERTa 서빙</p>
-                        </div>
-
-                        <div class="project-card" data-tags="python,ai" onclick="openModal('smishing')">
-                            <div class="project-title">
-                                <span>🛡️ Smishing Forecast: 자가 진화형 스미싱 방어 시스템</span>
-                                <span class="project-prize blue-badge" style="font-size:0.75rem; background:#3b6887; color:#fff; padding:2px 6px; border-radius:4px;">우수상 (DACON)</span>
-                            </div>
-                            <p class="project-desc" style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">비정형 텍스트 크롤링 원천 레이어 필터링 및 전처리 파이프라인 개발</p>
-                        </div>
-
-                        <div class="project-card" data-tags="python" onclick="openModal('iot')">
-                            <div class="project-title">
-                                <span>🏊 Safe Drain Lock: 수영장 배수구 사고 방지 자동 제어 임베디드</span>
-                                <span class="project-prize green-badge" style="font-size:0.75rem; background:#10b981; color:#fff; padding:2px 6px; border-radius:4px;">은상 (LINC 3.0 캡스톤)</span>
-                            </div>
-                            <p class="project-desc" style="margin-top:6px; font-size:0.88rem; color:var(--text-muted);">수압 센서 데이터 로그 분석 기반의 이상 임계값 도출 및 정격 릴레이 제어 소프트웨어 탑재</p>
-                        </div>
-                    </div>
-
-                    <h4 style="font-weight:900; font-size:1.1rem; margin-top:24px; margin-bottom:8px; color:var(--color-brand); font-family:var(--font-serif);">📜 인증 및 라이선스 (Certifications)</h4>
-                    <div style="background:var(--bg-nested); padding:16px; border-radius:12px; border:1px solid var(--border-cozy); font-weight:600; line-height: 1.8;">
-                        - 🎖️ 데이터 분석 준전문가 (ADsP) 자격증 취득 — 한국데이터산업진흥원 (2026.06.05)<br>
-                        - 📜 Azure AI Fundamentals (AI-900) — Microsoft 글로벌 인증<br>
-                        - 📜 Azure Data Fundamentals (DP-900) — Microsoft 글로벌 인증<br>
-                        - ⚙️ 전기기능사, 승강기기능사 자격증 취득 — 한국산업인력공단
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox(event)">
-            <div class="lightbox-content" onclick="event.stopPropagation()">
-                <button class="close-btn" onclick="closeLightboxDirect()">&times;</button>
-                <img id="lightboxImg" src="" alt="원본 스케일 화면">
-                <div id="lightboxCaption">사진 설명</div>
-            </div>
+      <header class="global-header">
+        <div class="logo-area">
+          <a href="index.html" aria-label="메인 포털 대시보드로 이동" style="text-decoration: none; color: inherit">🏠 Portal Hub</a>
         </div>
+        <nav class="theme-select-box" aria-label="4대 멀티 테마 스위치">
+          <button class="theme-btn-node active" data-theme="light">Light</button>
+          <button class="theme-btn-node" data-theme="dark">Dark</button>
+          <button class="theme-btn-node" data-theme="oatmeal">Latte</button>
+          <button class="theme-btn-node" data-theme="forest">Forest</button>
+        </nav>
+      </header>
 
-        <footer class="global-footer">
-            <p>© 2026 안성민. Enterprise Level semantic Portfolio Hub.</p>
-        </footer>
+      <main>
+        <section class="dashboard-card">
+          <h1 class="profile-main-title">안녕하세요! 안성민입니다! 👨‍💻</h1>
+          <blockquote
+            class="profile-blockquote"
+            cite="https://github.com/rntqkdl"
+            style="
+              background: var(--bg-primary);
+              border-left: 5px solid var(--color-brand);
+              padding: 20px;
+              border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+              color: var(--text-muted);
+              margin-bottom: 16px;
+              line-height: 1.7;
+            "
+          >
+            "저는 이론적 배움과 실무 오케스트레이션의 연결고리를 탐구하는
+            <mark
+              style="
+                background: linear-gradient(120deg, rgba(224, 108, 83, 0.15), rgba(224, 108, 83, 0.3));
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-weight: 800;
+                color: inherit;
+                font-family: var(--font-sans);
+              "
+              >지능형 데이터 엔지니어</mark
+            >입니다. <br />
+            문제의 본질을 집요하게 분석하여, 날것의 비정형 데이터셋을 유기적인 실용 서비스 파이프라인으로 설계합니다."
+          </blockquote>
+
+          <div class="keyword-container" style="display: flex; flex-wrap: wrap; gap: 8px">
+            <span class="keyword-tag">#원리주의_엔지니어</span>
+            <span class="keyword-tag">#데이터_센트릭_AI</span>
+            <span class="keyword-tag">#자동화_아키젝트</span>
+            <span class="keyword-tag">#집요한_트러블슈터</span>
+            <span class="keyword-tag">#협업_PM</span>
+          </div>
+        </section>
+
+        <section class="dashboard-card">
+          <div class="widget-headline">📷 성민의 라이프 아카이브 (Daily Life)</div>
+          <p class="section-desc">
+            💡 사진 카드를 클릭하시면 브라우저 맞춤형 Lightbox 모듈을 통해 원본 스케일로 크게 감상하실 수 있습니다.
+          </p>
+          <div class="gallery-grid">
+            <figure class="gallery-card" onclick="openLightbox('../media/인형뽑기.jpeg', '🎯 소소한 탕진잼, 인형뽑기')">
+              <div class="gallery-card-img-wrapper"><img src="../media/인형뽑기.jpeg" alt="인형뽑기" loading="lazy" /></div>
+              <figcaption class="gallery-info">
+                <h3>🎯 소소한 탕진잼, 인형뽑기</h3>
+                <p>
+                  최근 귀여운 인형뽑기에 제대로 맛을 들였습니다. 집게의 찰나의 손맛에 빠져 야금야금 전 재산을 행복하게 탕진하고 있는 요즘의
+                  힐링 취미 중 하나입니다.
+                </p>
+              </figcaption>
+            </figure>
+            <figure class="gallery-card" onclick="openLightbox('../media/음식.jpeg', '🍕 선(先) 사진, 후(後) 미식')">
+              <div class="gallery-card-img-wrapper"><img src="../media/음식.jpeg" alt="미식" loading="lazy" /></div>
+              <figcaption class="gallery-info">
+                <h3>🍕 선(先) 사진, 후(後) 미식</h3>
+                <p>맛있는 음식을 먹을 때 가장 짜릿한 행복을 느낍니다. 사진 기록을 남겨두는 것은 저만의 필수 루틴입니다.</p>
+              </figcaption>
+            </figure>
+            <figure class="gallery-card" onclick="openLightbox('../media/반려동물.jpeg', '🐶 힐링 치트키, 지인 펫 컬렉션')">
+              <div class="gallery-card-img-wrapper"><img src="../media/반려동물.jpeg" alt="반려동물" loading="lazy" /></div>
+              <figcaption class="gallery-info">
+                <h3>🐶 힐링 치트키, 지인 펫 컬렉션</h3>
+                <p>강아지나 고양이 등 귀여운 반려동물들을 정말 좋아합니다. 지인들의 사랑스러운 반려동물 사진들을 보며 활력을 얻습니다.</p>
+              </figcaption>
+            </figure>
+            <figure class="gallery-card" onclick="openLightbox('../media/풍경.jpeg', '✈️ 낯선 공기, 기록하는 여행')">
+              <div class="gallery-card-img-wrapper"><img src="../media/풍경.jpeg" alt="여행" loading="lazy" /></div>
+              <figcaption class="gallery-info">
+                <h3>✈️ 낯선 공기, 기록하는 여행</h3>
+                <p>새로운 도시, 탁 트인 하늘과 낯선 공기가 주는 여행의 해방감을 사랑합니다.</p>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="dashboard-card">
+          <div class="widget-headline">✍️ 성민의 실전 트러블슈팅 & 철학</div>
+          <div class="story-grid">
+            <div class="story-card" onclick="openModal('story_data')">
+              <div class="story-icon">📊</div>
+              <div class="story-content">
+                <h3>가상 데이터와 현업 데이터의 이질감 극복 경험</h3>
+                <p>학습용 데이터와 비정형 필드 데이터 사이에서 발생하는 격차를 데이터 중심 AI 전처리 기법으로 돌파한 기록입니다.</p>
+              </div>
+            </div>
+            <div class="story-card" onclick="openModal('story_collab')">
+              <div class="story-icon">🤝</div>
+              <div class="story-content">
+                <h3>역할 분담 없는 협업의 실패와 PM 리더십 극복기</h3>
+                <p>문서 기반 분할 아키텍처를 구축하여 리소스 중복을 차단하고 대상을 이끌어낸 협업 매니징입니다.</p>
+              </div>
+            </div>
+            <div class="story-card" onclick="openModal('story_mentor')">
+              <div class="story-icon">🌱</div>
+              <div class="story-content">
+                <h3>실전 중심의 커리어 로드맵과 멘토링 가이드라인</h3>
+                <p>후배 기수들이 매력적인 인덱싱 리드미와 커밋 컨벤션을 달성하도록 페이싱하는 교육 가치관입니다.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-card">
+          <fieldset
+            style="border: 1.5px dashed var(--border-cozy); padding: 20px; border-radius: var(--radius-md); background: var(--bg-card)"
+          >
+            <legend
+              class="cozy-legend"
+              style="
+                font-family: var(--font-serif);
+                font-size: 1.1rem;
+                font-weight: 900;
+                padding: 4px 16px;
+                background: var(--bg-nested);
+                border-radius: 30px;
+                border: 1px solid var(--border-cozy);
+              "
+            >
+              📅 2026년 마일스톤 보드
+            </legend>
+            <ul class="todo-list" style="margin-top: 14px; list-style: none; padding: 0">
+              <li class="todo-item completed" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
+                <input type="checkbox" class="todo-checkbox" checked disabled id="p-todo1" />
+                <label for="p-todo1" class="todo-text">국가공인 ADsP (데이터 분석 준전문가) 자격증 최종 취득 완료 (2026.06.05)</label>
+              </li>
+              <li class="todo-item" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
+                <input type="checkbox" class="todo-checkbox" disabled id="p-todo2" />
+                <label for="p-todo2" class="todo-text">SQLD 자격검정 대비 및 대규모 데이터베이스 인덱싱 쿼리 최적화 리서치</label>
+              </li>
+              <li class="todo-item" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
+                <input type="checkbox" class="todo-checkbox" disabled id="p-todo3" />
+                <label for="p-todo3" class="todo-text">COSS 빅데이터 서포터즈 활동 및 학과 후배 멘토링 프로그램 성공적 운영</label>
+              </li>
+              <li class="todo-item" style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
+                <input type="checkbox" class="todo-checkbox" disabled id="p-todo4" />
+                <label for="p-todo4" class="todo-text"
+                  >인공지능(AI) 모델과 임베디드 제어 파이프라인을 유기적으로 융합한 졸업 포트폴리오 완성</label
+                >
+              </li>
+            </ul>
+          </fieldset>
+        </section>
+
+        <section class="dashboard-card">
+          <div class="widget-headline">📋 기본 인적 사항 명세</div>
+          <address style="font-style: normal">
+            <ul class="profile-grid">
+              <li>👤 <strong>성명:</strong> 안성민 (Seongmin An)</li>
+              <li>📞 <strong>네트워크:</strong> <a href="tel:010-2878-5134">010-2878-5134</a></li>
+              <li>✉️ <strong>메일:</strong> <a href="mailto:tjdals2299@gmail.com">tjdals2299@gmail.com</a></li>
+              <li>📍 <strong>활동권역:</strong> 전북 전주시 완산구</li>
+              <li>🎸 <strong>문화라이프:</strong> 코딩, 영화 분석, 여행 동선 설계, 음악 감상</li>
+            </ul>
+          </address>
+        </section>
+
+        <section class="dashboard-card">
+          <div class="widget-headline">🛠️ 엔지니어링 핵심 기술 스택</div>
+          <ol class="tech-list" style="padding-left: 20px; line-height: 1.8">
+            <li><strong>프로그래밍 언어:</strong> Python, SQL, JavaScript, C, C++</li>
+            <li><strong>머신러닝 & 비전 프레임워크:</strong> PyTorch, OpenCV, FastAPI, Flask, React</li>
+            <li><strong>자동화 & 클라우드 인프라:</strong> n8n 워크플로우 자동화, Docker, AWS, Azure, Git/GitHub</li>
+            <li><strong>데이터 처리 기술:</strong> Google API 비동기 크롤러 수집, JSONL 정형화, 정규표현식 전처리 파싱</li>
+          </ol>
+        </section>
+
+        <section class="dashboard-card">
+          <div
+            class="widget-headline"
+            style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px"
+          >
+            <span>🎓 학력 및 대외 활동 프로젝트 실적</span>
+            <!-- 🎨 고도화: 동적 기술 스택 필터 레일 -->
+            <div id="projectFilterRail" style="display: flex; gap: 6px; flex-wrap: wrap">
+              <button
+                class="comment-ctrl-btn active"
+                data-filter="all"
+                onclick="filterProjects('all', this)"
+                style="padding: 4px 10px; font-size: 0.75rem"
+              >
+                ✨ 전체
+              </button>
+              <button
+                class="comment-ctrl-btn"
+                data-filter="python"
+                onclick="filterProjects('python', this)"
+                style="padding: 4px 10px; font-size: 0.75rem"
+              >
+                🐍 Python
+              </button>
+              <button
+                class="comment-ctrl-btn"
+                data-filter="js"
+                onclick="filterProjects('js', this)"
+                style="padding: 4px 10px; font-size: 0.75rem"
+              >
+                💻 JavaScript
+              </button>
+              <button
+                class="comment-ctrl-btn"
+                data-filter="ai"
+                onclick="filterProjects('ai', this)"
+                style="padding: 4px 10px; font-size: 0.75rem"
+              >
+                🤖 ML/AI
+              </button>
+            </div>
+          </div>
+          <p class="section-desc" style="margin-bottom: 16px">
+            💡 스택 필터 버튼을 누르면 해당 기술을 적용한 핵심 연구 실적만 즉각 실시간 선별 정제 렌더링됩니다.
+          </p>
+          <div class="career-timeline" style="line-height: 1.7">
+            <div class="education-block" style="margin-bottom: 24px">
+              <h4
+                style="font-weight: 900; font-size: 1.1rem; margin-bottom: 8px; color: var(--color-brand); font-family: var(--font-serif)"
+              >
+                🏫 학력 명세 (Education)
+              </h4>
+              <div
+                style="
+                  background: var(--bg-nested);
+                  padding: 16px;
+                  border-radius: 12px;
+                  border: 1px solid var(--border-cozy);
+                  font-weight: 600;
+                "
+              >
+                <strong>전북대학교 (Jeonbuk National University)</strong> (2019.03 - 2027.02 졸업 예정)<br />
+                - 공과대학 IT기전공학과 / IAB융합전공 (학사 재학 및 졸업예정)<br />
+                - 이수학점 대비 평점: 3.5 / 4.5
+              </div>
+            </div>
+
+            <h4 style="font-weight: 900; font-size: 1.1rem; margin-bottom: 12px; color: var(--color-brand); font-family: var(--font-serif)">
+              🏆 연구 프로젝트 및 수상 실적
+            </h4>
+            <div class="project-list-container">
+              <div class="project-card" data-tags="python,js" onclick="openModal('onlibrary')">
+                <div class="project-title">
+                  <span>🗺️ On Library: 공공데이터 기반 의사결정 지원 시스템</span>
+                  <span
+                    class="project-prize theme-badge"
+                    style="font-size: 0.75rem; background: var(--color-brand); color: #fff; padding: 2px 6px; border-radius: 4px"
+                    >최종 우수 프로젝트</span
+                  >
+                </div>
+                <p class="project-desc" style="margin-top: 6px; font-size: 0.88rem; color: var(--text-muted)">
+                  공간 접근성 다기준 평가 입지 선정 및 TSP 순회 알고리즘 최적 노선 모델 개발
+                </p>
+              </div>
+
+              <div class="project-card" data-tags="python,ai" onclick="openModal('epitext')">
+                <div class="project-title">
+                  <span>🏛️ EpiText: 딥러닝 멀티모달 기반 훼손 탁본 복원 시스템</span>
+                  <span
+                    class="project-prize"
+                    style="font-size: 0.75rem; background: var(--color-brand); color: #fff; padding: 2px 6px; border-radius: 4px"
+                    >대상 (정보통신기획평가원장상)</span
+                  >
+                </div>
+                <p class="project-desc" style="margin-top: 6px; font-size: 0.88rem; color: var(--text-muted)">
+                  13,000종 한자 클래스 불균형 해소를 위한 Loss 함수 설계 및 Swin V2 + SikuRoBERTa 서빙
+                </p>
+              </div>
+
+              <div class="project-card" data-tags="python,ai" onclick="openModal('smishing')">
+                <div class="project-title">
+                  <span>🛡️ Smishing Forecast: 자가 진화형 스미싱 방어 시스템</span>
+                  <span
+                    class="project-prize blue-badge"
+                    style="font-size: 0.75rem; background: #3b6887; color: #fff; padding: 2px 6px; border-radius: 4px"
+                    >우수상 (DACON)</span
+                  >
+                </div>
+                <p class="project-desc" style="margin-top: 6px; font-size: 0.88rem; color: var(--text-muted)">
+                  비정형 텍스트 크롤링 원천 레이어 필터링 및 전처리 파이프라인 개발
+                </p>
+              </div>
+
+              <div class="project-card" data-tags="python" onclick="openModal('iot')">
+                <div class="project-title">
+                  <span>🏊 Safe Drain Lock: 수영장 배수구 사고 방지 자동 제어 임베디드</span>
+                  <span
+                    class="project-prize green-badge"
+                    style="font-size: 0.75rem; background: #10b981; color: #fff; padding: 2px 6px; border-radius: 4px"
+                    >은상 (LINC 3.0 캡스톤)</span
+                  >
+                </div>
+                <p class="project-desc" style="margin-top: 6px; font-size: 0.88rem; color: var(--text-muted)">
+                  수압 센서 데이터 로그 분석 기반의 이상 임계값 도출 및 정격 릴레이 제어 소프트웨어 탑재
+                </p>
+              </div>
+            </div>
+
+            <h4
+              style="
+                font-weight: 900;
+                font-size: 1.1rem;
+                margin-top: 24px;
+                margin-bottom: 8px;
+                color: var(--color-brand);
+                font-family: var(--font-serif);
+              "
+            >
+              📜 인증 및 라이선스 (Certifications)
+            </h4>
+            <div
+              style="
+                background: var(--bg-nested);
+                padding: 16px;
+                border-radius: 12px;
+                border: 1px solid var(--border-cozy);
+                font-weight: 600;
+                line-height: 1.8;
+              "
+            >
+              - 🎖️ 데이터 분석 준전문가 (ADsP) 자격증 취득 — 한국데이터산업진흥원 (2026.06.05)<br />
+              - 📜 Azure AI Fundamentals (AI-900) — Microsoft 글로벌 인증<br />
+              - 📜 Azure Data Fundamentals (DP-900) — Microsoft 글로벌 인증<br />
+              - ⚙️ 전기기능사, 승강기기능사 자격증 취득 — 한국산업인력공단
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="lightbox-overlay" id="lightboxModal" onclick="closeLightbox(event)">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+          <button class="close-btn" onclick="closeLightboxDirect()">&times;</button>
+          <img id="lightboxImg" src="" alt="원본 스케일 화면" style="display: none" />
+          <video
+            id="lightboxVideo"
+            controls
+            loop
+            playsinline
+            style="
+              display: none;
+              width: 100%;
+              height: auto;
+              max-width: 100%;
+              max-height: 75vh;
+              border-radius: 8px;
+              box-shadow:
+                0 20px 48px rgba(0, 0, 0, 0.5),
+                0 0 32px rgba(224, 108, 83, 0.2);
+              object-fit: contain;
+              aspect-ratio: 16 / 10;
+            "
+          ></video>
+          <div id="lightboxCaption">사진 설명</div>
+        </div>
+      </div>
+
+      <footer class="global-footer">
+        <p>© 2026 안성민. Enterprise Level semantic Portfolio Hub.</p>
+      </footer>
     </div>
 
     <div class="modal-overlay" id="projectModal" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-btn" onclick="closeModalDirect()">&times;</button>
-            <h2 id="modalTitle">프로젝트 명세 리포트</h2>
-            <div id="modalBody"></div>
-        </div>
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeModalDirect()">&times;</button>
+        <h2 id="modalTitle">프로젝트 명세 리포트</h2>
+        <div id="modalBody"></div>
+      </div>
     </div>
 
     <script src="../script/portfolio.js"></script>
-</body>
+  </body>
 </html>
